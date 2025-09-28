@@ -1,0 +1,533 @@
+{
+  "master": {
+    "tasks": [
+      {
+        "id": 1,
+        "title": "Update Package Dependencies for Pi-Controller Integration",
+        "description": "Install and configure pi-controller dependencies in kubes-aura package.json to support authentication, GPIO controls, Socket.io real-time features, and state management while maintaining React 18.3.1 compatibility",
+        "details": "Add essential dependencies: socket.io-client@^4.8.1, zustand@^5.0.8, axios@^1.11.0, framer-motion@^12.23.16, @sentry/react@^10.12.0. Update vite.config.ts to support Socket.io with proxy configuration for development. Configure environment variables for backend API endpoints. Ensure all dependencies are compatible with React 18.3.1 to avoid conflicts with existing kubes-aura infrastructure. Test build process to verify no dependency conflicts exist.",
+        "testStrategy": "Run npm install and npm run build to verify dependency resolution. Test development server startup with new dependencies. Verify TypeScript compilation passes with updated dependencies.",
+        "priority": "high",
+        "dependencies": [],
+        "status": "done",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Install Core Dependencies",
+            "description": "Add essential npm dependencies for pi-controller integration including Socket.io client, state management, HTTP client, animations, and error tracking",
+            "dependencies": [],
+            "details": "Install socket.io-client@^4.8.1 for real-time communication, zustand@^5.0.8 for state management, axios@^1.11.0 for HTTP requests, framer-motion@^12.23.16 for animations, and @sentry/react@^10.12.0 for error tracking. Verify compatibility with existing React 18.3.1 setup and resolve any peer dependency warnings.\n<info added on 2025-09-27T20:14:10.930Z>\nI'll analyze the codebase structure to provide an informed update for the subtask.Dependency installation and setup verification completed successfully. All specified core dependencies (socket.io-client@^4.8.1, zustand@^5.0.8, axios@^1.12.2, framer-motion@^12.23.22, @sentry/react@^10.15.0) are now present in package.json and functioning correctly. Build process generates optimized production bundle (420.29 kB gzipped to 130.51 kB) in 1.29s. Development server configured to run on port 8080 with host \"::\" for local network access. Minor security advisories for esbuild/vite (moderate severity) exist but do not impact functionality or project development. Ready to proceed with Vite configuration updates for Socket.io proxy support in subtask 1.2.\n</info added on 2025-09-27T20:14:10.930Z>",
+            "status": "done",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Update Vite Configuration for Socket.io Support",
+            "description": "Configure vite.config.ts to support Socket.io development proxy and optimize build settings for new dependencies",
+            "dependencies": [
+              "1.1"
+            ],
+            "details": "Add proxy configuration to vite.config.ts for Socket.io development server connection. Configure WebSocket support and proper headers for Socket.io handshake. Set up build optimizations for Socket.io client bundling and ensure proper tree shaking for production builds.",
+            "status": "done",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Configure Environment Variables Setup",
+            "description": "Set up environment variable configuration for backend API endpoints and pi-controller integration settings",
+            "dependencies": [
+              "1.1"
+            ],
+            "details": "Create .env.example file with required environment variables for pi-controller backend URL, Socket.io endpoint, and API configuration. Configure environment variable loading in Vite for different deployment environments. Set up TypeScript types for environment variables to ensure type safety.",
+            "status": "done",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Test Build Process and Dependency Compatibility",
+            "description": "Verify that all new dependencies work correctly with existing kubes-aura infrastructure and build system",
+            "dependencies": [
+              "1.1",
+              "1.2",
+              "1.3"
+            ],
+            "details": "Run npm install to verify dependency resolution without conflicts. Execute npm run build to ensure production build succeeds with new dependencies. Test development server startup and verify TypeScript compilation passes. Check for any peer dependency warnings or version conflicts with React 18.3.1.\n<info added on 2025-09-27T20:22:25.199Z>\nI need to first understand the project structure and current implementation to provide an accurate update based on the successful testing results.Based on my analysis of the codebase and the user's comprehensive testing update, here is the new text content to append to the subtask's details:\n\nTESTING COMPLETED SUCCESSFULLY: All dependency integration and build system configurations verified working correctly. Production build generates optimized chunked bundles totaling 385.30 kB (reduced from 420.29 kB baseline) with proper manual chunk separation: socket chunk (0.00 kB - empty as expected), state chunk (34.75 kB for TanStack Query + Zustand), utils chunk (0.03 kB for axios + framer-motion), and monitoring chunk (0.03 kB for Sentry). TypeScript compilation passes without errors including new environment type definitions in src/types/env.d.ts. Development server configured to run on port 8081 with working Socket.io and API proxy routes to pi-controller backend. Environment configuration utility (src/lib/config.ts) provides type-safe access to all pi-controller integration variables. All new dependencies (socket.io-client@^4.8.1, zustand@^5.0.8, axios@^1.12.2, framer-motion@^12.23.22, @sentry/react@^10.15.0) confirmed compatible with React 18.3.1 and existing kubes-aura infrastructure. Vite configuration (vite.config.ts) properly configured with proxy settings and build optimizations. Ready to proceed with Task 2: Authentication System Infrastructure implementation.\n</info added on 2025-09-27T20:22:25.199Z>",
+            "status": "done",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Create Authentication System Infrastructure",
+        "description": "Establish core authentication architecture including secure session management, protected routes, and authentication context using TanStack Query patterns",
+        "details": "Create src/features/auth/ directory with AuthProvider using React Context and TanStack Query. Implement secure session management with JWT token handling, refresh token logic, and automatic session expiry. Create ProtectedRoute component that integrates with React Router DOM. Set up authentication API client with axios interceptors for token management. Implement logout functionality with proper token cleanup. Follow pi-controller's security patterns while adapting to kubes-aura's TanStack Query architecture.",
+        "testStrategy": "Unit tests for authentication context, session management functions, and protected route logic. Integration tests for login/logout flows. Mock API responses for authentication endpoints.",
+        "priority": "high",
+        "dependencies": [
+          1
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create authentication directory structure and types",
+            "description": "Set up src/features/auth/ directory with TypeScript interfaces for authentication state, user data, and API responses",
+            "dependencies": [],
+            "details": "Create src/features/auth/ directory with subdirectories for components, hooks, services, and types. Define TypeScript interfaces for User, AuthState, LoginCredentials, and JWT token structures. Create index.ts files for clean exports.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Implement AuthProvider with React Context and TanStack Query",
+            "description": "Create authentication context provider that manages user state and integrates with TanStack Query for data fetching",
+            "dependencies": [
+              "2.1"
+            ],
+            "details": "Build AuthProvider component using React Context API to manage authentication state. Integrate TanStack Query for user data fetching and caching. Implement authentication context hooks for accessing user state throughout the application.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Set up JWT session management with refresh token logic",
+            "description": "Implement secure JWT token handling with automatic refresh and session expiry management",
+            "dependencies": [
+              "2.1"
+            ],
+            "details": "Create token management utilities for storing, retrieving, and validating JWT tokens. Implement refresh token logic with automatic token renewal before expiry. Add session timeout handling and automatic logout on token expiration.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Create ProtectedRoute component for React Router integration",
+            "description": "Build route protection component that redirects unauthenticated users and handles loading states",
+            "dependencies": [
+              "2.2"
+            ],
+            "details": "Implement ProtectedRoute component that checks authentication state before rendering protected content. Add redirect logic for unauthenticated users to login page. Handle loading states during authentication verification.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Build authentication API client with axios interceptors",
+            "description": "Set up API client for authentication endpoints with request/response interceptors for token management",
+            "dependencies": [
+              "2.3"
+            ],
+            "details": "Create authentication service using axios with interceptors for automatic token attachment. Implement request interceptor to add JWT tokens to headers. Add response interceptor to handle token refresh and authentication errors.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Implement logout functionality with proper token cleanup",
+            "description": "Create logout mechanism that clears tokens, resets authentication state, and redirects users",
+            "dependencies": [
+              "2.2",
+              "2.3"
+            ],
+            "details": "Implement logout function that removes JWT tokens from storage, clears user state from context, and invalidates TanStack Query caches. Add logout confirmation dialog and redirect to login page after successful logout.",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Design Authentication UI Components with shadcn/ui",
+        "description": "Convert pi-controller authentication forms to shadcn/ui design system with enhanced visual consistency and responsive design",
+        "details": "Create LoginForm using shadcn/ui Form, Input, Button, and Card components. Implement RegisterForm with validation using react-hook-form and zod integration. Design UserProfile component with Avatar, Badge, and Separator components. Create session management UI with Toast notifications for login/logout states. Ensure forms follow kubes-aura's gradient design patterns and responsive breakpoints. Implement loading states and error handling with shadcn/ui Alert components.",
+        "testStrategy": "Visual regression tests for form components. Accessibility testing with screen readers. Responsive design testing across mobile and desktop viewports. Form validation testing with invalid inputs.",
+        "priority": "medium",
+        "dependencies": [
+          2
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 4,
+        "title": "Implement Socket.io Real-time Communication Layer",
+        "description": "Integrate Socket.io client for real-time GPIO updates, cluster monitoring, and live system status with connection management and reconnection logic",
+        "details": "Create src/hooks/useSocket.ts hook for Socket.io connection management. Implement automatic reconnection logic with exponential backoff. Set up event listeners for GPIO state changes, cluster status updates, and system monitoring events. Integrate with TanStack Query for real-time data synchronization and optimistic updates. Create connection status indicator component using shadcn/ui Badge and Progress components. Handle connection errors gracefully with user notifications using Sonner toast system.",
+        "testStrategy": "Mock Socket.io server for testing connection states. Test reconnection logic with simulated network interruptions. Verify real-time updates trigger proper UI state changes. Test error handling for failed connections.",
+        "priority": "high",
+        "dependencies": [
+          1
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create Socket.io Connection Hook with Configuration",
+            "description": "Implement useSocket.ts hook for Socket.io client connection management with configurable options",
+            "dependencies": [],
+            "details": "Create src/hooks/useSocket.ts with Socket.io client initialization, connection state management, and configuration options for server URL, authentication tokens, and connection parameters. Include TypeScript interfaces for connection options and event types. Set up proper cleanup on component unmount.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Implement Automatic Reconnection Logic",
+            "description": "Add exponential backoff reconnection strategy with configurable retry limits and intervals",
+            "dependencies": [
+              "4.1"
+            ],
+            "details": "Extend useSocket hook with automatic reconnection logic using exponential backoff algorithm. Implement retry limits, connection timeout handling, and backoff interval configuration. Add connection state tracking (connecting, connected, disconnected, error) and expose reconnection status to components.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Set Up Event Listeners for Real-time Updates",
+            "description": "Implement Socket.io event listeners for GPIO state changes, cluster status, and system monitoring",
+            "dependencies": [
+              "4.2"
+            ],
+            "details": "Create event listener system within useSocket hook for GPIO pin state changes, cluster status updates, and system monitoring events. Implement typed event handlers with proper TypeScript interfaces. Add event subscription/unsubscription management and ensure proper cleanup to prevent memory leaks.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Integrate with TanStack Query for Data Synchronization",
+            "description": "Connect Socket.io events with TanStack Query for optimistic updates and cache invalidation",
+            "dependencies": [
+              "4.3"
+            ],
+            "details": "Implement TanStack Query integration within Socket.io event handlers to automatically invalidate relevant queries on real-time updates. Set up optimistic update patterns for GPIO controls and cluster operations. Create query key invalidation strategies for different event types and ensure proper data synchronization.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Build Connection Status Indicator Component",
+            "description": "Create visual connection status indicator using shadcn/ui Badge and Progress components",
+            "dependencies": [
+              "4.2"
+            ],
+            "details": "Develop ConnectionStatus component using shadcn/ui Badge for connection state display and Progress component for reconnection attempts. Implement color-coded status indicators (green for connected, yellow for connecting, red for disconnected). Add pulse animations for connecting state and tooltip with connection details.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Implement Error Handling with Sonner Notifications",
+            "description": "Add comprehensive error handling for connection failures with user-friendly notifications",
+            "dependencies": [
+              "4.4",
+              "4.5"
+            ],
+            "details": "Implement error handling system for Socket.io connection failures, authentication errors, and event processing issues. Integrate Sonner toast notifications for user feedback on connection problems. Create error recovery suggestions and manual reconnection options. Add error logging for debugging and monitoring purposes.",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Create GPIO Control Interface Architecture",
+        "description": "Design and implement GPIO control system with real-time pin state management, user-friendly controls, and safety features",
+        "details": "Create src/features/gpio/ directory with GPIO control components. Implement GPIOControlPanel using shadcn/ui Switch, Button, and Slider components for pin controls. Create pin state visualization with color-coded status indicators. Design GPIO pin grid layout using shadcn/ui Card and Badge components. Implement pin configuration modal with Form components for setting pin modes, pull resistors, and output values. Add safety confirmations for critical GPIO operations using shadcn/ui AlertDialog.",
+        "testStrategy": "Mock GPIO API responses for different pin states. Test pin control interactions and state updates. Verify safety dialogs prevent accidental operations. Test real-time GPIO state synchronization.",
+        "priority": "medium",
+        "dependencies": [
+          4
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 6,
+        "title": "Implement Cluster Management Integration",
+        "description": "Integrate pi-controller cluster management functionality with kubes-aura's existing cluster interface, maintaining design consistency",
+        "details": "Extend existing ClusterCard and ClusterOverview components to support pi-controller cluster data. Create cluster configuration forms using shadcn/ui Select, Input, and Checkbox components. Implement cluster creation workflow with multi-step forms and progress indicators. Add cluster monitoring dashboard with real-time metrics using Chart components. Integrate cluster status updates through Socket.io with visual indicators using Progress and Badge components. Ensure seamless integration with existing kubes-aura cluster management patterns.",
+        "testStrategy": "Integration tests for cluster CRUD operations. Test real-time cluster status updates. Verify form validation for cluster configuration. Test cluster monitoring dashboard with mock data.",
+        "priority": "medium",
+        "dependencies": [
+          2,
+          4
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 7,
+        "title": "Create Navigation and Routing Structure",
+        "description": "Extend kubes-aura routing to include pi-controller features with unified navigation and breadcrumb systems",
+        "details": "Update App.tsx routing structure to include /auth, /gpio, /nodes, and /profile routes. Create unified navigation component using shadcn/ui NavigationMenu with role-based menu items. Implement breadcrumb navigation using shadcn/ui Breadcrumb component for complex workflows. Add mobile-responsive navigation with shadcn/ui Sheet for sidebar menu. Integrate authentication state to show/hide menu items based on user permissions. Ensure navigation follows kubes-aura's design language with gradient accents and smooth transitions.",
+        "testStrategy": "Test route navigation and protected route access. Verify breadcrumb updates on route changes. Test mobile navigation responsiveness. Validate role-based menu item visibility.",
+        "priority": "medium",
+        "dependencies": [
+          2,
+          3
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 8,
+        "title": "Implement State Management Architecture",
+        "description": "Establish unified state management using TanStack Query with strategic Zustand integration for critical real-time state",
+        "details": "Create custom hooks using TanStack Query for API data fetching and caching. Implement selective Zustand stores for GPIO pin states, Socket.io connection status, and user preferences that require immediate updates. Set up query invalidation strategies for real-time data synchronization. Create optimistic update patterns for GPIO controls and cluster operations. Implement error boundary handling with React Error Boundary and Sentry integration for production monitoring.",
+        "testStrategy": "Test query caching and invalidation strategies. Verify optimistic updates rollback on errors. Test state persistence for user preferences. Validate error boundary functionality with simulated errors.",
+        "priority": "high",
+        "dependencies": [
+          2,
+          4
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create TanStack Query Custom Hooks",
+            "description": "Develop custom hooks using TanStack Query for API data fetching and caching",
+            "dependencies": [],
+            "details": "Create custom hooks for GPIO data, cluster information, monitoring metrics, and user data. Implement proper query keys, stale time configurations, and cache invalidation patterns. Set up query options for different data types with appropriate refetch intervals.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Implement Zustand Stores for Real-time State",
+            "description": "Create selective Zustand stores for GPIO pin states, Socket.io connection status, and user preferences",
+            "dependencies": [],
+            "details": "Implement Zustand stores for GPIO pin states with real-time updates, Socket.io connection status tracking, and user preferences persistence. Create store slices with proper TypeScript typing and state persistence for critical data.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Set Up Query Invalidation Strategies",
+            "description": "Establish query invalidation strategies for real-time data synchronization",
+            "dependencies": [
+              "8.1",
+              "8.2"
+            ],
+            "details": "Configure TanStack Query invalidation patterns that work with Socket.io events and Zustand state changes. Implement selective query invalidation based on data dependencies and real-time events. Set up background refetch strategies for critical data.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Create Optimistic Update Patterns",
+            "description": "Implement optimistic update patterns for GPIO controls and cluster operations",
+            "dependencies": [
+              "8.1",
+              "8.2"
+            ],
+            "details": "Create optimistic update implementations for GPIO state changes and cluster operations. Implement rollback mechanisms on API errors with proper user feedback. Set up mutation patterns that update both TanStack Query cache and Zustand stores simultaneously.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Implement React Error Boundary System",
+            "description": "Set up error boundary handling with React Error Boundary for graceful error management",
+            "dependencies": [],
+            "details": "Create comprehensive error boundary components with different fallback UIs for various error types. Implement error recovery mechanisms and user-friendly error messages. Set up error boundary hierarchy for different application sections with appropriate fallback strategies.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Set Up Sentry Integration",
+            "description": "Configure Sentry integration for production monitoring and error tracking",
+            "dependencies": [
+              "8.5"
+            ],
+            "details": "Install and configure Sentry for production error monitoring with proper environment setup. Implement performance monitoring and error tracking integration with React Error Boundaries. Set up custom error tags and user context for better debugging in production.",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "title": "Create Monitoring Dashboard Components",
+        "description": "Build comprehensive monitoring dashboard with real-time system metrics, GPIO status, and cluster health indicators",
+        "details": "Create monitoring dashboard using shadcn/ui Chart components for CPU, memory, and network metrics. Implement GPIO status overview with pin state visualization using Badge and Progress components. Design cluster health monitoring with status indicators and alert systems. Create real-time log viewer using shadcn/ui ScrollArea and Table components. Implement customizable dashboard widgets with drag-and-drop layout using @dnd-kit library. Add export functionality for monitoring data using CSV/JSON formats.",
+        "testStrategy": "Mock real-time metrics data for testing. Test chart rendering with various data ranges. Verify alert system triggers for threshold violations. Test dashboard widget customization and persistence.",
+        "priority": "medium",
+        "dependencies": [
+          4,
+          5,
+          6
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 10,
+        "title": "Implement API Integration Layer",
+        "description": "Create comprehensive API client for pi-controller backend services with error handling, retry logic, and TypeScript definitions",
+        "details": "Create src/api/ directory with modular API clients for authentication, GPIO, clusters, and monitoring endpoints. Implement axios instance with interceptors for authentication token management and request/response logging. Set up automatic retry logic with exponential backoff for failed requests. Create comprehensive TypeScript interfaces for all API responses. Implement request caching strategies that complement TanStack Query. Add API response transformation layer for consistent data formatting across the application.",
+        "testStrategy": "Mock API endpoints for testing all service integrations. Test retry logic with simulated network failures. Verify authentication token handling and refresh. Test TypeScript type safety for API responses.",
+        "priority": "high",
+        "dependencies": [
+          1,
+          8
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 11,
+        "title": "Configure Build System and Development Environment",
+        "description": "Update Vite configuration to support pi-controller features including Socket.io proxy, environment variables, and production optimizations",
+        "details": "Update vite.config.ts with Socket.io development proxy configuration pointing to pi-controller backend. Configure environment variable management for different deployment environments (development, staging, production). Set up build optimizations for Socket.io client bundling and tree shaking. Implement development middleware for API mocking during offline development. Configure TypeScript path mapping for new feature directories. Add build-time checks for required environment variables.",
+        "testStrategy": "Test development server with Socket.io proxy functionality. Verify production build optimization and bundle sizes. Test environment variable loading across different environments. Validate TypeScript compilation with new path mappings.",
+        "priority": "medium",
+        "dependencies": [
+          1
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 12,
+        "title": "Implement Security and Error Handling",
+        "description": "Establish comprehensive security measures and error handling systems following pi-controller's security patterns",
+        "details": "Implement input validation and sanitization for all user inputs using zod schemas. Set up Content Security Policy headers and CSRF protection. Create comprehensive error boundary system with graceful degradation for critical features. Implement secure session management with proper token storage and automatic logout on security events. Set up Sentry integration for production error monitoring and performance tracking. Create audit logging for sensitive operations like GPIO changes and cluster modifications.",
+        "testStrategy": "Security testing with invalid inputs and CSRF attempts. Test error boundary recovery mechanisms. Verify secure token storage and session management. Test audit logging for all sensitive operations.",
+        "priority": "high",
+        "dependencies": [
+          2,
+          10
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Set up input validation and sanitization with zod schemas",
+            "description": "Create comprehensive zod schemas for all user inputs including forms, API requests, and GPIO operations",
+            "dependencies": [],
+            "details": "Create zod schemas in src/lib/validation/ for form inputs, API payloads, and GPIO commands. Implement validation middleware for API routes. Add client-side validation for all forms using react-hook-form with zod resolvers. Create reusable validation utilities for common patterns like cluster names, IP addresses, and GPIO pin numbers.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Configure Content Security Policy headers and CSRF protection",
+            "description": "Implement security headers and CSRF protection for the application",
+            "dependencies": [],
+            "details": "Set up CSP headers in Next.js configuration to prevent XSS attacks. Implement CSRF token generation and validation for state-changing operations. Configure secure cookie settings for session management. Add security middleware to protect against common web vulnerabilities.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Create comprehensive error boundary system",
+            "description": "Implement React error boundaries with graceful degradation for critical features",
+            "dependencies": [],
+            "details": "Create ErrorBoundary components with fallback UI for different application sections. Implement error recovery mechanisms for GPIO operations and cluster management. Set up error state management with user-friendly error messages. Create error boundary hierarchy for granular error handling.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Implement secure session management with proper token storage",
+            "description": "Set up secure authentication token storage and session management with automatic security logout",
+            "dependencies": [
+              "12.2"
+            ],
+            "details": "Implement secure token storage using httpOnly cookies with proper security flags. Create automatic token refresh mechanisms. Set up session timeout and automatic logout on security events. Implement secure session validation middleware. Add protection against session fixation and hijacking attacks.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Set up Sentry integration for error monitoring",
+            "description": "Configure Sentry for production error monitoring and performance tracking",
+            "dependencies": [
+              "12.3"
+            ],
+            "details": "Install and configure Sentry SDK for Next.js application. Set up error tracking for client-side and server-side errors. Implement performance monitoring for critical operations like GPIO controls and cluster management. Create custom error contexts for better debugging. Set up alerts for critical errors and performance issues.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Create audit logging for sensitive operations",
+            "description": "Implement comprehensive audit logging system for GPIO changes and cluster modifications",
+            "dependencies": [
+              "12.1",
+              "12.4"
+            ],
+            "details": "Create audit logging service for tracking GPIO pin changes, cluster configuration modifications, and user authentication events. Implement structured logging with proper log levels and metadata. Set up log rotation and retention policies. Create audit trail viewing interface for administrators. Ensure compliance with security logging best practices.",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "title": "Create Node Management Interface",
+        "description": "Build comprehensive node management system with hardware monitoring, GPIO control integration, and cluster assignment capabilities",
+        "details": "Create NodeManagement component with detailed hardware information display using shadcn/ui Card and Table components. Implement node health monitoring with real-time status indicators and alert systems. Design GPIO pin assignment interface for hardware-specific configurations. Create node clustering workflow with drag-and-drop assignment using @dnd-kit. Implement node provisioning forms with hardware detection and configuration validation. Add node performance metrics visualization with Chart components.",
+        "testStrategy": "Mock node hardware data for testing interface components. Test node assignment workflows and validation. Verify real-time health monitoring updates. Test GPIO configuration for different node types.",
+        "priority": "medium",
+        "dependencies": [
+          5,
+          6,
+          9
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 14,
+        "title": "Implement Testing Infrastructure",
+        "description": "Establish comprehensive testing suite including unit tests, integration tests, and E2E testing for all pi-controller features",
+        "details": "Set up testing infrastructure using Vitest and React Testing Library for component testing. Create mock implementations for Socket.io, GPIO APIs, and authentication services. Implement integration tests for authentication flows, real-time updates, and API interactions. Set up E2E testing with Playwright for critical user workflows. Create testing utilities for common patterns like authentication state and Socket.io connections. Implement visual regression testing for shadcn/ui component conversions.",
+        "testStrategy": "Achieve >90% code coverage for all new features. Test all user interaction flows end-to-end. Verify mock implementations match real API behaviors. Test accessibility compliance for all components.",
+        "priority": "medium",
+        "dependencies": [
+          8,
+          10,
+          12
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 15,
+        "title": "Performance Optimization and Bundle Analysis",
+        "description": "Optimize application performance with code splitting, lazy loading, and bundle size analysis for production deployment",
+        "details": "Implement code splitting for pi-controller features using React.lazy and Suspense. Set up lazy loading for non-critical components and routes. Optimize Socket.io client configuration for minimal bundle impact. Implement service worker for offline GPIO state caching and background sync. Analyze bundle sizes and implement tree shaking for unused dependencies. Create performance monitoring with Web Vitals integration and custom metrics for real-time features.",
+        "testStrategy": "Bundle size analysis before and after optimizations. Performance testing with Lighthouse for mobile and desktop. Test offline functionality and background sync. Monitor real-time update performance under load.",
+        "priority": "medium",
+        "dependencies": [
+          11,
+          13,
+          14
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 16,
+        "title": "Production Deployment and Documentation",
+        "description": "Prepare production deployment configuration, environment setup, and comprehensive documentation for the integrated platform",
+        "details": "Create production build configuration with environment-specific optimizations. Set up deployment scripts and CI/CD pipeline integration. Create comprehensive documentation for new features including API integration guides, component usage examples, and deployment instructions. Implement production monitoring with health checks for Socket.io connections and API endpoints. Create user guides for GPIO control interface and cluster management workflows. Set up production error monitoring and alerting systems.",
+        "testStrategy": "Test production builds in staging environment. Verify all environment configurations and health checks. Test deployment pipeline and rollback procedures. Validate documentation accuracy with fresh environment setup.",
+        "priority": "medium",
+        "dependencies": [
+          12,
+          15
+        ],
+        "status": "pending",
+        "subtasks": []
+      }
+    ],
+    "metadata": {
+      "created": "2025-09-27T19:48:35.671Z",
+      "updated": "2025-09-27T20:22:34.458Z",
+      "description": "Tasks for master context"
+    }
+  }
+}
