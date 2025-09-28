@@ -389,9 +389,11 @@ const PiClusters = () => {
 
                         {/* Actions */}
                         <div className="flex gap-2">
-                          <Button size="sm" variant="outline" className="flex-1">
-                            Monitor
-                          </Button>
+                          <Link to={`/pi-controller/node/${node.id}`} className="flex-1">
+                            <Button size="sm" variant="outline" className="w-full">
+                              Monitor
+                            </Button>
+                          </Link>
                           <Button size="sm" variant="outline" className="flex-1">
                             SSH
                           </Button>
