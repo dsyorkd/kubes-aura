@@ -131,7 +131,7 @@ const PiDashboard = () => {
                 </div>
                 <div>
                   <h1 className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                    Node Dashboard
+                    Pi Controller
                   </h1>
                   <p className="text-sm text-muted-foreground">
                     {currentNode.name} - {currentNode.ip}
