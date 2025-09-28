@@ -8,51 +8,54 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Modern dark futuristic background */
+    --background: 222 47% 7%;
+    --foreground: 210 20% 98%;
+    
+    /* Refined card with subtle depth */
+    --card: 222 47% 10%;
+    --card-foreground: 210 20% 98%;
+    
+    /* Sleeker popover */
+    --popover: 222 47% 9%;
+    --popover-foreground: 210 20% 98%;
+    
+    /* Modern primary with tech feel */
+    --primary: 217 91% 60%;
+    --primary-foreground: 222 47% 7%;
+    
+    /* Softer secondary */
+    --secondary: 222 47% 15%;
+    --secondary-foreground: 210 20% 98%;
+    
+    /* Refined muted tones */
+    --muted: 222 47% 13%;
+    --muted-foreground: 215 20% 65%;
+    
+    /* Subtle accent */
+    --accent: 222 47% 14%;
+    --accent-foreground: 210 20% 98%;
+    
+    /* Alert colors */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 20% 98%;
+    
+    /* Refined borders - much lighter */
+    --border: 222 47% 16%;
+    --input: 222 47% 14%;
+    --ring: 217 91% 60%;
+    
+    --radius: 0.4rem;
+    
+    /* Sidebar */
+    --sidebar-background: 222 47% 8%;
+    --sidebar-foreground: 210 20% 95%;
+    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary-foreground: 222 47% 7%;
+    --sidebar-accent: 222 47% 12%;
+    --sidebar-accent-foreground: 210 20% 95%;
+    --sidebar-border: 222 47% 15%;
+    --sidebar-ring: 217 91% 60%;
   }
 
   .dark {
@@ -106,6 +109,21 @@ All colors MUST be HSL.
 
 @layer utilities {
   .bg-gradient-primary {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, hsl(217 91% 60%), hsl(217 91% 45%));
+  }
+  
+  /* Add subtle gradient for cards */
+  .bg-gradient-card {
+    background: linear-gradient(145deg, hsl(222 47% 10%), hsl(222 47% 8%));
+  }
+  
+  /* Subtle glow effect */
+  .glow-sm {
+    box-shadow: 0 0 20px hsl(217 91% 60% / 0.1);
+  }
+  
+  /* Lighter shadows */
+  .shadow-soft {
+    box-shadow: 0 4px 6px -1px hsl(0 0% 0% / 0.1);
   }
 }

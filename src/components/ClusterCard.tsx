@@ -82,8 +82,8 @@ export function ClusterCard({ cluster, viewMode, isSelected, onClick }: ClusterC
     return (
       <Card 
         className={cn(
-          "p-4 cursor-pointer transition-all hover:shadow-lg hover:scale-[1.01]",
-          isSelected && "ring-2 ring-primary shadow-lg"
+          "p-3 cursor-pointer transition-all border-border/30 shadow-soft hover:shadow-lg hover:scale-[1.01]",
+          isSelected && "border-primary/50 shadow-primary/10"
         )}
         onClick={onClick}
       >
@@ -162,8 +162,8 @@ export function ClusterCard({ cluster, viewMode, isSelected, onClick }: ClusterC
   return (
     <Card 
       className={cn(
-        "p-6 cursor-pointer transition-all hover:shadow-lg hover:scale-[1.02] group",
-        isSelected && "ring-2 ring-primary shadow-lg"
+        "p-5 cursor-pointer transition-all border-border/30 shadow-soft hover:shadow-lg hover:scale-[1.01] group",
+        isSelected && "border-primary/50 shadow-primary/10"
       )}
       onClick={onClick}
     >

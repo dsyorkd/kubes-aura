@@ -121,16 +121,16 @@ const PiDashboard = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="border-b border-border/50 bg-card/50 backdrop-blur-sm sticky top-0 z-50">
-        <div className="container mx-auto px-6 py-4">
+      <header className="border-b border-border/30 bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+        <div className="container mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-6">
-              <div className="flex items-center gap-4">
-                <div className="h-10 w-10 rounded-lg bg-gradient-primary flex items-center justify-center">
-                  <Server className="h-6 w-6 text-white" />
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3">
+                <div className="h-9 w-9 rounded-lg bg-gradient-primary flex items-center justify-center">
+                  <Server className="h-5 w-5 text-white" />
                 </div>
                 <div>
-                  <h1 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                  <h1 className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
                     Node Dashboard
                   </h1>
                   <p className="text-sm text-muted-foreground">
@@ -165,11 +165,11 @@ const PiDashboard = () => {
               </Select>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
               <Link to="/pi-controller/clusters">
-                <Button variant="outline" size="sm" className="h-9">
-                  <Network className="h-4 w-4 mr-2" />
-                  Cluster View
+                <Button variant="outline" size="sm" className="h-8">
+                  <Network className="h-3.5 w-3.5 mr-1.5" />
+                  Clusters
                 </Button>
               </Link>
 
@@ -178,14 +178,14 @@ const PiDashboard = () => {
                 size="sm"
                 onClick={refreshData}
                 disabled={isRefreshing}
-                className="h-9"
+                className="h-8"
               >
-                <RefreshCw className={cn("h-4 w-4 mr-2", isRefreshing && "animate-spin")} />
+                <RefreshCw className={cn("h-3.5 w-3.5 mr-1.5", isRefreshing && "animate-spin")} />
                 Refresh
               </Button>
 
-              <Button size="sm" variant="outline" className="h-9">
-                <Settings className="h-4 w-4 mr-2" />
+              <Button size="sm" variant="outline" className="h-8">
+                <Settings className="h-3.5 w-3.5 mr-1.5" />
                 Settings
               </Button>
             </div>
@@ -193,7 +193,7 @@ const PiDashboard = () => {
         </div>
       </header>
 
-      <div className="container mx-auto px-6 py-8">
+      <div className="container mx-auto px-4 py-6">
         {/* Node Status Badge */}
         <div className="mb-6 flex items-center gap-4">
           <Badge 
@@ -220,9 +220,9 @@ const PiDashboard = () => {
 
           <TabsContent value="overview" className="space-y-6">
             {/* System Stats Grid */}
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
               {/* CPU Card */}
-              <Card>
+              <Card className="border-border/30 shadow-soft">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">CPU Usage</CardTitle>
                   <Cpu className="h-4 w-4 text-muted-foreground" />
@@ -237,7 +237,7 @@ const PiDashboard = () => {
               </Card>
 
               {/* Memory Card */}
-              <Card>
+              <Card className="border-border/30 shadow-soft">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">Memory</CardTitle>
                   <MemoryStick className="h-4 w-4 text-muted-foreground" />
@@ -252,7 +252,7 @@ const PiDashboard = () => {
               </Card>
 
               {/* Disk Card */}
-              <Card>
+              <Card className="border-border/30 shadow-soft">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">Storage</CardTitle>
                   <HardDrive className="h-4 w-4 text-muted-foreground" />
@@ -267,7 +267,7 @@ const PiDashboard = () => {
               </Card>
 
               {/* Network Card */}
-              <Card>
+              <Card className="border-border/30 shadow-soft">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">Network</CardTitle>
                   <Wifi className="h-4 w-4 text-muted-foreground" />

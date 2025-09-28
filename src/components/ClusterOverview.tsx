@@ -77,10 +77,10 @@ export function ClusterOverview({ clusters }: ClusterOverviewProps) {
   ];
   
   return (
-    <div className="container mx-auto px-6 py-6">
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+    <div className="container mx-auto px-4 py-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
         {stats.map((stat) => (
-          <Card key={stat.label} className="p-4 hover:shadow-md transition-shadow">
+          <Card key={stat.label} className="p-3 border-border/30 shadow-soft hover:shadow-md transition-shadow">
             <div className="flex items-start justify-between mb-3">
               <div className={cn("p-2 rounded-lg", stat.bg)}>
                 <stat.icon className={cn("h-4 w-4", stat.color)} />
