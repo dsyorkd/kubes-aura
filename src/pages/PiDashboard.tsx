@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import {
   Activity,
   Cpu,
@@ -19,7 +20,9 @@ import {
   CheckCircle,
   XCircle,
   ArrowLeft,
-  Users
+  Users,
+  Server,
+  Network
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -41,6 +44,19 @@ interface GpioPin {
 }
 
 const PiDashboard = () => {
+  const { nodeId } = useParams();
+  const [selectedNode, setSelectedNode] = useState(nodeId || "node-1");
+  
+  // Mock node data - in real app this would come from API
+  const nodes = [
+    { id: "node-1", name: "Pi Master", ip: "192.168.1.100", status: "online", role: "master" },
+    { id: "node-2", name: "Pi Worker 1", ip: "192.168.1.101", status: "online", role: "worker" },
+    { id: "node-3", name: "Pi Worker 2", ip: "192.168.1.102", status: "warning", role: "worker" },
+    { id: "node-4", name: "Pi Storage", ip: "192.168.1.103", status: "online", role: "storage" },
+  ];
+  
+  const currentNode = nodes.find(n => n.id === selectedNode) || nodes[0];
+  
   const [systemStats, setSystemStats] = useState<SystemStats>({
     cpu: { usage: 45, temperature: 52, frequency: 1500 },
     memory: { total: 4096, used: 1842, free: 2254, percentage: 45 },
@@ -108,32 +124,52 @@ const PiDashboard = () => {
       <header className="border-b border-border/50 bg-card/50 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="h-10 w-10 rounded-lg bg-gradient-primary flex items-center justify-center">
-                <Activity className="h-6 w-6 text-white" />
+            <div className="flex items-center gap-6">
+              <div className="flex items-center gap-4">
+                <div className="h-10 w-10 rounded-lg bg-gradient-primary flex items-center justify-center">
+                  <Server className="h-6 w-6 text-white" />
+                </div>
+                <div>
+                  <h1 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                    Node Dashboard
+                  </h1>
+                  <p className="text-sm text-muted-foreground">
+                    {currentNode.name} - {currentNode.ip}
+                  </p>
+                </div>
               </div>
-              <div>
-                <h1 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                  Pi Controller
-                </h1>
-                <p className="text-sm text-muted-foreground">
-                  System Dashboard & GPIO Control
-                </p>
-              </div>
+              
+              {/* Node Selector */}
+              <Select value={selectedNode} onValueChange={setSelectedNode}>
+                <SelectTrigger className="w-[200px]">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {nodes.map((node) => (
+                    <SelectItem key={node.id} value={node.id}>
+                      <div className="flex items-center gap-2">
+                        <div className={cn(
+                          "w-2 h-2 rounded-full",
+                          node.status === "online" && "bg-green-500",
+                          node.status === "warning" && "bg-yellow-500",
+                          node.status === "offline" && "bg-red-500"
+                        )} />
+                        <span>{node.name}</span>
+                        <Badge variant="outline" className="ml-2 text-xs">
+                          {node.role}
+                        </Badge>
+                      </div>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
 
             <div className="flex items-center gap-3">
-              <Link to="/">
-                <Button variant="outline" size="sm" className="h-9">
-                  <ArrowLeft className="h-4 w-4 mr-2" />
-                  Clusters
-                </Button>
-              </Link>
-
               <Link to="/pi-controller/clusters">
                 <Button variant="outline" size="sm" className="h-9">
-                  <Users className="h-4 w-4 mr-2" />
-                  Pi Clusters
+                  <Network className="h-4 w-4 mr-2" />
+                  Cluster View
                 </Button>
               </Link>
 
@@ -158,11 +194,28 @@ const PiDashboard = () => {
       </header>
 
       <div className="container mx-auto px-6 py-8">
+        {/* Node Status Badge */}
+        <div className="mb-6 flex items-center gap-4">
+          <Badge 
+            variant={currentNode.status === "online" ? "default" : currentNode.status === "warning" ? "secondary" : "destructive"}
+            className="px-3 py-1"
+          >
+            <div className={cn(
+              "w-2 h-2 rounded-full mr-2",
+              currentNode.status === "online" && "bg-green-500",
+              currentNode.status === "warning" && "bg-yellow-500",
+              currentNode.status === "offline" && "bg-red-500"
+            )} />
+            {currentNode.status === "online" ? "Online" : currentNode.status === "warning" ? "Warning" : "Offline"}
+          </Badge>
+          <Badge variant="outline">{currentNode.role}</Badge>
+        </div>
+        
         <Tabs defaultValue="overview" className="space-y-6">
           <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="overview">System Overview</TabsTrigger>
+            <TabsTrigger value="overview">Node Overview</TabsTrigger>
             <TabsTrigger value="gpio">GPIO Control</TabsTrigger>
-            <TabsTrigger value="monitoring">Monitoring</TabsTrigger>
+            <TabsTrigger value="monitoring">Node Monitoring</TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview" className="space-y-6">
@@ -232,8 +285,8 @@ const PiDashboard = () => {
             {/* System Information */}
             <Card>
               <CardHeader>
-                <CardTitle>System Information</CardTitle>
-                <CardDescription>Current system status and uptime</CardDescription>
+                <CardTitle>Node Information</CardTitle>
+                <CardDescription>Status and metrics for {currentNode.name}</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="grid gap-4 md:grid-cols-3">
@@ -257,9 +310,9 @@ const PiDashboard = () => {
           <TabsContent value="gpio" className="space-y-6">
             <Card>
               <CardHeader>
-                <CardTitle>GPIO Pin Control</CardTitle>
+                <CardTitle>GPIO Pin Control - {currentNode.name}</CardTitle>
                 <CardDescription>
-                  Control and monitor GPIO pins on your Raspberry Pi
+                  Control and monitor GPIO pins on {currentNode.name} ({currentNode.ip})
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -317,17 +370,19 @@ const PiDashboard = () => {
             <div className="grid gap-6 md:grid-cols-2">
               <Card>
                 <CardHeader>
-                  <CardTitle>System Alerts</CardTitle>
+                  <CardTitle>Node Alerts</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex items-center gap-2 p-3 rounded-lg bg-green-50 dark:bg-green-950/20">
                     <CheckCircle className="h-4 w-4 text-green-500" />
-                    <span className="text-sm">System running normally</span>
+                    <span className="text-sm">{currentNode.name} running normally</span>
                   </div>
-                  <div className="flex items-center gap-2 p-3 rounded-lg bg-yellow-50 dark:bg-yellow-950/20">
-                    <AlertTriangle className="h-4 w-4 text-yellow-500" />
-                    <span className="text-sm">High CPU temperature detected</span>
-                  </div>
+                  {currentNode.status === "warning" && (
+                    <div className="flex items-center gap-2 p-3 rounded-lg bg-yellow-50 dark:bg-yellow-950/20">
+                      <AlertTriangle className="h-4 w-4 text-yellow-500" />
+                      <span className="text-sm">High resource usage detected on this node</span>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
 
