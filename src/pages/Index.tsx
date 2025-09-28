@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import { ClusterCard } from "@/components/ClusterCard";
 import { ClusterOverview } from "@/components/ClusterOverview";
 import { CreateClusterDialog } from "@/components/CreateClusterDialog";
+import { MainNavigation } from "@/components/MainNavigation";
 import { Button } from "@/components/ui/button";
-import { Plus, Grid3x3, List, Activity, Settings, Cpu } from "lucide-react";
+import { Plus, Grid3x3, List, Activity, Settings } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface Cluster {
@@ -133,13 +134,8 @@ const Index = () => {
             </div>
             
             <div className="flex items-center gap-3">
-              <Link to="/pi-controller">
-                <Button variant="outline" size="sm" className="h-9">
-                  <Cpu className="h-4 w-4 mr-2" />
-                  Pi Controller
-                </Button>
-              </Link>
-
+              <MainNavigation />
+              
               <div className="flex items-center gap-1 p-1 bg-muted/50 rounded-lg">
                 <Button
                   variant={viewMode === "grid" ? "secondary" : "ghost"}

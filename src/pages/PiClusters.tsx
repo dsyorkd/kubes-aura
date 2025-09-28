@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { MainNavigation } from "@/components/MainNavigation";
 import {
   Plus,
   Search,
@@ -207,27 +208,17 @@ const PiClusters = () => {
               </div>
               <div>
                 <h1 className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                  Pi Clusters
+                  All Pi Nodes
                 </h1>
                 <p className="text-sm text-muted-foreground">
-                  Manage your Raspberry Pi clusters
+                  {clusters.reduce((acc, c) => acc + c.nodes.length, 0)} nodes across {clusters.length} clusters
                 </p>
               </div>
             </div>
 
             <div className="flex items-center gap-3">
-              <Link to="/pi-controller">
-                <Button variant="outline" size="sm" className="h-9">
-                  <ArrowLeft className="h-4 w-4 mr-2" />
-                  Dashboard
-                </Button>
-              </Link>
-
-              <Button size="sm" variant="outline" className="h-9">
-                <Filter className="h-4 w-4 mr-2" />
-                Filter
-              </Button>
-
+              <MainNavigation />
+              
               <Button size="sm" className="bg-gradient-primary text-white hover:opacity-90 h-9">
                 <Plus className="h-4 w-4 mr-2" />
                 Add Node

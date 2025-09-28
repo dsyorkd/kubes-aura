@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { MainNavigation } from "@/components/MainNavigation";
 import {
   Activity,
   Cpu,
@@ -165,29 +166,33 @@ const PiDashboard = () => {
               </Select>
             </div>
 
-            <div className="flex items-center gap-2">
-              <Link to="/pi-controller/clusters">
-                <Button variant="outline" size="sm" className="h-8">
-                  <Network className="h-3.5 w-3.5 mr-1.5" />
-                  Clusters
+            <div className="flex items-center gap-3">
+              <MainNavigation />
+              
+              <div className="flex items-center gap-2">
+                <Link to="/pi-controller/clusters">
+                  <Button variant="outline" size="sm" className="h-8">
+                    <Network className="h-3.5 w-3.5 mr-1.5" />
+                    View All Nodes
+                  </Button>
+                </Link>
+
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={refreshData}
+                  disabled={isRefreshing}
+                  className="h-8"
+                >
+                  <RefreshCw className={cn("h-3.5 w-3.5 mr-1.5", isRefreshing && "animate-spin")} />
+                  Refresh
                 </Button>
-              </Link>
 
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={refreshData}
-                disabled={isRefreshing}
-                className="h-8"
-              >
-                <RefreshCw className={cn("h-3.5 w-3.5 mr-1.5", isRefreshing && "animate-spin")} />
-                Refresh
-              </Button>
-
-              <Button size="sm" variant="outline" className="h-8">
-                <Settings className="h-3.5 w-3.5 mr-1.5" />
-                Settings
-              </Button>
+                <Button size="sm" variant="outline" className="h-8">
+                  <Settings className="h-3.5 w-3.5 mr-1.5" />
+                  Settings
+                </Button>
+              </div>
             </div>
           </div>
         </div>
