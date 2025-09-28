@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -146,7 +147,9 @@ export function ClusterCard({ cluster, viewMode, isSelected, onClick }: ClusterC
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem>View Details</DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to={`/clusters/${cluster.id}`}>View Details</Link>
+                </DropdownMenuItem>
                 <DropdownMenuItem>Edit Configuration</DropdownMenuItem>
                 <DropdownMenuItem>Scale Cluster</DropdownMenuItem>
                 <DropdownMenuItem>View Logs</DropdownMenuItem>
@@ -160,6 +163,7 @@ export function ClusterCard({ cluster, viewMode, isSelected, onClick }: ClusterC
   }
   
   return (
+    <Link to={`/clusters/${cluster.id}`}>
     <Card 
       className={cn(
         "p-5 cursor-pointer transition-all border-border/30 shadow-soft hover:shadow-lg hover:scale-[1.01] group",
@@ -201,7 +205,9 @@ export function ClusterCard({ cluster, viewMode, isSelected, onClick }: ClusterC
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem>View Details</DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to={`/clusters/${cluster.id}`}>View Details</Link>
+                </DropdownMenuItem>
                 <DropdownMenuItem>Edit Configuration</DropdownMenuItem>
                 <DropdownMenuItem>Scale Cluster</DropdownMenuItem>
                 <DropdownMenuItem>View Logs</DropdownMenuItem>
@@ -266,5 +272,6 @@ export function ClusterCard({ cluster, viewMode, isSelected, onClick }: ClusterC
         </div>
       </div>
     </Card>
+    </Link>
   );
 }

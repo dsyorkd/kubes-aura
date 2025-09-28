@@ -9,6 +9,7 @@ import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import PiDashboard from "./pages/PiDashboard";
 import PiClusters from "./pages/PiClusters";
+import ClusterDetails from "./pages/ClusterDetails";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,7 +27,11 @@ const App = () => (
             <Route path="/auth/login" element={<Login />} />
             <Route path="/auth/register" element={<Register />} />
 
-            {/* Pi-Controller Routes */}
+            {/* Cluster Management Routes */}
+            <Route path="/clusters/:clusterId" element={<ClusterDetails />} />
+            <Route path="/clusters/:clusterId/nodes/:nodeId" element={<PiDashboard />} />
+            
+            {/* Legacy Routes - Remove these later */}
             <Route path="/pi-controller" element={<PiDashboard />} />
             <Route path="/pi-controller/clusters" element={<PiClusters />} />
 
