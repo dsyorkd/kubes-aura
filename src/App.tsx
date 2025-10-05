@@ -27,13 +27,13 @@ const App = () => (
             <Route path="/auth/login" element={<Login />} />
             <Route path="/auth/register" element={<Register />} />
 
-            {/* Cluster Management Routes */}
+            {/* Kubernetes Cluster Management */}
             <Route path="/clusters/:clusterId" element={<ClusterDetails />} />
-            <Route path="/clusters/:clusterId/nodes/:nodeId" element={<PiDashboard />} />
             
-            {/* Legacy Routes - Remove these later */}
+            {/* Pi Controller - Hardware Management */}
             <Route path="/pi-controller" element={<PiDashboard />} />
             <Route path="/pi-controller/clusters" element={<PiClusters />} />
+            <Route path="/pi-controller/node/:nodeId" element={<PiDashboard />} />
 
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

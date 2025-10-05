@@ -55,8 +55,6 @@ interface PiCluster {
 }
 
 const PiClusters = () => {
-  const [selectedCluster, setSelectedCluster] = useState<string>("cluster-1");
-  const [searchTerm, setSearchTerm] = useState("");
   const [clusters] = useState<PiCluster[]>([
     {
       id: "cluster-1",
@@ -189,12 +187,7 @@ const PiClusters = () => {
     return `${days}d ${hours}h`;
   };
 
-  const currentCluster = clusters.find(c => c.id === selectedCluster);
-  const filteredNodes = currentCluster?.nodes.filter(node =>
-    node.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    node.hostname.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    node.ipAddress.includes(searchTerm)
-  ) || [];
+
 
   return (
     <div className="min-h-screen bg-background">
@@ -229,176 +222,64 @@ const PiClusters = () => {
       </header>
 
       <div className="container mx-auto px-6 py-8">
-        <div className="grid gap-6 lg:grid-cols-4">
-          {/* Cluster List Sidebar */}
-          <div className="lg:col-span-1 space-y-4">
-            <Card>
+        {/* Remove sidebar, show all nodes in grid format */}
+        <div className="space-y-6">
+          {clusters.map((cluster) => (
+            <Card key={cluster.id}>
               <CardHeader>
-                <CardTitle className="text-lg">Clusters</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                {clusters.map((cluster) => (
-                  <div
-                    key={cluster.id}
-                    className={cn(
-                      "p-3 rounded-lg border cursor-pointer transition-colors hover:bg-accent",
-                      selectedCluster === cluster.id && "bg-accent border-primary"
-                    )}
-                    onClick={() => setSelectedCluster(cluster.id)}
-                  >
-                    <div className="flex items-center justify-between mb-2">
-                      <h3 className="font-medium text-sm">{cluster.name}</h3>
-                      <div className={cn("w-2 h-2 rounded-full", getStatusColor(cluster.status))} />
-                    </div>
-                    <p className="text-xs text-muted-foreground mb-2">
-                      {cluster.nodes.length} nodes
-                    </p>
-                    <div className="flex items-center gap-2 text-xs">
-                      <span>{cluster.nodes.filter(n => n.status === 'online').length} online</span>
-                      <span className="text-muted-foreground">·</span>
-                      <span>{cluster.nodes.filter(n => n.status === 'error').length} error</span>
-                    </div>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Main Content */}
-          <div className="lg:col-span-3 space-y-6">
-            {currentCluster && (
-              <>
-                {/* Cluster Overview */}
-                <Card>
-                  <CardHeader>
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <CardTitle className="flex items-center gap-2">
-                          {currentCluster.name}
-                          <Badge variant={currentCluster.status === 'healthy' ? 'default' : 'destructive'}>
-                            {currentCluster.status}
-                          </Badge>
-                        </CardTitle>
-                        <CardDescription>{currentCluster.description}</CardDescription>
-                      </div>
-                      <Button variant="outline" size="sm">
-                        <MoreHorizontal className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid gap-4 md:grid-cols-4">
-                      <div className="text-center">
-                        <div className="text-2xl font-bold">{currentCluster.nodes.length}</div>
-                        <p className="text-sm text-muted-foreground">Total Nodes</p>
-                      </div>
-                      <div className="text-center">
-                        <div className="text-2xl font-bold">{currentCluster.totalCpu}</div>
-                        <p className="text-sm text-muted-foreground">Total Cores</p>
-                      </div>
-                      <div className="text-center">
-                        <div className="text-2xl font-bold">{currentCluster.totalMemory}GB</div>
-                        <p className="text-sm text-muted-foreground">Total RAM</p>
-                      </div>
-                      <div className="text-center">
-                        <div className="text-2xl font-bold">{currentCluster.totalStorage}GB</div>
-                        <p className="text-sm text-muted-foreground">Total Storage</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Search and Filter */}
-                <div className="flex items-center gap-4">
-                  <div className="relative flex-1">
-                    <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                    <Input
-                      placeholder="Search nodes..."
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      className="pl-10"
-                    />
+                <div className="flex items-center justify-between">
+                  <div>
+                    <CardTitle className="flex items-center gap-2">
+                      {cluster.name}
+                      <Badge variant={cluster.status === 'healthy' ? 'default' : 'destructive'}>
+                        {cluster.status}
+                      </Badge>
+                    </CardTitle>
+                    <CardDescription>
+                      {cluster.nodes.length} nodes • {cluster.nodes.filter(n => n.status === 'online').length} online
+                    </CardDescription>
                   </div>
                 </div>
-
-                {/* Node List */}
-                <div className="grid gap-4 md:grid-cols-2">
-                  {filteredNodes.map((node) => (
+              </CardHeader>
+              <CardContent>
+                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                  {cluster.nodes.map((node) => (
                     <Card key={node.id} className="hover:shadow-md transition-shadow">
-                      <CardHeader className="pb-3">
-                        <div className="flex items-center justify-between">
+                      <CardContent className="p-4">
+                        <div className="flex items-center justify-between mb-3">
                           <div className="flex items-center gap-2">
                             {getStatusIcon(node.status)}
                             <div>
-                              <CardTitle className="text-base">{node.name}</CardTitle>
-                              <CardDescription className="text-sm">
-                                {node.hostname} • {node.ipAddress}
-                              </CardDescription>
+                              <h3 className="font-semibold">{node.name}</h3>
+                              <p className="text-sm text-muted-foreground">{node.ipAddress}</p>
                             </div>
                           </div>
                           <Badge variant={node.role === 'master' ? 'default' : 'secondary'}>
                             {node.role}
                           </Badge>
                         </div>
-                      </CardHeader>
-                      <CardContent className="space-y-4">
-                        {/* System Stats */}
-                        <div className="space-y-3">
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-2">
-                              <Cpu className="h-4 w-4 text-muted-foreground" />
-                              <span className="text-sm">CPU</span>
-                            </div>
-                            <span className="text-sm font-medium">{node.cpuUsage}%</span>
+                        
+                        <div className="space-y-2 mb-3">
+                          <div className="flex items-center justify-between text-sm">
+                            <span>CPU: {node.cpuUsage}%</span>
+                            <span>Mem: {node.memoryUsage}%</span>
                           </div>
-                          <Progress value={node.cpuUsage} className="h-2" />
-
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-2">
-                              <MemoryStick className="h-4 w-4 text-muted-foreground" />
-                              <span className="text-sm">Memory</span>
-                            </div>
-                            <span className="text-sm font-medium">{node.memoryUsage}%</span>
-                          </div>
-                          <Progress value={node.memoryUsage} className="h-2" />
-
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-2">
-                              <HardDrive className="h-4 w-4 text-muted-foreground" />
-                              <span className="text-sm">Storage</span>
-                            </div>
-                            <span className="text-sm font-medium">{node.diskUsage}%</span>
-                          </div>
-                          <Progress value={node.diskUsage} className="h-2" />
+                          <Progress value={node.cpuUsage} className="h-1" />
                         </div>
-
-                        {/* Additional Info */}
-                        <div className="flex items-center justify-between text-sm text-muted-foreground">
-                          <span>Temp: {node.temperature}°C</span>
-                          <span>Uptime: {formatUptime(node.uptime)}</span>
-                        </div>
-
-                        {/* Actions */}
-                        <div className="flex gap-2">
-                          <Link to={`/pi-controller/node/${node.id}`} className="flex-1">
-                            <Button size="sm" variant="outline" className="w-full">
-                              Monitor
-                            </Button>
-                          </Link>
-                          <Button size="sm" variant="outline" className="flex-1">
-                            SSH
+                        
+                        <Link to={`/pi-controller/node/${node.id}`}>
+                          <Button size="sm" className="w-full">
+                            <Activity className="h-3 w-3 mr-2" />
+                            Monitor
                           </Button>
-                          <Button size="sm" variant="outline">
-                            <MoreHorizontal className="h-4 w-4" />
-                          </Button>
-                        </div>
+                        </Link>
                       </CardContent>
                     </Card>
                   ))}
                 </div>
-              </>
-            )}
-          </div>
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </div>
     </div>
