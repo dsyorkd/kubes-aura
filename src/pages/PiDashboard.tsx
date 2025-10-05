@@ -6,7 +6,6 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { MainNavigation } from "@/components/MainNavigation";
 import {
   Activity,
   Cpu,
@@ -46,7 +45,83 @@ interface GpioPin {
 
 const PiDashboard = () => {
   const { nodeId } = useParams();
-  const [selectedNode, setSelectedNode] = useState(nodeId || "node-1");
+  
+  // If no nodeId, show overview dashboard
+  if (!nodeId) {
+    return (
+      <div className="space-y-6">
+        <div>
+          <h1 className="text-3xl font-bold">Pi Controller Dashboard</h1>
+          <p className="text-muted-foreground">
+            Overview of your Raspberry Pi infrastructure
+          </p>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-medium">Total Nodes</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">12</div>
+              <p className="text-xs text-muted-foreground">8 online, 4 offline</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-medium">Clusters</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">4</div>
+              <p className="text-xs text-muted-foreground">All types</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-medium">Avg CPU Usage</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">45%</div>
+              <Progress value={45} className="mt-2" />
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-medium">Avg Temperature</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">52°C</div>
+              <p className="text-xs text-muted-foreground">Normal range</p>
+            </CardContent>
+          </Card>
+        </div>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Quick Actions</CardTitle>
+            <CardDescription>Common tasks and navigation</CardDescription>
+          </CardHeader>
+          <CardContent className="grid gap-4 md:grid-cols-2">
+            <Link to="/pi-controller/clusters">
+              <Button className="w-full" variant="outline">
+                <Network className="h-4 w-4 mr-2" />
+                View All Clusters
+              </Button>
+            </Link>
+            <Button className="w-full" variant="outline">
+              <Server className="h-4 w-4 mr-2" />
+              Manage Nodes
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+  
+  const [selectedNode, setSelectedNode] = useState(nodeId);
   
   // Mock node data - in real app this would come from API
   const nodes = [
@@ -120,85 +195,62 @@ const PiDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b border-border/30 bg-card/50 backdrop-blur-sm sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-3">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-3">
-                <div className="h-9 w-9 rounded-lg bg-gradient-primary flex items-center justify-center">
-                  <Server className="h-5 w-5 text-white" />
-                </div>
-                <div>
-                  <h1 className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                    Pi Controller
-                  </h1>
-                  <p className="text-sm text-muted-foreground">
-                    {currentNode.name} - {currentNode.ip}
-                  </p>
-                </div>
-              </div>
-              
-              {/* Node Selector */}
-              <Select value={selectedNode} onValueChange={setSelectedNode}>
-                <SelectTrigger className="w-[200px]">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {nodes.map((node) => (
-                    <SelectItem key={node.id} value={node.id}>
-                      <div className="flex items-center gap-2">
-                        <div className={cn(
-                          "w-2 h-2 rounded-full",
-                          node.status === "online" && "bg-green-500",
-                          node.status === "warning" && "bg-yellow-500",
-                          node.status === "offline" && "bg-red-500"
-                        )} />
-                        <span>{node.name}</span>
-                        <Badge variant="outline" className="ml-2 text-xs">
-                          {node.role}
-                        </Badge>
-                      </div>
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <MainNavigation />
-              
-              <div className="flex items-center gap-2">
-                <Link to="/pi-controller/clusters">
-                  <Button variant="outline" size="sm" className="h-8">
-                    <Network className="h-3.5 w-3.5 mr-1.5" />
-                    View All Nodes
-                  </Button>
-                </Link>
-
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={refreshData}
-                  disabled={isRefreshing}
-                  className="h-8"
-                >
-                  <RefreshCw className={cn("h-3.5 w-3.5 mr-1.5", isRefreshing && "animate-spin")} />
-                  Refresh
-                </Button>
-
-                <Button size="sm" variant="outline" className="h-8">
-                  <Settings className="h-3.5 w-3.5 mr-1.5" />
-                  Settings
-                </Button>
-              </div>
-            </div>
+    <div className="space-y-6">
+      {/* Node Selector and Actions */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <div>
+            <h1 className="text-3xl font-bold">Node Dashboard</h1>
+            <p className="text-muted-foreground">
+              {currentNode.name} - {currentNode.ip}
+            </p>
           </div>
+          
+          {/* Node Selector */}
+          <Select value={selectedNode} onValueChange={setSelectedNode}>
+            <SelectTrigger className="w-[200px]">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {nodes.map((node) => (
+                <SelectItem key={node.id} value={node.id}>
+                  <div className="flex items-center gap-2">
+                    <div className={cn(
+                      "w-2 h-2 rounded-full",
+                      node.status === "online" && "bg-green-500",
+                      node.status === "warning" && "bg-yellow-500",
+                      node.status === "offline" && "bg-red-500"
+                    )} />
+                    <span>{node.name}</span>
+                    <Badge variant="outline" className="ml-2 text-xs">
+                      {node.role}
+                    </Badge>
+                  </div>
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
-      </header>
 
-      <div className="container mx-auto px-4 py-6">
+        <div className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={refreshData}
+            disabled={isRefreshing}
+          >
+            <RefreshCw className={cn("h-4 w-4 mr-2", isRefreshing && "animate-spin")} />
+            Refresh
+          </Button>
+
+          <Button size="sm" variant="outline">
+            <Settings className="h-4 w-4 mr-2" />
+            Settings
+          </Button>
+        </div>
+      </div>
+
+      <div>
         {/* Node Status Badge */}
         <div className="mb-6 flex items-center gap-4">
           <Badge 

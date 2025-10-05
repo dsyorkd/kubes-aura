@@ -96,58 +96,46 @@ const ClusterDetails = () => {
   };
   
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b border-border/30 bg-card/50 backdrop-blur-sm sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-3">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Link to="/">
-                <Button variant="outline" size="sm" className="h-8">
-                  <ArrowLeft className="h-3.5 w-3.5 mr-1.5" />
-                  Clusters
-                </Button>
-              </Link>
-              
-              <div className="flex items-center gap-3">
-                <div className="h-9 w-9 rounded-lg bg-gradient-primary flex items-center justify-center">
-                  <Network className="h-5 w-5 text-white" />
-                </div>
-                <div>
-                  <h1 className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                    {cluster.name}
-                  </h1>
-                  <p className="text-sm text-muted-foreground">
-                    {cluster.region} • {nodes.length} nodes
-                  </p>
-                </div>
-              </div>
-            </div>
-            
-            <div className="flex items-center gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={refreshData}
-                disabled={isRefreshing}
-                className="h-8"
-              >
-                <RefreshCw className={cn("h-3.5 w-3.5 mr-1.5", isRefreshing && "animate-spin")} />
-                Refresh
-              </Button>
-              
-              <Button size="sm" variant="outline" className="h-8">
-                <Settings className="h-3.5 w-3.5 mr-1.5" />
-                Settings
-              </Button>
-            </div>
+    <div className="space-y-6">
+      {/* Cluster Header */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <Link to="/pi-controller/clusters">
+            <Button variant="outline" size="sm">
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              All Clusters
+            </Button>
+          </Link>
+          
+          <div>
+            <h1 className="text-3xl font-bold">{cluster.name}</h1>
+            <p className="text-muted-foreground">
+              {cluster.region} • {nodes.length} nodes
+            </p>
           </div>
         </div>
-      </header>
+        
+        <div className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={refreshData}
+            disabled={isRefreshing}
+          >
+            <RefreshCw className={cn("h-4 w-4 mr-2", isRefreshing && "animate-spin")} />
+            Refresh
+          </Button>
+          
+          <Button size="sm" variant="outline">
+            <Settings className="h-4 w-4 mr-2" />
+            Settings
+          </Button>
+        </div>
+      </div>
       
-      <div className="container mx-auto px-4 py-6">
-        {/* Cluster Overview */}
-        <div className="grid gap-4 md:grid-cols-4 mb-6">
+      <div>
+      {/* Cluster Overview */}
+      <div className="grid gap-4 md:grid-cols-4">
           <Card className="border-border/30 shadow-soft">
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-medium">Status</CardTitle>
@@ -193,8 +181,8 @@ const ClusterDetails = () => {
             </CardContent>
           </Card>
         </div>
-        
-        <Tabs defaultValue="nodes" className="space-y-4">
+      
+      <Tabs defaultValue="nodes" className="space-y-4">
           <TabsList>
             <TabsTrigger value="nodes">Nodes</TabsTrigger>
             <TabsTrigger value="workloads">Workloads</TabsTrigger>
@@ -254,7 +242,7 @@ const ClusterDetails = () => {
                         </div>
                         
                         <div className="flex items-center gap-2">
-                          <Link to={`/clusters/${clusterId}/nodes/${node.id}`}>
+                          <Link to={`/pi-controller/clusters/${clusterId}/nodes/${node.id}`}>
                             <Button size="sm" variant="outline" className="h-8">
                               <Activity className="h-3.5 w-3.5 mr-1.5" />
                               Monitor
