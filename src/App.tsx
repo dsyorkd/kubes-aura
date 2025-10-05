@@ -11,6 +11,7 @@ import PiControllerLayout from "./pages/PiControllerLayout";
 import Clusters from "./pages/Clusters";
 import ClusterDetails from "./pages/ClusterDetails";
 import Settings from "./pages/Settings";
+import Hardware from "./pages/Hardware";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -36,7 +37,7 @@ const App = () => (
               <Route path="clusters" element={<Clusters />} />
               <Route path="clusters/:clusterId" element={<ClusterDetails />} />
               <Route path="clusters/:clusterId/nodes/:nodeId" element={<PiDashboard />} />
-              <Route path="hardware" element={<div>Hardware page coming soon</div>} />
+              <Route path="hardware" element={<Hardware />} />
               <Route path="settings" element={<Settings />} />
             </Route>
 
