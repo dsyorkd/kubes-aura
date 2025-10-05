@@ -10,6 +10,7 @@ import PiDashboard from "./pages/PiDashboard";
 import PiControllerLayout from "./pages/PiControllerLayout";
 import Clusters from "./pages/Clusters";
 import ClusterDetails from "./pages/ClusterDetails";
+import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -36,7 +37,7 @@ const App = () => (
               <Route path="clusters/:clusterId" element={<ClusterDetails />} />
               <Route path="clusters/:clusterId/nodes/:nodeId" element={<PiDashboard />} />
               <Route path="hardware" element={<div>Hardware page coming soon</div>} />
-              <Route path="settings" element={<div>Settings page coming soon</div>} />
+              <Route path="settings" element={<Settings />} />
             </Route>
 
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
