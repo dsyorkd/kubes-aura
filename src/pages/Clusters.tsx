@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
+import NewClusterDialog from "@/components/NewClusterDialog";
 import {
   Plus,
   Search,
@@ -79,6 +80,7 @@ const mockClusters: Cluster[] = [
 const Clusters = () => {
   const [clusters] = useState<Cluster[]>(mockClusters);
   const [searchTerm, setSearchTerm] = useState("");
+  const [isNewClusterOpen, setIsNewClusterOpen] = useState(false);
 
   const getStatusIcon = (status: string) => {
     switch (status) {
@@ -155,6 +157,8 @@ const Clusters = () => {
 
   return (
     <div className="space-y-6">
+      <NewClusterDialog open={isNewClusterOpen} onOpenChange={setIsNewClusterOpen} />
+      
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">Clusters</h1>
@@ -162,7 +166,7 @@ const Clusters = () => {
             Manage all your compute clusters
           </p>
         </div>
-        <Button className="bg-gradient-primary text-white">
+        <Button onClick={() => setIsNewClusterOpen(true)} className="bg-gradient-primary text-white">
           <Plus className="h-4 w-4 mr-2" />
           New Cluster
         </Button>
