@@ -12,6 +12,8 @@ import Clusters from "./pages/Clusters";
 import ClusterDetails from "./pages/ClusterDetails";
 import Settings from "./pages/Settings";
 import Hardware from "./pages/Hardware";
+import GettingStarted from "./pages/GettingStarted";
+import Documentation from "./pages/Documentation";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,11 +36,13 @@ const App = () => (
             {/* Pi Controller with Sidebar Layout */}
             <Route path="/pi-controller" element={<PiControllerLayout />}>
               <Route index element={<PiDashboard />} />
+              <Route path="getting-started" element={<GettingStarted />} />
               <Route path="clusters" element={<Clusters />} />
               <Route path="clusters/:clusterId" element={<ClusterDetails />} />
               <Route path="clusters/:clusterId/nodes/:nodeId" element={<PiDashboard />} />
               <Route path="hardware" element={<Hardware />} />
               <Route path="settings" element={<Settings />} />
+              <Route path="documentation" element={<Documentation />} />
             </Route>
 
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
