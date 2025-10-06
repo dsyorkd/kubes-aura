@@ -38,4 +38,7 @@ node_modules/
 
 # Task files
 # tasks.json
-# tasks/ 
+# tasks/
+
+# Generated API client (regenerate with npm run generate-api)
+src/api/generated/ 
