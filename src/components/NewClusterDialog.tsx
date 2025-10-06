@@ -2,6 +2,9 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import NodeDiscoveryPanel from "@/components/NodeDiscoveryPanel";
+import ManualNodeEntryDialog from "@/components/ManualNodeEntryDialog";
+import { ManualNodeEntry, DiscoveredNode } from "@/types/pi-controller";
 import {
   Dialog,
   DialogContent,
@@ -107,6 +110,9 @@ interface NewClusterDialogProps {
 export default function NewClusterDialog({ open, onOpenChange }: NewClusterDialogProps) {
   const [step, setStep] = useState(1);
   const [selectedType, setSelectedType] = useState<string>("");
+  const [selectedNodes, setSelectedNodes] = useState<string[]>([]);
+  const [manualDialogOpen, setManualDialogOpen] = useState(false);
+  const [manualNodes, setManualNodes] = useState<ManualNodeEntry[]>([]);
 
   const form = useForm<ClusterFormData>({
     resolver: zodResolver(clusterSchema),
@@ -147,7 +153,16 @@ export default function NewClusterDialog({ open, onOpenChange }: NewClusterDialo
       toast.error("Please select a cluster type");
       return;
     }
-    if (step < 4) setStep(step + 1);
+    if (step === 4 && selectedNodes.length === 0) {
+      toast.error("Please select at least one node");
+      return;
+    }
+    if (step < 5) setStep(step + 1);
+  };
+
+  const handleManualNodeAdd = (node: ManualNodeEntry) => {
+    setManualNodes([...manualNodes, node]);
+    toast.success("Manual node added successfully");
   };
 
   const handleBack = () => {
@@ -163,7 +178,7 @@ export default function NewClusterDialog({ open, onOpenChange }: NewClusterDialo
   const totalMemory = form.watch("nodeCount") * form.watch("memoryPerNode");
   const totalStorage = form.watch("nodeCount") * form.watch("storagePerNode");
 
-  const progressPercentage = (step / 4) * 100;
+  const progressPercentage = (step / 5) * 100;
 
   return (
     <Dialog open={open} onOpenChange={(newOpen) => {
@@ -174,7 +189,13 @@ export default function NewClusterDialog({ open, onOpenChange }: NewClusterDialo
         <DialogHeader>
           <DialogTitle className="text-2xl">Create New Cluster</DialogTitle>
           <DialogDescription>
-            Step {step} of 4: {step === 1 ? "Choose Type" : step === 2 ? "Basic Information" : step === 3 ? "Configuration" : "Review"}
+            Step {step} of 5: {
+              step === 1 ? "Choose Type" : 
+              step === 2 ? "Basic Information" : 
+              step === 3 ? "Configuration" : 
+              step === 4 ? "Select Nodes" :
+              "Review"
+            }
           </DialogDescription>
           <Progress value={progressPercentage} className="mt-2" />
         </DialogHeader>
@@ -374,8 +395,41 @@ export default function NewClusterDialog({ open, onOpenChange }: NewClusterDialo
             </div>
           )}
 
-          {/* Step 4: Review */}
+          {/* Step 4: Node Selection */}
           {step === 4 && (
+            <div className="space-y-4 animate-fade-in">
+              <NodeDiscoveryPanel
+                selectedNodes={selectedNodes}
+                onSelectionChange={setSelectedNodes}
+                onManualAdd={() => setManualDialogOpen(true)}
+              />
+              
+              {manualNodes.length > 0 && (
+                <div className="space-y-2">
+                  <h4 className="text-sm font-semibold">Manually Added Nodes</h4>
+                  <div className="space-y-2">
+                    {manualNodes.map((node, index) => (
+                      <div
+                        key={index}
+                        className="flex items-center justify-between p-3 border rounded-lg"
+                      >
+                        <div>
+                          <p className="font-medium">{node.hostname}</p>
+                          <p className="text-sm text-muted-foreground">{node.ipAddress}</p>
+                        </div>
+                        {node.label && (
+                          <Badge variant="secondary">{node.label}</Badge>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Step 5: Review */}
+          {step === 5 && (
             <div className="space-y-4 animate-fade-in">
               <h3 className="text-lg font-semibold">Review Configuration</h3>
               
@@ -405,6 +459,26 @@ export default function NewClusterDialog({ open, onOpenChange }: NewClusterDialo
                         <span className="font-medium">{form.watch("description")}</span>
                       </div>
                     )}
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-base">Selected Nodes</CardTitle>
+                  </CardHeader>
+                  <CardContent className="grid gap-2 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Total Nodes:</span>
+                      <span className="font-medium">{selectedNodes.length + manualNodes.length}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Auto-discovered:</span>
+                      <span className="font-medium">{selectedNodes.length}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Manual entries:</span>
+                      <span className="font-medium">{manualNodes.length}</span>
+                    </div>
                   </CardContent>
                 </Card>
 
@@ -446,7 +520,7 @@ export default function NewClusterDialog({ open, onOpenChange }: NewClusterDialo
               Back
             </Button>
 
-            {step < 4 ? (
+            {step < 5 ? (
               <Button type="button" onClick={handleNext}>
                 Next
                 <ArrowRight className="h-4 w-4 ml-2" />
@@ -459,6 +533,12 @@ export default function NewClusterDialog({ open, onOpenChange }: NewClusterDialo
             )}
           </DialogFooter>
         </form>
+
+        <ManualNodeEntryDialog
+          open={manualDialogOpen}
+          onOpenChange={setManualDialogOpen}
+          onAdd={handleManualNodeAdd}
+        />
       </DialogContent>
     </Dialog>
   );

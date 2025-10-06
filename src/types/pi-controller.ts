@@ -244,6 +244,80 @@ export interface DashboardWidget {
   data?: any;
 }
 
+// Node Discovery Types
+export type NodeDiscoveryMethod = "mdns" | "dhcp" | "manual" | "api";
+
+export type NodeDiscoveryStatus = 
+  | "discovered"           // Found via mDNS/DHCP but not contacted
+  | "identified"          // Successfully communicated and identified as pi-controller
+  | "unresponsive"        // Discovered but not responding
+  | "manual"              // Manually added by user
+  | "connected";          // Actively connected to cluster
+
+export interface DiscoveredNode {
+  id: string;
+  hostname: string;
+  ipAddress: string;
+  macAddress?: string;
+  discoveryMethod: NodeDiscoveryMethod;
+  discoveryStatus: NodeDiscoveryStatus;
+  discoveredAt: string;
+  lastSeen: string;
+  
+  // Only available if pi-controller is running on the node
+  piControllerInfo?: {
+    version: string;
+    apiPort: number;
+    isHealthy: boolean;
+    capabilities: string[];
+  };
+  
+  // System information (if available)
+  systemInfo?: {
+    model: string;
+    osVersion: string;
+    architecture: string;
+    cpuCores: number;
+    totalMemory: number;
+    totalStorage: number;
+  };
+  
+  // Network information
+  networkInfo?: {
+    openPorts: number[];
+    services: string[];
+    latency: number; // ms
+  };
+  
+  // User-provided information (for manual entries)
+  metadata?: {
+    label?: string;
+    location?: string;
+    notes?: string;
+    tags?: string[];
+  };
+}
+
+export interface NodeDiscoveryResult {
+  success: boolean;
+  nodes: DiscoveredNode[];
+  discoveryMethod: NodeDiscoveryMethod;
+  timestamp: string;
+  error?: string;
+}
+
+export interface ManualNodeEntry {
+  hostname: string;
+  ipAddress: string;
+  port?: number;
+  username?: string;
+  password?: string;
+  sshKey?: string;
+  label?: string;
+  location?: string;
+  notes?: string;
+}
+
 // Configuration Types
 export interface PiControllerConfig {
   general: {
