@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -18,6 +19,7 @@ import {
   Edit,
   Plus,
   RefreshCw,
+  ArrowLeft,
 } from "lucide-react";
 import { GPIOPin, SystemInfo } from "@/types/pi-controller";
 import { Progress } from "@/components/ui/progress";
@@ -59,10 +61,19 @@ const categoryColors = {
 };
 
 export default function Hardware() {
+  const { nodeId, clusterId } = useParams<{ nodeId: string; clusterId: string }>();
+  const navigate = useNavigate();
   const [pins, setPins] = useState<GPIOPin[]>(mockGPIOPins);
   const [systemInfo, setSystemInfo] = useState<SystemInfo>(mockSystemInfo);
   const [cpuTemp, setCpuTemp] = useState(45.2);
   const [isLoading, setIsLoading] = useState(false);
+
+  // Redirect if no nodeId is provided
+  useEffect(() => {
+    if (!nodeId || !clusterId) {
+      navigate("/pi-controller/clusters");
+    }
+  }, [nodeId, clusterId, navigate]);
 
   const togglePin = async (pinId: number) => {
     setIsLoading(true);
@@ -97,11 +108,21 @@ export default function Hardware() {
 
   const memoryUsage = ((systemInfo.totalMemory - systemInfo.freeMemory) / systemInfo.totalMemory) * 100;
 
+  if (!nodeId || !clusterId) return null;
+
   return (
     <div className="space-y-6 animate-fade-in">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-foreground">Hardware Control</h2>
+          <Button 
+            variant="ghost" 
+            onClick={() => navigate(`/pi-controller/clusters/${clusterId}/nodes/${nodeId}`)}
+            className="mb-2 -ml-2"
+          >
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Back to Node
+          </Button>
+          <h2 className="text-2xl font-bold text-foreground">Hardware Control - Node {nodeId}</h2>
           <p className="text-sm text-muted-foreground">GPIO pins, system resources, and hardware monitoring</p>
         </div>
         <Button onClick={refreshData} disabled={isLoading} variant="outline">

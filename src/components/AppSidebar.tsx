@@ -1,5 +1,5 @@
 import { Home, Network, Cpu, Settings, Activity, BookOpen, HelpCircle, Rocket } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import {
@@ -29,9 +29,17 @@ const helpItems = [
 
 export function AppSidebar() {
   const { open } = useSidebar();
+  const location = useLocation();
   const [showGettingStarted, setShowGettingStarted] = useState(() => {
     return localStorage.getItem("hideGettingStarted") !== "true";
   });
+
+  // Extract nodeId and clusterId from URL
+  const pathParts = location.pathname.split('/');
+  const clusterIndex = pathParts.indexOf('clusters');
+  const nodeIndex = pathParts.indexOf('nodes');
+  const clusterId = clusterIndex >= 0 ? pathParts[clusterIndex + 1] : null;
+  const nodeId = nodeIndex >= 0 ? pathParts[nodeIndex + 1] : null;
 
   useEffect(() => {
     const handleVisibilityChange = () => {
@@ -42,9 +50,27 @@ export function AppSidebar() {
     return () => window.removeEventListener("gettingStartedVisibilityChanged", handleVisibilityChange);
   }, []);
 
-  const displayMainItems = showGettingStarted 
-    ? [{ title: "Getting Started", url: "/pi-controller/getting-started", icon: Rocket }, ...mainItems]
-    : mainItems;
+  // Build dynamic menu items based on context
+  let displayMainItems = [...mainItems];
+  
+  // Add Hardware link only when viewing a specific node
+  if (nodeId && clusterId) {
+    const hardwareItem = { 
+      title: "Hardware", 
+      url: `/pi-controller/clusters/${clusterId}/nodes/${nodeId}/hardware`, 
+      icon: Cpu 
+    };
+    // Remove generic Hardware link and add node-specific one
+    displayMainItems = displayMainItems.filter(item => item.title !== "Hardware");
+    displayMainItems.splice(2, 0, hardwareItem);
+  } else {
+    // Remove Hardware from main menu when not viewing a node
+    displayMainItems = displayMainItems.filter(item => item.title !== "Hardware");
+  }
+
+  if (showGettingStarted) {
+    displayMainItems = [{ title: "Getting Started", url: "/pi-controller/getting-started", icon: Rocket }, ...displayMainItems];
+  }
 
   return (
     <Sidebar collapsible="icon">
