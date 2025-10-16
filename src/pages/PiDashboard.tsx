@@ -111,7 +111,7 @@ const PiDashboard = () => {
                 View All Clusters
               </Button>
             </Link>
-            <Link to="/pi-controller/clusters">
+            <Link to="/pi-controller/nodes">
               <Button className="w-full" variant="outline">
                 <Server className="h-4 w-4 mr-2" />
                 Manage Nodes

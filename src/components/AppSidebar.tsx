@@ -1,4 +1,4 @@
-import { Home, Network, Cpu, Settings, Activity, BookOpen, HelpCircle, Rocket } from "lucide-react";
+import { Home, Network, Cpu, Settings, Activity, BookOpen, HelpCircle, Rocket, Server } from "lucide-react";
 import { NavLink, useLocation, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 
@@ -18,6 +18,7 @@ import {
 const mainItems = [
   { title: "Dashboard", url: "/pi-controller", icon: Home },
   { title: "Clusters", url: "/pi-controller/clusters", icon: Network },
+  { title: "Nodes", url: "/pi-controller/nodes", icon: Server },
   { title: "Hardware", url: "/pi-controller/hardware", icon: Cpu },
   { title: "Settings", url: "/pi-controller/settings", icon: Settings },
 ];
@@ -62,7 +63,8 @@ export function AppSidebar() {
     };
     // Remove generic Hardware link and add node-specific one
     displayMainItems = displayMainItems.filter(item => item.title !== "Hardware");
-    displayMainItems.splice(2, 0, hardwareItem);
+    // Insert after Nodes (which is now at index 2 after filtering)
+    displayMainItems.splice(3, 0, hardwareItem);
   } else {
     // Remove Hardware from main menu when not viewing a node
     displayMainItems = displayMainItems.filter(item => item.title !== "Hardware");

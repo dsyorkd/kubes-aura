@@ -10,6 +10,7 @@ import PiDashboard from "./pages/PiDashboard";
 import PiControllerLayout from "./pages/PiControllerLayout";
 import Clusters from "./pages/Clusters";
 import ClusterDetails from "./pages/ClusterDetails";
+import Nodes from "./pages/Nodes";
 import Settings from "./pages/Settings";
 import Hardware from "./pages/Hardware";
 import GettingStarted from "./pages/GettingStarted";
@@ -39,6 +40,7 @@ const App = () => (
               <Route path="getting-started" element={<GettingStarted />} />
               <Route path="clusters" element={<Clusters />} />
               <Route path="clusters/:clusterId" element={<ClusterDetails />} />
+              <Route path="nodes" element={<Nodes />} />
               <Route path="clusters/:clusterId/nodes/:nodeId" element={<PiDashboard />} />
               <Route path="clusters/:clusterId/nodes/:nodeId/hardware" element={<Hardware />} />
               <Route path="settings" element={<Settings />} />
