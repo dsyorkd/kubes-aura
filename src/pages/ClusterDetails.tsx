@@ -133,7 +133,6 @@ const ClusterDetails = () => {
         </div>
       </div>
       
-      <div>
       {/* Cluster Overview */}
       <div className="grid gap-4 md:grid-cols-4">
           <Card className="border-border/30 shadow-soft">
@@ -182,6 +181,7 @@ const ClusterDetails = () => {
           </Card>
         </div>
       
+      {/* Cluster Tabs */}
       <Tabs defaultValue="nodes" className="space-y-4">
           <TabsList>
             <TabsTrigger value="nodes">Nodes</TabsTrigger>
@@ -308,7 +308,6 @@ const ClusterDetails = () => {
             </Card>
           </TabsContent>
         </Tabs>
-      </div>
     </div>
   );
 };

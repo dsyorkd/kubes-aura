@@ -5,22 +5,23 @@
  * DO NOT modify generated files directly - edit this wrapper instead.
  */
 
-import { OpenAPI } from './generated';
-import { config } from '@/lib/config';
+// TODO: Uncomment when API client is generated
+// import { OpenAPI } from './generated';
+// import { config } from '@/lib/config';
 
 // Configure the generated client
-OpenAPI.BASE = config.piController.apiBaseUrl;
-OpenAPI.WITH_CREDENTIALS = true;
-OpenAPI.CREDENTIALS = 'include';
+// OpenAPI.BASE = config.piController.apiBaseUrl;
+// OpenAPI.WITH_CREDENTIALS = true;
+// OpenAPI.CREDENTIALS = 'include';
 
 // Add auth token from localStorage
-OpenAPI.TOKEN = async () => {
-  const token = localStorage.getItem('auth_token');
-  return token || '';
-};
+// OpenAPI.TOKEN = async () => {
+//   const token = localStorage.getItem('auth_token');
+//   return token || '';
+// };
 
 // Export all generated services and models
-export * from './generated';
+// export * from './generated';
 
 // Custom error handler
 export class ApiError extends Error {
