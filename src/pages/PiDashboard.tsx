@@ -111,10 +111,12 @@ const PiDashboard = () => {
                 View All Clusters
               </Button>
             </Link>
-            <Button className="w-full" variant="outline">
-              <Server className="h-4 w-4 mr-2" />
-              Manage Nodes
-            </Button>
+            <Link to="/pi-controller/clusters">
+              <Button className="w-full" variant="outline">
+                <Server className="h-4 w-4 mr-2" />
+                Manage Nodes
+              </Button>
+            </Link>
           </CardContent>
         </Card>
       </div>
