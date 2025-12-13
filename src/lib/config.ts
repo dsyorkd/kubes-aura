@@ -71,9 +71,9 @@ function getRequiredEnv(key: string, value: string | undefined): string {
  */
 export const config: AppConfig = {
   piController: {
-    url: import.meta.env.VITE_PI_CONTROLLER_URL || "http://localhost:8765",
-    apiBaseUrl: import.meta.env.VITE_API_BASE_URL || "http://localhost:8765/api",
-    socketIoUrl: import.meta.env.VITE_SOCKET_IO_URL || "http://localhost:8765",
+    url: import.meta.env.VITE_PI_CONTROLLER_URL || "/",
+    apiBaseUrl: import.meta.env.VITE_API_BASE_URL || "/api/v1",
+    socketIoUrl: import.meta.env.VITE_SOCKET_IO_URL || "/",
   },
 
   app: {

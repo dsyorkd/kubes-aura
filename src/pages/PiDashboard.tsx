@@ -1,11 +1,14 @@
-import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useState } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { useClusters, useNodes, useNode, useHealth } from "@/api/hooks";
 import {
   Activity,
   Cpu,
@@ -19,42 +22,99 @@ import {
   AlertTriangle,
   CheckCircle,
   XCircle,
-  ArrowLeft,
-  Users,
   Server,
-  Network
+  Network,
+  AlertCircle
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-interface SystemStats {
-  cpu: { usage: number; temperature: number; frequency: number; };
-  memory: { total: number; used: number; free: number; percentage: number; };
-  disk: { total: number; used: number; free: number; percentage: number; };
-  network: { rx: number; tx: number; speed: number; };
-  uptime: number;
-  timestamp: string;
-}
-
 interface GpioPin {
   id: number;
+  pin_number?: number;
   name: string;
-  direction: 'input' | 'output';
+  direction: string;
   value: boolean;
   description?: string;
 }
 
+interface NodeData {
+  id: number | string;
+  hostname?: string;
+  name?: string;
+  ip_address?: string;
+  status: string;
+  role?: string;
+  cpu_usage?: number;
+  memory_usage?: number;
+  memory_total?: number;
+  memory_used?: number;
+  disk_usage?: number;
+  disk_total?: number;
+  disk_used?: number;
+  temperature?: number;
+  uptime?: number;
+  gpio_pins?: GpioPin[];
+  network_rx?: number;
+  network_tx?: number;
+}
+
 const PiDashboard = () => {
   const { nodeId } = useParams();
-  
+  const navigate = useNavigate();
+
+  // Fetch health status
+  const { data: healthData, isLoading: isLoadingHealth } = useHealth();
+
+  // Fetch clusters for overview
+  const { data: clustersResponse, isLoading: isLoadingClusters, refetch: refetchClusters } = useClusters();
+
+  // Fetch all nodes for overview and selector
+  const { data: nodesResponse, isLoading: isLoadingNodes, refetch: refetchNodes } = useNodes({ includeGpio: true });
+
+  // Fetch specific node if nodeId is present
+  const { data: nodeData, isLoading: isLoadingNode, refetch: refetchNode } = useNode(nodeId || "", {
+    enabled: !!nodeId
+  });
+
+  const clusters = clustersResponse?.data || [];
+  const nodes: NodeData[] = nodesResponse?.data || [];
+
+  // Calculate overview stats
+  const totalNodes = nodesResponse?.total || nodes.length;
+  const onlineNodes = nodes.filter(n =>
+    ["online", "ready", "running"].includes(n.status?.toLowerCase())
+  ).length;
+  const offlineNodes = totalNodes - onlineNodes;
+
+  const avgCpu = nodes.length > 0
+    ? Math.round(nodes.reduce((acc, n) => acc + (n.cpu_usage ?? 0), 0) / nodes.length)
+    : 0;
+
+  const avgTemp = nodes.length > 0
+    ? Math.round(nodes.reduce((acc, n) => acc + (n.temperature ?? 0), 0) / nodes.filter(n => n.temperature).length) || 0
+    : 0;
+
+  const isRefreshing = isLoadingNodes || isLoadingClusters || isLoadingNode;
+
+  const refreshAll = async () => {
+    await Promise.all([refetchClusters(), refetchNodes(), nodeId ? refetchNode() : Promise.resolve()]);
+  };
+
   // If no nodeId, show overview dashboard
   if (!nodeId) {
     return (
       <div className="space-y-6">
-        <div>
-          <h1 className="text-3xl font-bold">Pi Controller Dashboard</h1>
-          <p className="text-muted-foreground">
-            Overview of your Raspberry Pi infrastructure
-          </p>
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold">Pi Controller Dashboard</h1>
+            <p className="text-muted-foreground">
+              Overview of your Raspberry Pi infrastructure
+            </p>
+          </div>
+          <Button variant="outline" size="sm" onClick={refreshAll} disabled={isRefreshing}>
+            <RefreshCw className={cn("h-4 w-4 mr-2", isRefreshing && "animate-spin")} />
+            Refresh
+          </Button>
         </div>
 
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -63,8 +123,17 @@ const PiDashboard = () => {
               <CardTitle className="text-sm font-medium">Total Nodes</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">12</div>
-              <p className="text-xs text-muted-foreground">8 online, 4 offline</p>
+              {isLoadingNodes ? (
+                <>
+                  <Skeleton className="h-8 w-16 mb-1" />
+                  <Skeleton className="h-4 w-24" />
+                </>
+              ) : (
+                <>
+                  <div className="text-2xl font-bold">{totalNodes}</div>
+                  <p className="text-xs text-muted-foreground">{onlineNodes} online, {offlineNodes} offline</p>
+                </>
+              )}
             </CardContent>
           </Card>
 
@@ -73,8 +142,17 @@ const PiDashboard = () => {
               <CardTitle className="text-sm font-medium">Clusters</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">4</div>
-              <p className="text-xs text-muted-foreground">All types</p>
+              {isLoadingClusters ? (
+                <>
+                  <Skeleton className="h-8 w-12 mb-1" />
+                  <Skeleton className="h-4 w-16" />
+                </>
+              ) : (
+                <>
+                  <div className="text-2xl font-bold">{clustersResponse?.total || clusters.length}</div>
+                  <p className="text-xs text-muted-foreground">All types</p>
+                </>
+              )}
             </CardContent>
           </Card>
 
@@ -83,8 +161,17 @@ const PiDashboard = () => {
               <CardTitle className="text-sm font-medium">Avg CPU Usage</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">45%</div>
-              <Progress value={45} className="mt-2" />
+              {isLoadingNodes ? (
+                <>
+                  <Skeleton className="h-8 w-16 mb-2" />
+                  <Skeleton className="h-2 w-full" />
+                </>
+              ) : (
+                <>
+                  <div className="text-2xl font-bold">{avgCpu}%</div>
+                  <Progress value={avgCpu} className="mt-2" />
+                </>
+              )}
             </CardContent>
           </Card>
 
@@ -93,11 +180,57 @@ const PiDashboard = () => {
               <CardTitle className="text-sm font-medium">Avg Temperature</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">52°C</div>
-              <p className="text-xs text-muted-foreground">Normal range</p>
+              {isLoadingNodes ? (
+                <>
+                  <Skeleton className="h-8 w-16 mb-1" />
+                  <Skeleton className="h-4 w-20" />
+                </>
+              ) : (
+                <>
+                  <div className="text-2xl font-bold">{avgTemp > 0 ? `${avgTemp}°C` : "N/A"}</div>
+                  <p className="text-xs text-muted-foreground">
+                    {avgTemp > 0 && avgTemp < 70 ? "Normal range" : avgTemp >= 70 ? "High" : "No data"}
+                  </p>
+                </>
+              )}
             </CardContent>
           </Card>
         </div>
+
+        {/* Nodes List */}
+        {nodes.length > 0 && (
+          <Card>
+            <CardHeader>
+              <CardTitle>Nodes</CardTitle>
+              <CardDescription>Click on a node to view details</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid gap-2">
+                {nodes.slice(0, 5).map((node) => (
+                  <div
+                    key={node.id}
+                    className="flex items-center justify-between p-3 rounded-lg border cursor-pointer hover:bg-accent"
+                    onClick={() => navigate(`/pi-controller/dashboard/${node.id}`)}
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className={cn(
+                        "w-2 h-2 rounded-full",
+                        ["online", "ready", "running"].includes(node.status?.toLowerCase()) && "bg-green-500",
+                        node.status?.toLowerCase() === "warning" && "bg-yellow-500",
+                        ["offline", "error"].includes(node.status?.toLowerCase()) && "bg-red-500"
+                      )} />
+                      <div>
+                        <div className="font-medium">{node.hostname || node.name || `Node ${node.id}`}</div>
+                        <div className="text-sm text-muted-foreground">{node.ip_address || "N/A"}</div>
+                      </div>
+                    </div>
+                    <Badge variant="outline">{node.role || "worker"}</Badge>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         <Card>
           <CardHeader>
@@ -111,90 +244,109 @@ const PiDashboard = () => {
                 View All Clusters
               </Button>
             </Link>
-            <Link to="/pi-controller/nodes">
+            <Link to="/pi-controller/hardware">
               <Button className="w-full" variant="outline">
                 <Server className="h-4 w-4 mr-2" />
-                Manage Nodes
+                Hardware Control
               </Button>
             </Link>
           </CardContent>
         </Card>
+
+        {/* Health Status */}
+        {healthData && (
+          <Card>
+            <CardHeader>
+              <CardTitle>System Health</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center gap-2">
+                {healthData.status === "healthy" || healthData.status === "ok" ? (
+                  <CheckCircle className="h-5 w-5 text-green-500" />
+                ) : (
+                  <AlertTriangle className="h-5 w-5 text-yellow-500" />
+                )}
+                <span className="capitalize">{healthData.status || "Unknown"}</span>
+                {healthData.version && (
+                  <Badge variant="outline" className="ml-2">v{healthData.version}</Badge>
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        )}
       </div>
     );
   }
-  
+
+  // Node Detail View
   const [selectedNode, setSelectedNode] = useState(nodeId);
-  
-  // Mock node data - in real app this would come from API
-  const nodes = [
-    { id: "node-1", name: "Pi Master", ip: "192.168.1.100", status: "online", role: "master" },
-    { id: "node-2", name: "Pi Worker 1", ip: "192.168.1.101", status: "online", role: "worker" },
-    { id: "node-3", name: "Pi Worker 2", ip: "192.168.1.102", status: "warning", role: "worker" },
-    { id: "node-4", name: "Pi Storage", ip: "192.168.1.103", status: "online", role: "storage" },
-  ];
-  
-  const currentNode = nodes.find(n => n.id === selectedNode) || nodes[0];
-  
-  const [systemStats, setSystemStats] = useState<SystemStats>({
-    cpu: { usage: 45, temperature: 52, frequency: 1500 },
-    memory: { total: 4096, used: 1842, free: 2254, percentage: 45 },
-    disk: { total: 32000, used: 12800, free: 19200, percentage: 40 },
-    network: { rx: 1024, tx: 512, speed: 1000 },
-    uptime: 86400,
-    timestamp: new Date().toISOString(),
-  });
+  const currentNode = nodeData || nodes.find(n => String(n.id) === nodeId);
 
-  const [gpioPins, setGpioPins] = useState<GpioPin[]>([
-    { id: 2, name: "LED Red", direction: "output", value: false, description: "Status LED" },
-    { id: 3, name: "LED Green", direction: "output", value: true, description: "Power LED" },
-    { id: 4, name: "Button 1", direction: "input", value: false, description: "Reset Button" },
-    { id: 17, name: "Relay 1", direction: "output", value: false, description: "Main Relay" },
-    { id: 18, name: "Sensor", direction: "input", value: true, description: "Motion Sensor" },
-    { id: 27, name: "Fan", direction: "output", value: false, description: "Cooling Fan" },
-  ]);
-
-  const [isRefreshing, setIsRefreshing] = useState(false);
-
-  const refreshData = async () => {
-    setIsRefreshing(true);
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    setSystemStats(prev => ({
-      ...prev,
-      cpu: { ...prev.cpu, usage: Math.random() * 100 },
-      memory: { ...prev.memory, percentage: Math.random() * 100 },
-      timestamp: new Date().toISOString(),
-    }));
-    setIsRefreshing(false);
-  };
-
-  const toggleGpioPin = (pinId: number) => {
-    setGpioPins(pins => pins.map(pin =>
-      pin.id === pinId && pin.direction === 'output'
-        ? { ...pin, value: !pin.value }
-        : pin
-    ));
-  };
-
-  const formatBytes = (bytes: number) => {
+  const formatBytes = (bytes?: number) => {
+    if (!bytes) return "0 B";
     const sizes = ['B', 'KB', 'MB', 'GB'];
-    if (bytes === 0) return '0 B';
     const i = Math.floor(Math.log(bytes) / Math.log(1024));
     return Math.round(bytes / Math.pow(1024, i) * 100) / 100 + ' ' + sizes[i];
   };
 
-  const formatUptime = (seconds: number) => {
+  const formatUptime = (seconds?: number) => {
+    if (!seconds) return "N/A";
     const days = Math.floor(seconds / 86400);
     const hours = Math.floor((seconds % 86400) / 3600);
     const mins = Math.floor((seconds % 3600) / 60);
     return `${days}d ${hours}h ${mins}m`;
   };
 
-  const getStatusColor = (value: number, thresholds: { warning: number; critical: number }) => {
-    if (value >= thresholds.critical) return "destructive";
-    if (value >= thresholds.warning) return "secondary";
-    return "default";
+  const getNodeName = (node?: NodeData) => node?.hostname || node?.name || `Node ${node?.id}`;
+  const getNodeIp = (node?: NodeData) => node?.ip_address || "N/A";
+
+  const handleNodeChange = (newNodeId: string) => {
+    setSelectedNode(newNodeId);
+    navigate(`/pi-controller/dashboard/${newNodeId}`);
   };
+
+  if (isLoadingNode && !currentNode) {
+    return (
+      <div className="space-y-6">
+        <div className="flex items-center gap-4">
+          <Skeleton className="h-9 w-48" />
+          <Skeleton className="h-10 w-[200px]" />
+        </div>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {[1, 2, 3, 4].map((i) => (
+            <Card key={i}>
+              <CardHeader className="pb-2">
+                <Skeleton className="h-4 w-24" />
+              </CardHeader>
+              <CardContent>
+                <Skeleton className="h-8 w-16 mb-2" />
+                <Skeleton className="h-2 w-full" />
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (!currentNode) {
+    return (
+      <div className="space-y-6">
+        <Alert variant="destructive">
+          <AlertCircle className="h-4 w-4" />
+          <AlertTitle>Node not found</AlertTitle>
+          <AlertDescription>
+            The requested node could not be found.
+            <Link to="/pi-controller/dashboard" className="ml-2 underline">
+              Go back to dashboard
+            </Link>
+          </AlertDescription>
+        </Alert>
+      </div>
+    );
+  }
+
+  const gpioPins: GpioPin[] = currentNode.gpio_pins || [];
 
   return (
     <div className="space-y-6">
@@ -204,28 +356,28 @@ const PiDashboard = () => {
           <div>
             <h1 className="text-3xl font-bold">Node Dashboard</h1>
             <p className="text-muted-foreground">
-              {currentNode.name} - {currentNode.ip}
+              {getNodeName(currentNode)} - {getNodeIp(currentNode)}
             </p>
           </div>
-          
+
           {/* Node Selector */}
-          <Select value={selectedNode} onValueChange={setSelectedNode}>
+          <Select value={selectedNode} onValueChange={handleNodeChange}>
             <SelectTrigger className="w-[200px]">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
               {nodes.map((node) => (
-                <SelectItem key={node.id} value={node.id}>
+                <SelectItem key={node.id} value={String(node.id)}>
                   <div className="flex items-center gap-2">
                     <div className={cn(
                       "w-2 h-2 rounded-full",
-                      node.status === "online" && "bg-green-500",
-                      node.status === "warning" && "bg-yellow-500",
-                      node.status === "offline" && "bg-red-500"
+                      ["online", "ready", "running"].includes(node.status?.toLowerCase()) && "bg-green-500",
+                      node.status?.toLowerCase() === "warning" && "bg-yellow-500",
+                      ["offline", "error"].includes(node.status?.toLowerCase()) && "bg-red-500"
                     )} />
-                    <span>{node.name}</span>
+                    <span>{getNodeName(node)}</span>
                     <Badge variant="outline" className="ml-2 text-xs">
-                      {node.role}
+                      {node.role || "worker"}
                     </Badge>
                   </div>
                 </SelectItem>
@@ -238,10 +390,10 @@ const PiDashboard = () => {
           <Button
             variant="outline"
             size="sm"
-            onClick={refreshData}
-            disabled={isRefreshing}
+            onClick={() => refetchNode()}
+            disabled={isLoadingNode}
           >
-            <RefreshCw className={cn("h-4 w-4 mr-2", isRefreshing && "animate-spin")} />
+            <RefreshCw className={cn("h-4 w-4 mr-2", isLoadingNode && "animate-spin")} />
             Refresh
           </Button>
 
@@ -255,21 +407,27 @@ const PiDashboard = () => {
       <div>
         {/* Node Status Badge */}
         <div className="mb-6 flex items-center gap-4">
-          <Badge 
-            variant={currentNode.status === "online" ? "default" : currentNode.status === "warning" ? "secondary" : "destructive"}
+          <Badge
+            variant={
+              ["online", "ready", "running"].includes(currentNode.status?.toLowerCase())
+                ? "default"
+                : currentNode.status?.toLowerCase() === "warning"
+                  ? "secondary"
+                  : "destructive"
+            }
             className="px-3 py-1"
           >
             <div className={cn(
               "w-2 h-2 rounded-full mr-2",
-              currentNode.status === "online" && "bg-green-500",
-              currentNode.status === "warning" && "bg-yellow-500",
-              currentNode.status === "offline" && "bg-red-500"
+              ["online", "ready", "running"].includes(currentNode.status?.toLowerCase()) && "bg-green-500",
+              currentNode.status?.toLowerCase() === "warning" && "bg-yellow-500",
+              ["offline", "error"].includes(currentNode.status?.toLowerCase()) && "bg-red-500"
             )} />
-            {currentNode.status === "online" ? "Online" : currentNode.status === "warning" ? "Warning" : "Offline"}
+            {currentNode.status || "Unknown"}
           </Badge>
-          <Badge variant="outline">{currentNode.role}</Badge>
+          <Badge variant="outline">{currentNode.role || "worker"}</Badge>
         </div>
-        
+
         <Tabs defaultValue="overview" className="space-y-6">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="overview">Node Overview</TabsTrigger>
@@ -287,11 +445,13 @@ const PiDashboard = () => {
                   <Cpu className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{systemStats.cpu.usage.toFixed(1)}%</div>
-                  <Progress value={systemStats.cpu.usage} className="mt-2" />
-                  <p className="text-xs text-muted-foreground mt-2">
-                    Temp: {systemStats.cpu.temperature}°C
-                  </p>
+                  <div className="text-2xl font-bold">{currentNode.cpu_usage?.toFixed(1) || 0}%</div>
+                  <Progress value={currentNode.cpu_usage || 0} className="mt-2" />
+                  {currentNode.temperature && (
+                    <p className="text-xs text-muted-foreground mt-2">
+                      Temp: {currentNode.temperature}°C
+                    </p>
+                  )}
                 </CardContent>
               </Card>
 
@@ -302,11 +462,13 @@ const PiDashboard = () => {
                   <MemoryStick className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{systemStats.memory.percentage.toFixed(1)}%</div>
-                  <Progress value={systemStats.memory.percentage} className="mt-2" />
-                  <p className="text-xs text-muted-foreground mt-2">
-                    {formatBytes(systemStats.memory.used)} / {formatBytes(systemStats.memory.total)}
-                  </p>
+                  <div className="text-2xl font-bold">{currentNode.memory_usage?.toFixed(1) || 0}%</div>
+                  <Progress value={currentNode.memory_usage || 0} className="mt-2" />
+                  {currentNode.memory_total && (
+                    <p className="text-xs text-muted-foreground mt-2">
+                      {formatBytes(currentNode.memory_used)} / {formatBytes(currentNode.memory_total)}
+                    </p>
+                  )}
                 </CardContent>
               </Card>
 
@@ -317,11 +479,13 @@ const PiDashboard = () => {
                   <HardDrive className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{systemStats.disk.percentage.toFixed(1)}%</div>
-                  <Progress value={systemStats.disk.percentage} className="mt-2" />
-                  <p className="text-xs text-muted-foreground mt-2">
-                    {formatBytes(systemStats.disk.used)} / {formatBytes(systemStats.disk.total)}
-                  </p>
+                  <div className="text-2xl font-bold">{currentNode.disk_usage?.toFixed(1) || 0}%</div>
+                  <Progress value={currentNode.disk_usage || 0} className="mt-2" />
+                  {currentNode.disk_total && (
+                    <p className="text-xs text-muted-foreground mt-2">
+                      {formatBytes(currentNode.disk_used)} / {formatBytes(currentNode.disk_total)}
+                    </p>
+                  )}
                 </CardContent>
               </Card>
 
@@ -332,11 +496,13 @@ const PiDashboard = () => {
                   <Wifi className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{systemStats.network.speed} Mbps</div>
-                  <div className="flex justify-between text-xs text-muted-foreground mt-2">
-                    <span>↓ {formatBytes(systemStats.network.rx)}/s</span>
-                    <span>↑ {formatBytes(systemStats.network.tx)}/s</span>
-                  </div>
+                  <div className="text-2xl font-bold">{getNodeIp(currentNode)}</div>
+                  {(currentNode.network_rx !== undefined || currentNode.network_tx !== undefined) && (
+                    <div className="flex justify-between text-xs text-muted-foreground mt-2">
+                      <span>↓ {formatBytes(currentNode.network_rx)}/s</span>
+                      <span>↑ {formatBytes(currentNode.network_tx)}/s</span>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             </div>
@@ -345,21 +511,23 @@ const PiDashboard = () => {
             <Card>
               <CardHeader>
                 <CardTitle>Node Information</CardTitle>
-                <CardDescription>Status and metrics for {currentNode.name}</CardDescription>
+                <CardDescription>Status and metrics for {getNodeName(currentNode)}</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="grid gap-4 md:grid-cols-3">
                   <div className="flex items-center gap-2">
                     <Power className="h-4 w-4 text-green-500" />
-                    <span className="text-sm">Uptime: {formatUptime(systemStats.uptime)}</span>
+                    <span className="text-sm">Uptime: {formatUptime(currentNode.uptime)}</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Thermometer className="h-4 w-4 text-orange-500" />
-                    <span className="text-sm">CPU Temp: {systemStats.cpu.temperature}°C</span>
-                  </div>
+                  {currentNode.temperature && (
+                    <div className="flex items-center gap-2">
+                      <Thermometer className="h-4 w-4 text-orange-500" />
+                      <span className="text-sm">CPU Temp: {currentNode.temperature}°C</span>
+                    </div>
+                  )}
                   <div className="flex items-center gap-2">
                     <Activity className="h-4 w-4 text-blue-500" />
-                    <span className="text-sm">Frequency: {systemStats.cpu.frequency} MHz</span>
+                    <span className="text-sm">Status: {currentNode.status}</span>
                   </div>
                 </div>
               </CardContent>
@@ -369,58 +537,63 @@ const PiDashboard = () => {
           <TabsContent value="gpio" className="space-y-6">
             <Card>
               <CardHeader>
-                <CardTitle>GPIO Pin Control - {currentNode.name}</CardTitle>
+                <CardTitle>GPIO Pin Control - {getNodeName(currentNode)}</CardTitle>
                 <CardDescription>
-                  Control and monitor GPIO pins on {currentNode.name} ({currentNode.ip})
+                  Control and monitor GPIO pins on {getNodeName(currentNode)} ({getNodeIp(currentNode)})
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                  {gpioPins.map((pin) => (
-                    <Card key={pin.id} className="border border-border/50">
-                      <CardContent className="pt-6">
-                        <div className="flex items-center justify-between mb-4">
-                          <div>
-                            <h3 className="font-medium">{pin.name}</h3>
-                            <p className="text-sm text-muted-foreground">Pin {pin.id}</p>
+                {gpioPins.length > 0 ? (
+                  <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                    {gpioPins.map((pin) => (
+                      <Card key={pin.id} className="border border-border/50">
+                        <CardContent className="pt-6">
+                          <div className="flex items-center justify-between mb-4">
+                            <div>
+                              <h3 className="font-medium">{pin.name}</h3>
+                              <p className="text-sm text-muted-foreground">Pin {pin.pin_number || pin.id}</p>
+                            </div>
+                            <Badge variant={pin.direction === 'output' ? 'default' : 'secondary'}>
+                              {pin.direction}
+                            </Badge>
                           </div>
-                          <Badge variant={pin.direction === 'output' ? 'default' : 'secondary'}>
-                            {pin.direction}
-                          </Badge>
-                        </div>
 
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-2">
-                            {pin.value ? (
-                              <CheckCircle className="h-4 w-4 text-green-500" />
-                            ) : (
-                              <XCircle className="h-4 w-4 text-gray-400" />
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-2">
+                              {pin.value ? (
+                                <CheckCircle className="h-4 w-4 text-green-500" />
+                              ) : (
+                                <XCircle className="h-4 w-4 text-gray-400" />
+                              )}
+                              <span className="text-sm">
+                                {pin.value ? 'HIGH' : 'LOW'}
+                              </span>
+                            </div>
+
+                            {pin.direction === 'output' && (
+                              <Button
+                                size="sm"
+                                variant={pin.value ? "default" : "outline"}
+                              >
+                                Toggle
+                              </Button>
                             )}
-                            <span className="text-sm">
-                              {pin.value ? 'HIGH' : 'LOW'}
-                            </span>
                           </div>
 
-                          {pin.direction === 'output' && (
-                            <Button
-                              size="sm"
-                              variant={pin.value ? "default" : "outline"}
-                              onClick={() => toggleGpioPin(pin.id)}
-                            >
-                              Toggle
-                            </Button>
+                          {pin.description && (
+                            <p className="text-xs text-muted-foreground mt-2">
+                              {pin.description}
+                            </p>
                           )}
-                        </div>
-
-                        {pin.description && (
-                          <p className="text-xs text-muted-foreground mt-2">
-                            {pin.description}
-                          </p>
-                        )}
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-8 text-muted-foreground">
+                    No GPIO pins configured for this node
+                  </div>
+                )}
               </CardContent>
             </Card>
           </TabsContent>
@@ -434,9 +607,9 @@ const PiDashboard = () => {
                 <CardContent className="space-y-4">
                   <div className="flex items-center gap-2 p-3 rounded-lg bg-green-50 dark:bg-green-950/20">
                     <CheckCircle className="h-4 w-4 text-green-500" />
-                    <span className="text-sm">{currentNode.name} running normally</span>
+                    <span className="text-sm">{getNodeName(currentNode)} running normally</span>
                   </div>
-                  {currentNode.status === "warning" && (
+                  {currentNode.status?.toLowerCase() === "warning" && (
                     <div className="flex items-center gap-2 p-3 rounded-lg bg-yellow-50 dark:bg-yellow-950/20">
                       <AlertTriangle className="h-4 w-4 text-yellow-500" />
                       <span className="text-sm">High resource usage detected on this node</span>
