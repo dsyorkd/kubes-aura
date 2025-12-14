@@ -1,8 +1,33 @@
 {
-  "name": "vite_react_shadcn_ts",
-  "private": true,
-  "version": "0.0.0",
+  "name": "@dsyorkd/kubes-aura",
+  "private": false,
+  "version": "0.1.0",
+  "description": "Kubes Aura - Modern Web UI for Pi Controller Kubernetes Management",
   "type": "module",
+  "main": "dist/index.html",
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dsyorkd/kubes-aura.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "keywords": [
+    "kubernetes",
+    "pi-controller",
+    "raspberry-pi",
+    "dashboard",
+    "ui",
+    "react",
+    "vite"
+  ],
+  "author": "dsyorkd",
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -11,7 +36,11 @@
     "preview": "vite preview",
     "sync-api": "./scripts/sync-api-spec.sh",
     "generate-api": "./scripts/generate-api-client.sh",
-    "api-update": "npm run sync-api && npm run generate-api"
+    "api-update": "npm run sync-api && npm run generate-api",
+    "test": "npx playwright test",
+    "test:ui": "npx playwright test --ui",
+    "test:headed": "npx playwright test --headed",
+    "test:debug": "npx playwright test --debug"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
