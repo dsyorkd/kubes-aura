@@ -41,8 +41,11 @@ const App = () => (
               <Route path="clusters" element={<Clusters />} />
               <Route path="clusters/:clusterId" element={<ClusterDetails />} />
               <Route path="nodes" element={<Nodes />} />
+              <Route path="nodes/:nodeId" element={<PiDashboard />} />
               <Route path="clusters/:clusterId/nodes/:nodeId" element={<PiDashboard />} />
               <Route path="clusters/:clusterId/nodes/:nodeId/hardware" element={<Hardware />} />
+              <Route path="hardware" element={<Hardware />} />
+              <Route path="hardware/:nodeId" element={<Hardware />} />
               <Route path="settings" element={<Settings />} />
               <Route path="documentation" element={<Documentation />} />
             </Route>
