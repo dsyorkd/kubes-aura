@@ -111,10 +111,19 @@ cluster:
     return yaml;
   };
 
+  type ParsedConfigSection = Record<string, string | number | boolean>;
+  type ParsedConfig = Record<string, ParsedConfigSection>;
+
   const parseYAML = (yaml: string): ConfigFormData | null => {
     try {
       const lines = yaml.split("\n").filter(line => !line.trim().startsWith("#") && line.trim());
-      const config: Record<string, Record<string, string | number | boolean>> = { general: {}, auth: {}, gpio: {}, monitoring: {}, cluster: {} };
+      const config: ParsedConfig = {
+        general: {},
+        auth: {},
+        gpio: {},
+        monitoring: {},
+        cluster: {},
+      };
       let currentSection = "";
 
       lines.forEach(line => {
