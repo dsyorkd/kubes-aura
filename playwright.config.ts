@@ -14,6 +14,10 @@ export default defineConfig({
   // Test directory structure
   testDir: './tests',
 
+  // Global setup and teardown
+  globalSetup: './tests/setup/global-setup.ts',
+  globalTeardown: './tests/setup/global-teardown.ts',
+
   // Parallel execution for better performance
   fullyParallel: true,
 

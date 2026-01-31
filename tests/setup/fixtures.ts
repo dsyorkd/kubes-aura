@@ -1,97 +1,59 @@
-import { test as base, Page } from '@playwright/test';
+import { test as base } from '@playwright/test';
+import type { Page } from '@playwright/test';
+import {
+  mockNodes as mockNodeData,
+  mockClusters as mockClusterData,
+  mockAuthToken,
+  mockUsers,
+  type Node,
+  type Cluster,
+} from './test-data';
 
 /**
  * Custom Test Fixtures for Pi-Controller E2E Tests
- *
- * This file extends Playwright's base test with custom fixtures
- * that provide pre-configured pages, mock data, and helper utilities.
  *
  * Usage:
  *   import { test, expect } from './setup/fixtures';
  *
  * Available Fixtures:
- *   - authenticatedPage: A page that is already logged in
- *   - mockNodes: Array of mock node data
- *   - mockClusters: Array of mock cluster data
+ *   - authenticatedPage: A page with auth tokens pre-set in localStorage
+ *   - mockNodes: Array of mock node data from test-data.ts
+ *   - mockClusters: Array of mock cluster data from test-data.ts
  */
 
-// Type definitions for mock data
-export interface Node {
-  id: string;
-  hostname: string;
-  ip: string;
-  status: 'online' | 'offline' | 'degraded';
-  role: 'master' | 'worker';
-  cluster_id?: string;
-  cpu_percent?: number;
-  memory_percent?: number;
-  disk_percent?: number;
-  temperature?: number;
-  uptime?: number;
-  discovery_method?: 'mdns' | 'manual';
-}
-
-export interface Cluster {
-  id: string;
-  name: string;
-  type: 'kubernetes' | 'standalone';
-  status: 'healthy' | 'degraded' | 'unhealthy';
-  nodes_online: number;
-  nodes_total: number;
-  region?: string;
-  version?: string;
-}
-
-// Custom test fixtures interface
 export interface TestFixtures {
   authenticatedPage: Page;
   mockNodes: Node[];
   mockClusters: Cluster[];
 }
 
-/**
- * Extended test object with custom fixtures
- *
- * TODO: Implement fixture logic as tests are developed
- * This is a placeholder structure that will be expanded in subsequent tasks.
- */
 export const test = base.extend<TestFixtures>({
   /**
    * Authenticated Page Fixture
    *
-   * Provides a pre-authenticated page session.
-   * Will be implemented when authentication tests are created.
+   * Sets pi-controller auth tokens in localStorage before the test
+   * navigates to any application page.
    */
   authenticatedPage: async ({ page }, use) => {
-    // TODO: Implement authentication logic
-    // For now, just pass through the regular page
+    // Navigate to a blank page first so we can set localStorage on the origin
+    await page.goto('about:blank');
+    await page.evaluate(
+      ({ token, user }) => {
+        localStorage.setItem('pi-controller-token', token);
+        localStorage.setItem('pi-controller-user', JSON.stringify(user));
+      },
+      { token: mockAuthToken, user: mockUsers[0] },
+    );
     await use(page);
   },
 
-  /**
-   * Mock Nodes Fixture
-   *
-   * Provides an array of mock node data for testing.
-   * Will be populated from test-data.ts when created.
-   */
   mockNodes: async ({}, use) => {
-    // TODO: Import from test-data.ts when available
-    const nodes: Node[] = [];
-    await use(nodes);
+    await use(mockNodeData);
   },
 
-  /**
-   * Mock Clusters Fixture
-   *
-   * Provides an array of mock cluster data for testing.
-   * Will be populated from test-data.ts when created.
-   */
   mockClusters: async ({}, use) => {
-    // TODO: Import from test-data.ts when available
-    const clusters: Cluster[] = [];
-    await use(clusters);
+    await use(mockClusterData);
   },
 });
 
-// Export expect from Playwright for convenience
 export { expect } from '@playwright/test';
