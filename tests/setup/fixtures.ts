@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { test as base } from '@playwright/test';
 import type { Page } from '@playwright/test';
 import {
@@ -47,11 +48,11 @@ export const test = base.extend<TestFixtures>({
     await use(page);
   },
 
-  mockNodes: async ({}, use) => {
+  mockNodes: async (_, use) => {
     await use(mockNodeData);
   },
 
-  mockClusters: async ({}, use) => {
+  mockClusters: async (_, use) => {
     await use(mockClusterData);
   },
 });

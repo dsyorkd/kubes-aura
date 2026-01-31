@@ -169,7 +169,7 @@ export interface ProcessInfo {
 // WebSocket Event Types
 export interface WebSocketEvent {
   type: "gpio_update" | "node_status" | "service_update" | "system_alert" | "cluster_update";
-  data: any;
+  data: unknown;
   timestamp: string;
 }
 
@@ -197,7 +197,7 @@ export interface SystemAlert {
 }
 
 // API Response Types
-export interface APIResponse<T = any> {
+export interface APIResponse<T = unknown> {
   success: boolean;
   data?: T;
   message?: string;
@@ -240,8 +240,8 @@ export interface DashboardWidget {
   title: string;
   size: "small" | "medium" | "large";
   position: { x: number; y: number };
-  config: Record<string, any>;
-  data?: any;
+  config: Record<string, unknown>;
+  data?: unknown;
 }
 
 // Node Discovery Types

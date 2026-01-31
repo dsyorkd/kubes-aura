@@ -114,7 +114,7 @@ cluster:
   const parseYAML = (yaml: string): ConfigFormData | null => {
     try {
       const lines = yaml.split("\n").filter(line => !line.trim().startsWith("#") && line.trim());
-      const config: any = { general: {}, auth: {}, gpio: {}, monitoring: {}, cluster: {} };
+      const config: Record<string, Record<string, string | number | boolean>> = { general: {}, auth: {}, gpio: {}, monitoring: {}, cluster: {} };
       let currentSection = "";
 
       lines.forEach(line => {
@@ -256,7 +256,7 @@ cluster:
                   <Label htmlFor="logLevel">Log Level</Label>
                   <Select
                     value={form.watch("general.logLevel")}
-                    onValueChange={(value) => form.setValue("general.logLevel", value as any)}
+                    onValueChange={(value) => form.setValue("general.logLevel", value as ConfigFormData["general"]["logLevel"])}
                   >
                     <SelectTrigger>
                       <SelectValue />
@@ -323,7 +323,7 @@ cluster:
                   <Label htmlFor="defaultMode">Default Mode</Label>
                   <Select
                     value={form.watch("gpio.defaultMode")}
-                    onValueChange={(value) => form.setValue("gpio.defaultMode", value as any)}
+                    onValueChange={(value) => form.setValue("gpio.defaultMode", value as ConfigFormData["gpio"]["defaultMode"])}
                   >
                     <SelectTrigger>
                       <SelectValue />

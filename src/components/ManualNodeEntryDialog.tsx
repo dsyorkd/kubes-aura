@@ -77,8 +77,9 @@ export default function ManualNodeEntryDialog({
       toast.success(`Node ${data.name} registered successfully`);
       onOpenChange(false);
       form.reset();
-    } catch (error: any) {
-      toast.error(error.response?.data?.message || "Failed to register node");
+    } catch (error: unknown) {
+      const err = error as { response?: { data?: { message?: string } } };
+      toast.error(err.response?.data?.message || "Failed to register node");
       console.error(error);
     }
   };
