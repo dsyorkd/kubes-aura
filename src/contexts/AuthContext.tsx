@@ -72,7 +72,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   }, [token, user]);
 
-  const makeAuthRequest = async (endpoint: string, data: any): Promise<AuthResponse> => {
+  const makeAuthRequest = async (endpoint: string, data: Record<string, unknown>): Promise<AuthResponse> => {
     try {
       const response = await fetch(`${config.piController.apiBaseUrl}${endpoint}`, {
         method: "POST",

@@ -171,7 +171,7 @@ export default function NewClusterDialog({ open, onOpenChange }: NewClusterDialo
 
   const handleTypeSelect = (typeId: string) => {
     setSelectedType(typeId);
-    form.setValue("type", typeId as any);
+    form.setValue("type", typeId as ClusterFormData["type"]);
   };
 
   const totalCpu = form.watch("nodeCount") * form.watch("cpuPerNode");
