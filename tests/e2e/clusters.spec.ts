@@ -1,5 +1,5 @@
 import { test, expect } from '../setup/fixtures';
-import { setupDefaultApiMocks, mockApiRoute, navigateTo, waitForLoadingComplete } from '../utils/helpers';
+import { setupDefaultApiMocks, mockApiRoute, navigateTo, waitForLoadingComplete, injectAuthState } from '../utils/helpers';
 
 test.describe('Clusters', () => {
   test.describe('with mocked data', () => {
@@ -63,6 +63,10 @@ test.describe('Clusters', () => {
   });
 
   test.describe('error and empty states', () => {
+    test.beforeEach(async ({ page }) => {
+      await injectAuthState(page);
+    });
+
     test('shows error state when API fails', async ({ page }) => {
       // Abort the request to simulate network failure, which triggers axios error
       await page.route(

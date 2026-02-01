@@ -65,7 +65,7 @@ export interface User {
   id: number;
   username: string;
   email: string;
-  role: 'admin' | 'user' | 'readonly';
+  role: 'admin' | 'operator' | 'viewer';
   created_at: string;
 }
 
@@ -289,14 +289,14 @@ export const mockUsers: User[] = [
     id: 2,
     username: 'operator',
     email: 'operator@pi-controller.local',
-    role: 'user',
+    role: 'operator',
     created_at: '2025-01-15T00:00:00Z',
   },
   {
     id: 3,
     username: 'viewer',
     email: 'viewer@pi-controller.local',
-    role: 'readonly',
+    role: 'viewer',
     created_at: '2025-02-01T00:00:00Z',
   },
 ];
@@ -350,7 +350,7 @@ export function createMockUser(overrides: Partial<User> = {}): User {
     id: Math.floor(Math.random() * 10000),
     username: 'test-user',
     email: 'test@pi-controller.local',
-    role: 'user',
+    role: 'operator',
     created_at: new Date().toISOString(),
     ...overrides,
   };

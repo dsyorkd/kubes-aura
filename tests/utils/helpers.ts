@@ -12,6 +12,8 @@ import {
   mockClusters,
   mockNodes,
   mockGpioPins,
+  mockAuthToken,
+  mockUsers,
   createPaginatedResponse,
   type PaginatedResponse,
 } from '../setup/test-data';
@@ -128,10 +130,35 @@ export async function waitForLoadingComplete(page: Page): Promise<void> {
 }
 
 /**
+ * Inject auth state into localStorage so ProtectedRoute allows access.
+ * Must be called before navigating to any protected page.
+ */
+export async function injectAuthState(page: Page): Promise<void> {
+  const testUser = {
+    id: mockUsers[0].id,
+    username: mockUsers[0].username,
+    email: mockUsers[0].email,
+    role: mockUsers[0].role,
+    createdAt: mockUsers[0].created_at,
+  };
+
+  await page.addInitScript(
+    ({ token, user }) => {
+      localStorage.setItem('pi-controller-token', token);
+      localStorage.setItem('pi-controller-refresh-token', `${token}-refresh`);
+      localStorage.setItem('pi-controller-user', JSON.stringify(user));
+    },
+    { token: mockAuthToken, user: testUser },
+  );
+}
+
+/**
  * Set up mock responses for all commonly used API endpoints.
  * Call this at the start of tests that need a fully mocked backend.
+ * Also injects auth state so ProtectedRoute does not redirect to login.
  */
 export async function setupDefaultApiMocks(page: Page): Promise<void> {
+  await injectAuthState(page);
   await mockApiRoute(page, 'health', mockHealthResponse);
   await mockApiRoute(page, 'ready', { status: 'ready' });
   await mockApiRoute(page, 'clusters', mockClusters, { paginated: true });

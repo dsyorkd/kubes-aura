@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import AuthProvider from "./contexts/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import PiDashboard from "./pages/PiDashboard";
@@ -29,13 +30,17 @@ const App = () => (
           <Routes>
             {/* Redirect root to Pi Controller */}
             <Route path="/" element={<Navigate to="/pi-controller" replace />} />
-            
+
             {/* Auth Routes */}
             <Route path="/auth/login" element={<Login />} />
             <Route path="/auth/register" element={<Register />} />
 
             {/* Pi Controller with Sidebar Layout */}
-            <Route path="/pi-controller" element={<PiControllerLayout />}>
+            <Route path="/pi-controller" element={
+              <ProtectedRoute>
+                <PiControllerLayout />
+              </ProtectedRoute>
+            }>
               <Route index element={<PiDashboard />} />
               <Route path="getting-started" element={<GettingStarted />} />
               <Route path="clusters" element={<Clusters />} />

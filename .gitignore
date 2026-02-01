@@ -41,4 +41,8 @@ node_modules/
 # tasks/
 
 # Generated API client (regenerate with npm run generate-api)
-src/api/generated/ 
+src/api/generated/
+
+# Playwright test artifacts
+playwright-report/
+test-results/

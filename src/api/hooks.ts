@@ -5,10 +5,7 @@
  */
 
 import { useQuery, useMutation, useQueryClient, type UseQueryOptions } from '@tanstack/react-query';
-import axios from 'axios';
-
-// API Base URL - the proxy is configured in vite.config.ts to forward /api to the backend
-const API_BASE = '/api/v1';
+import apiClient from './axios';
 
 // Types for API responses
 interface PaginatedResponse<T> {
@@ -70,7 +67,7 @@ export function useHealth(options?: Omit<UseQueryOptions<HealthResponse>, 'query
   return useQuery({
     queryKey: ['health'],
     queryFn: async () => {
-      const response = await axios.get<HealthResponse>(`${API_BASE}/health`);
+      const response = await apiClient.get<HealthResponse>('/health');
       return response.data;
     },
     ...options,
@@ -81,7 +78,7 @@ export function useReadiness(options?: Omit<UseQueryOptions<{ status: string }>,
   return useQuery({
     queryKey: ['ready'],
     queryFn: async () => {
-      const response = await axios.get<{ status: string }>(`${API_BASE}/ready`);
+      const response = await apiClient.get<{ status: string }>('/ready');
       return response.data;
     },
     ...options,
@@ -93,7 +90,7 @@ export function useClusters(params?: { limit?: number; offset?: number; type?: s
   return useQuery({
     queryKey: ['clusters', params],
     queryFn: async () => {
-      const response = await axios.get<PaginatedResponse<Cluster>>(`${API_BASE}/clusters`, { params });
+      const response = await apiClient.get<PaginatedResponse<Cluster>>('/clusters', { params });
       return response.data;
     },
   });
@@ -103,7 +100,7 @@ export function useCluster(id: string | number, options?: { enabled?: boolean })
   return useQuery({
     queryKey: ['clusters', id],
     queryFn: async () => {
-      const response = await axios.get<Cluster>(`${API_BASE}/clusters/${id}`);
+      const response = await apiClient.get<Cluster>(`/clusters/${id}`);
       return response.data;
     },
     enabled: options?.enabled !== false && !!id,
@@ -114,7 +111,7 @@ export function useClusterNodes(clusterId: string | number, params?: { limit?: n
   return useQuery({
     queryKey: ['clusters', clusterId, 'nodes', params],
     queryFn: async () => {
-      const response = await axios.get<PaginatedResponse<Node>>(`${API_BASE}/clusters/${clusterId}/nodes`, { params });
+      const response = await apiClient.get<PaginatedResponse<Node>>(`/clusters/${clusterId}/nodes`, { params });
       return response.data;
     },
     enabled: !!clusterId,
@@ -133,7 +130,7 @@ export function useNodes(params?: {
   return useQuery({
     queryKey: ['nodes', params],
     queryFn: async () => {
-      const response = await axios.get<PaginatedResponse<Node>>(`${API_BASE}/nodes`, { params });
+      const response = await apiClient.get<PaginatedResponse<Node>>('/nodes', { params });
       return response.data;
     },
   });
@@ -143,7 +140,7 @@ export function useNode(id: string | number, options?: { enabled?: boolean }) {
   return useQuery({
     queryKey: ['nodes', id],
     queryFn: async () => {
-      const response = await axios.get<Node>(`${API_BASE}/nodes/${id}`);
+      const response = await apiClient.get<Node>(`/nodes/${id}`);
       return response.data;
     },
     enabled: options?.enabled !== false && !!id,
@@ -156,7 +153,7 @@ export function useProvisionCluster() {
 
   return useMutation({
     mutationFn: async (data: { name: string; type: string; nodes?: string[] }) => {
-      const response = await axios.post(`${API_BASE}/clusters/provision`, data);
+      const response = await apiClient.post('/clusters/provision', data);
       return response.data;
     },
     onSuccess: () => {
@@ -171,7 +168,7 @@ export function useProvisionNode() {
 
   return useMutation({
     mutationFn: async (data: { cluster_id: number; node_ids: number[] }) => {
-      const response = await axios.post(`${API_BASE}/clusters/nodes/provision`, data);
+      const response = await apiClient.post('/clusters/nodes/provision', data);
       return response.data;
     },
     onSuccess: () => {
@@ -186,7 +183,7 @@ export function useDeprovisionNode() {
 
   return useMutation({
     mutationFn: async (data: { node_id: number }) => {
-      const response = await axios.post(`${API_BASE}/nodes/deprovision`, data);
+      const response = await apiClient.post('/nodes/deprovision', data);
       return response.data;
     },
     onSuccess: () => {
@@ -200,7 +197,7 @@ export function useNodeGpioPins(nodeId: string | number, options?: { enabled?: b
   return useQuery({
     queryKey: ['nodes', nodeId, 'gpio'],
     queryFn: async () => {
-      const response = await axios.get<PaginatedResponse<GpioPin>>(`${API_BASE}/nodes/${nodeId}/gpio`);
+      const response = await apiClient.get<PaginatedResponse<GpioPin>>(`/nodes/${nodeId}/gpio`);
       return response.data;
     },
     enabled: options?.enabled !== false && !!nodeId,
@@ -212,7 +209,7 @@ export function useSetGpioPin() {
 
   return useMutation({
     mutationFn: async ({ nodeId, pinId, value }: { nodeId: string | number; pinId: number; value: boolean }) => {
-      const response = await axios.put(`${API_BASE}/nodes/${nodeId}/gpio/${pinId}`, { value });
+      const response = await apiClient.put(`/nodes/${nodeId}/gpio/${pinId}`, { value });
       return response.data;
     },
     onSuccess: (_, variables) => {
@@ -226,7 +223,7 @@ export function useSystemInfo(nodeId: string | number, options?: { enabled?: boo
   return useQuery({
     queryKey: ['nodes', nodeId, 'system'],
     queryFn: async () => {
-      const response = await axios.get(`${API_BASE}/nodes/${nodeId}/system`);
+      const response = await apiClient.get(`/nodes/${nodeId}/system`);
       return response.data;
     },
     enabled: options?.enabled !== false && !!nodeId,
@@ -255,7 +252,7 @@ export function useRegisterNode() {
       cpu_cores?: number;
       memory?: number;
     }) => {
-      const response = await axios.post(`${API_BASE}/nodes`, data);
+      const response = await apiClient.post('/nodes', data);
       return response.data;
     },
     onSuccess: () => {
@@ -274,7 +271,7 @@ export function useAdoptNode() {
       trust_token: string;
       cluster_id?: number;
     }) => {
-      const response = await axios.post(`${API_BASE}/nodes/${data.nodeId}/adopt`, {
+      const response = await apiClient.post(`/nodes/${data.nodeId}/adopt`, {
         trust_token: data.trust_token,
         cluster_id: data.cluster_id,
       });

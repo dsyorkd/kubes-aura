@@ -1,7 +1,11 @@
 import { test, expect } from '../setup/fixtures';
-import { navigateTo } from '../utils/helpers';
+import { navigateTo, injectAuthState } from '../utils/helpers';
 
 test.describe('Settings', () => {
+  test.beforeEach(async ({ page }) => {
+    await injectAuthState(page);
+  });
+
   test('renders page heading and subtitle', async ({ page }) => {
     await navigateTo(page, '/pi-controller/settings');
     await expect(page.getByRole('heading', { name: 'Settings', level: 2 })).toBeVisible();
