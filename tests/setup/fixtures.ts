@@ -1,3 +1,10 @@
+/**
+ * ESLint: Disabling react-hooks/rules-of-hooks for this file.
+ * This is a false positive - Playwright's `use` function is NOT a React Hook.
+ * It's Playwright's fixture system for dependency injection in tests.
+ * See: https://playwright.dev/docs/test-fixtures
+ */
+/* eslint-disable react-hooks/rules-of-hooks, no-empty-pattern */
 import { test as base } from '@playwright/test';
 import type { Page } from '@playwright/test';
 import {
@@ -27,7 +34,6 @@ export interface TestFixtures {
   mockClusters: Cluster[];
 }
 
-/* eslint-disable react-hooks/rules-of-hooks, no-empty-pattern */
 export const test = base.extend<TestFixtures>({
   /**
    * Authenticated Page Fixture

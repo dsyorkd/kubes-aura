@@ -66,8 +66,9 @@ export default function AdoptNodeDialog({
       toast.success(`Node ${nodeName} adopted successfully`);
       onOpenChange(false);
       form.reset();
-    } catch (error: any) {
-      const message = error.response?.data?.message || "Failed to adopt node";
+    } catch (error: unknown) {
+      const err = error as { response?: { data?: { message?: string } } };
+      const message = err.response?.data?.message || "Failed to adopt node";
       toast.error(message);
       console.error(error);
     }
@@ -119,7 +120,7 @@ export default function AdoptNodeDialog({
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="">None</SelectItem>
-                {clusters.map((cluster: any) => (
+                {clusters.map((cluster: { id: number | string; name: string }) => (
                   <SelectItem key={cluster.id} value={cluster.id.toString()}>
                     {cluster.name}
                   </SelectItem>
