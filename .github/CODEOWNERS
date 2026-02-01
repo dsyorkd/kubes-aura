@@ -1,0 +1,10 @@
+# Default owners for everything in the repo
+* @dsyorkd
+
+# Workflow files
+/.github/ @dsyorkd
+
+# Build configuration
+/vite.config.ts @dsyorkd
+/package.json @dsyorkd
+/Dockerfile @dsyorkd

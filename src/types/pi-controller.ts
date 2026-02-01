@@ -5,10 +5,13 @@
 
 // Authentication Types
 export interface User {
-  id: string;
+  id: number;
   username: string;
   email?: string;
-  role: "admin" | "user" | "readonly";
+  firstName?: string;
+  lastName?: string;
+  role: "viewer" | "operator" | "admin";
+  isActive?: boolean;
   createdAt: string;
   lastLogin?: string;
 }
@@ -25,16 +28,44 @@ export interface RegisterData {
   confirmPassword: string;
 }
 
+export interface BackendLoginResponse {
+  access_token: string;
+  refresh_token: string;
+  token_type: string;
+  expires_in: number;
+  user: {
+    id: number;
+    username: string;
+    email?: string;
+    first_name?: string;
+    last_name?: string;
+    role: "viewer" | "operator" | "admin";
+    is_active?: boolean;
+    created_at: string;
+    last_login?: string;
+  };
+  csrf_token?: string;
+}
+
+export interface BackendRefreshResponse {
+  access_token: string;
+  refresh_token: string;
+  token_type: string;
+  expires_in: number;
+}
+
 export interface AuthResponse {
   success: boolean;
   user?: User;
   token?: string;
+  refreshToken?: string;
   message?: string;
 }
 
 export interface AuthContextType {
   user: User | null;
   token: string | null;
+  refreshToken: string | null;
   login: (credentials: LoginCredentials) => Promise<AuthResponse>;
   register: (data: RegisterData) => Promise<AuthResponse>;
   logout: () => void;
@@ -169,7 +200,7 @@ export interface ProcessInfo {
 // WebSocket Event Types
 export interface WebSocketEvent {
   type: "gpio_update" | "node_status" | "service_update" | "system_alert" | "cluster_update";
-  data: any;
+  data: unknown;
   timestamp: string;
 }
 
@@ -197,7 +228,7 @@ export interface SystemAlert {
 }
 
 // API Response Types
-export interface APIResponse<T = any> {
+export interface APIResponse<T = unknown> {
   success: boolean;
   data?: T;
   message?: string;
@@ -240,14 +271,14 @@ export interface DashboardWidget {
   title: string;
   size: "small" | "medium" | "large";
   position: { x: number; y: number };
-  config: Record<string, any>;
-  data?: any;
+  config: Record<string, unknown>;
+  data?: unknown;
 }
 
 // Node Discovery Types
 export type NodeDiscoveryMethod = "mdns" | "dhcp" | "manual" | "api";
 
-export type NodeDiscoveryStatus = 
+export type NodeDiscoveryStatus =
   | "discovered"           // Found via mDNS/DHCP but not contacted
   | "identified"          // Successfully communicated and identified as pi-controller
   | "unresponsive"        // Discovered but not responding
@@ -263,7 +294,7 @@ export interface DiscoveredNode {
   discoveryStatus: NodeDiscoveryStatus;
   discoveredAt: string;
   lastSeen: string;
-  
+
   // Only available if pi-controller is running on the node
   piControllerInfo?: {
     version: string;
@@ -271,7 +302,7 @@ export interface DiscoveredNode {
     isHealthy: boolean;
     capabilities: string[];
   };
-  
+
   // System information (if available)
   systemInfo?: {
     model: string;
@@ -281,14 +312,14 @@ export interface DiscoveredNode {
     totalMemory: number;
     totalStorage: number;
   };
-  
+
   // Network information
   networkInfo?: {
     openPorts: number[];
     services: string[];
     latency: number; // ms
   };
-  
+
   // User-provided information (for manual entries)
   metadata?: {
     label?: string;

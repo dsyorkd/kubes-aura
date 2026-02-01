@@ -1,0 +1,16 @@
+node_modules
+dist
+.git
+.github
+.vscode
+.taskmaster
+*.md
+!README.md
+.env*
+!.env.example
+coverage
+playwright-report
+test-results
+.DS_Store
+*.log
+npm-debug.log*

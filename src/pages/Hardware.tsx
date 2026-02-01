@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -6,7 +6,10 @@ import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { toast } from "sonner";
+import { useNode, useNodes } from "@/api/hooks";
 import {
   Cpu,
   Thermometer,
@@ -21,38 +24,56 @@ import {
   RefreshCw,
   ArrowLeft,
 } from "lucide-react";
-import { GPIOPin, SystemInfo } from "@/types/pi-controller";
 import { Progress } from "@/components/ui/progress";
 
-// Mock data - replace with actual API calls
-const mockGPIOPins: GPIOPin[] = [
-  { id: 2, name: "LED Red", mode: "output", value: false, description: "Status LED", category: "led" },
-  { id: 3, name: "LED Green", mode: "output", value: true, description: "Power LED", category: "led" },
-  { id: 4, name: "LED Blue", mode: "output", value: false, description: "Activity LED", category: "led" },
-  { id: 17, name: "Button 1", mode: "input", value: false, description: "Emergency stop", category: "button" },
-  { id: 27, name: "Relay 1", mode: "output", value: false, description: "Main power relay", category: "relay" },
-  { id: 22, name: "Temp Sensor", mode: "input", value: true, description: "DHT22 sensor", category: "sensor" },
-  { id: 10, name: "Fan Control", mode: "output", value: true, description: "Cooling fan", category: "custom" },
-  { id: 9, name: "Water Pump", mode: "output", value: false, description: "Cooling pump", category: "relay" },
-];
+interface GPIOPin {
+  id: number;
+  pin_number?: number;
+  name: string;
+  mode?: string;
+  direction?: string;
+  value: boolean;
+  description?: string;
+  category?: string;
+}
 
-const mockSystemInfo: SystemInfo = {
-  hostname: "pi-controller-01",
-  platform: "linux",
-  architecture: "arm64",
-  cpuModel: "ARM Cortex-A72",
-  totalMemory: 4096,
-  freeMemory: 2048,
-  uptime: 345600,
-  loadAverage: [0.5, 0.7, 0.9],
-  networkInterfaces: [
-    { name: "eth0", address: "192.168.1.100", netmask: "255.255.255.0", family: "IPv4", mac: "b8:27:eb:aa:bb:cc", internal: false },
-    { name: "wlan0", address: "192.168.1.101", netmask: "255.255.255.0", family: "IPv4", mac: "b8:27:eb:dd:ee:ff", internal: false },
-  ],
-  processes: [],
-};
+interface NetworkInterface {
+  name: string;
+  address?: string;
+  ip_address?: string;
+  netmask?: string;
+  family?: string;
+  mac?: string;
+  mac_address?: string;
+  internal?: boolean;
+}
 
-const categoryColors = {
+interface NodeData {
+  id: number | string;
+  hostname?: string;
+  name?: string;
+  ip_address?: string;
+  status: string;
+  role?: string;
+  cpu_usage?: number;
+  memory_usage?: number;
+  memory_total?: number;
+  memory_used?: number;
+  memory_free?: number;
+  disk_usage?: number;
+  disk_total?: number;
+  disk_used?: number;
+  temperature?: number;
+  uptime?: number;
+  gpio_pins?: GPIOPin[];
+  network_interfaces?: NetworkInterface[];
+  platform?: string;
+  architecture?: string;
+  cpu_model?: string;
+  load_average?: number[];
+}
+
+const categoryColors: Record<string, string> = {
   led: "bg-blue-500/10 text-blue-500 border-blue-500/20",
   button: "bg-green-500/10 text-green-500 border-green-500/20",
   sensor: "bg-purple-500/10 text-purple-500 border-purple-500/20",
@@ -63,66 +84,190 @@ const categoryColors = {
 export default function Hardware() {
   const { nodeId, clusterId } = useParams<{ nodeId: string; clusterId: string }>();
   const navigate = useNavigate();
-  const [pins, setPins] = useState<GPIOPin[]>(mockGPIOPins);
-  const [systemInfo, setSystemInfo] = useState<SystemInfo>(mockSystemInfo);
-  const [cpuTemp, setCpuTemp] = useState(45.2);
-  const [isLoading, setIsLoading] = useState(false);
 
-  // Redirect if no nodeId is provided
+  // Fetch node data with GPIO pins
+  const {
+    data: nodeData,
+    isLoading,
+    isError,
+    error,
+    refetch
+  } = useNode(nodeId || "", {
+    enabled: !!nodeId
+  });
+
+  // If no nodeId but we're on the hardware page, show node selection
+  const { data: nodesResponse, isLoading: isLoadingNodes } = useNodes({ includeGpio: true }, {
+    enabled: !nodeId
+  });
+
+  const nodes = nodesResponse?.data || [];
+
+  // Redirect if no nodeId is provided and we have a clusterId
   useEffect(() => {
-    if (!nodeId || !clusterId) {
-      navigate("/pi-controller/clusters");
+    if (!nodeId && clusterId) {
+      navigate(`/pi-controller/clusters/${clusterId}`);
     }
   }, [nodeId, clusterId, navigate]);
 
   const togglePin = async (pinId: number) => {
-    setIsLoading(true);
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 300));
-      
-      setPins(prev => prev.map(pin => 
-        pin.id === pinId && pin.mode === "output" 
-          ? { ...pin, value: !pin.value }
-          : pin
-      ));
-      
+      // TODO: Implement GPIO write API call
       toast.success(`GPIO Pin ${pinId} toggled`);
-    } catch (error) {
+      refetch();
+    } catch {
       toast.error("Failed to toggle pin");
-    } finally {
-      setIsLoading(false);
     }
   };
 
   const refreshData = async () => {
-    setIsLoading(true);
-    try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 500));
-      toast.success("Hardware data refreshed");
-    } finally {
-      setIsLoading(false);
-    }
+    await refetch();
+    toast.success("Hardware data refreshed");
   };
 
-  const memoryUsage = ((systemInfo.totalMemory - systemInfo.freeMemory) / systemInfo.totalMemory) * 100;
+  // If no nodeId, show node selection
+  if (!nodeId) {
+    return (
+      <div className="space-y-6 animate-fade-in">
+        <div>
+          <h2 className="text-2xl font-bold text-foreground">Hardware Control</h2>
+          <p className="text-sm text-muted-foreground">Select a node to manage GPIO pins and hardware</p>
+        </div>
 
-  if (!nodeId || !clusterId) return null;
+        {isLoadingNodes ? (
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {[1, 2, 3].map((i) => (
+              <Card key={i}>
+                <CardContent className="p-4">
+                  <Skeleton className="h-6 w-32 mb-2" />
+                  <Skeleton className="h-4 w-24" />
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        ) : nodes.length > 0 ? (
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {nodes.map((node: NodeData) => (
+              <Card
+                key={node.id}
+                className="cursor-pointer hover:shadow-md transition-shadow"
+                onClick={() => navigate(`/pi-controller/hardware/${node.id}`)}
+              >
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="font-semibold">{node.hostname || node.name || `Node ${node.id}`}</h3>
+                      <p className="text-sm text-muted-foreground">{node.ip_address || "N/A"}</p>
+                    </div>
+                    <Badge variant={node.status?.toLowerCase() === "online" ? "default" : "secondary"}>
+                      {node.status || "Unknown"}
+                    </Badge>
+                  </div>
+                  {node.gpio_pins && node.gpio_pins.length > 0 && (
+                    <p className="text-xs text-muted-foreground mt-2">
+                      {node.gpio_pins.length} GPIO pins configured
+                    </p>
+                  )}
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        ) : (
+          <Card>
+            <CardContent className="p-8 text-center text-muted-foreground">
+              No nodes found. Add nodes to your cluster to manage hardware.
+            </CardContent>
+          </Card>
+        )}
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="space-y-6 animate-fade-in">
+        <Button
+          variant="ghost"
+          onClick={() => navigate(-1)}
+          className="mb-2 -ml-2"
+        >
+          <ArrowLeft className="h-4 w-4 mr-2" />
+          Back
+        </Button>
+        <Alert variant="destructive">
+          <AlertCircle className="h-4 w-4" />
+          <AlertTitle>Error loading hardware data</AlertTitle>
+          <AlertDescription className="flex items-center justify-between">
+            <span>{error instanceof Error ? error.message : "Failed to fetch node data"}</span>
+            <Button variant="outline" size="sm" onClick={() => refetch()}>
+              <RefreshCw className="h-4 w-4 mr-2" />
+              Retry
+            </Button>
+          </AlertDescription>
+        </Alert>
+      </div>
+    );
+  }
+
+  if (isLoading || !nodeData) {
+    return (
+      <div className="space-y-6 animate-fade-in">
+        <div className="flex items-center justify-between">
+          <div>
+            <Skeleton className="h-8 w-48 mb-2" />
+            <Skeleton className="h-4 w-64" />
+          </div>
+          <Skeleton className="h-10 w-24" />
+        </div>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {[1, 2, 3, 4].map((i) => (
+            <Card key={i}>
+              <CardHeader className="pb-2">
+                <Skeleton className="h-4 w-24" />
+              </CardHeader>
+              <CardContent>
+                <Skeleton className="h-8 w-16 mb-2" />
+                <Skeleton className="h-2 w-full" />
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  const node = nodeData as NodeData;
+  const pins: GPIOPin[] = node.gpio_pins || [];
+  const networkInterfaces: NetworkInterface[] = node.network_interfaces || [];
+
+  const memoryUsage = node.memory_usage ?? (
+    node.memory_total && node.memory_free
+      ? ((node.memory_total - node.memory_free) / node.memory_total) * 100
+      : 0
+  );
+
+  const cpuTemp = node.temperature ?? 0;
+  const loadAverage = node.load_average || [0, 0, 0];
+  const uptime = node.uptime || 0;
+
+  const getNodeName = () => node.hostname || node.name || `Node ${node.id}`;
 
   return (
     <div className="space-y-6 animate-fade-in">
       <div className="flex items-center justify-between">
         <div>
-          <Button 
-            variant="ghost" 
-            onClick={() => navigate(`/pi-controller/clusters/${clusterId}/nodes/${nodeId}`)}
+          <Button
+            variant="ghost"
+            onClick={() => clusterId
+              ? navigate(`/pi-controller/clusters/${clusterId}/nodes/${nodeId}`)
+              : navigate(-1)
+            }
             className="mb-2 -ml-2"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Node
           </Button>
-          <h2 className="text-2xl font-bold text-foreground">Hardware Control - Node {nodeId}</h2>
+          <h2 className="text-2xl font-bold text-foreground">Hardware Control - {getNodeName()}</h2>
           <p className="text-sm text-muted-foreground">GPIO pins, system resources, and hardware monitoring</p>
         </div>
         <Button onClick={refreshData} disabled={isLoading} variant="outline">
@@ -139,10 +284,10 @@ export default function Hardware() {
             <Thermometer className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{cpuTemp}°C</div>
-            <Progress value={(cpuTemp / 85) * 100} className="mt-2" />
+            <div className="text-2xl font-bold">{cpuTemp > 0 ? `${cpuTemp}°C` : "N/A"}</div>
+            {cpuTemp > 0 && <Progress value={(cpuTemp / 85) * 100} className="mt-2" />}
             <p className="text-xs text-muted-foreground mt-2">
-              {cpuTemp < 60 ? "Normal" : cpuTemp < 75 ? "Warm" : "Hot"}
+              {cpuTemp === 0 ? "No data" : cpuTemp < 60 ? "Normal" : cpuTemp < 75 ? "Warm" : "Hot"}
             </p>
           </CardContent>
         </Card>
@@ -156,7 +301,7 @@ export default function Hardware() {
             <div className="text-2xl font-bold">{memoryUsage.toFixed(1)}%</div>
             <Progress value={memoryUsage} className="mt-2" />
             <p className="text-xs text-muted-foreground mt-2">
-              {systemInfo.freeMemory}MB / {systemInfo.totalMemory}MB free
+              {node.memory_free ? `${node.memory_free}MB free` : `${memoryUsage.toFixed(0)}% used`}
             </p>
           </CardContent>
         </Card>
@@ -167,9 +312,12 @@ export default function Hardware() {
             <Cpu className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{systemInfo.loadAverage[0].toFixed(2)}</div>
+            <div className="text-2xl font-bold">{node.cpu_usage?.toFixed(1) || loadAverage[0]?.toFixed(2) || "0"}%</div>
             <p className="text-xs text-muted-foreground mt-2">
-              1m: {systemInfo.loadAverage[0].toFixed(2)} | 5m: {systemInfo.loadAverage[1].toFixed(2)} | 15m: {systemInfo.loadAverage[2].toFixed(2)}
+              {loadAverage.length > 0
+                ? `1m: ${loadAverage[0]?.toFixed(2)} | 5m: ${loadAverage[1]?.toFixed(2)} | 15m: ${loadAverage[2]?.toFixed(2)}`
+                : "No load data"
+              }
             </p>
           </CardContent>
         </Card>
@@ -181,10 +329,13 @@ export default function Hardware() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              {Math.floor(systemInfo.uptime / 86400)}d
+              {uptime > 0 ? `${Math.floor(uptime / 86400)}d` : "N/A"}
             </div>
             <p className="text-xs text-muted-foreground mt-2">
-              {Math.floor((systemInfo.uptime % 86400) / 3600)}h {Math.floor((systemInfo.uptime % 3600) / 60)}m
+              {uptime > 0
+                ? `${Math.floor((uptime % 86400) / 3600)}h ${Math.floor((uptime % 3600) / 60)}m`
+                : "No uptime data"
+              }
             </p>
           </CardContent>
         </Card>
@@ -213,56 +364,68 @@ export default function Hardware() {
               </div>
             </CardHeader>
             <CardContent>
-              <ScrollArea className="h-[500px] pr-4">
-                <div className="space-y-4">
-                  {pins.map((pin) => (
-                    <Card key={pin.id} className="hover-scale">
-                      <CardContent className="p-4">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-4 flex-1">
-                            <div className="flex flex-col items-center gap-1 min-w-[60px]">
-                              <Zap className={`h-5 w-5 ${pin.value ? 'text-yellow-500' : 'text-muted-foreground'}`} />
-                              <span className="text-xs font-mono font-bold">GPIO {pin.id}</span>
-                            </div>
-                            
-                            <div className="flex-1">
-                              <div className="flex items-center gap-2">
-                                <h4 className="font-semibold">{pin.name}</h4>
-                                <Badge variant="outline" className={categoryColors[pin.category]}>
-                                  {pin.category}
-                                </Badge>
-                                <Badge variant="outline">
-                                  {pin.mode}
-                                </Badge>
+              {pins.length > 0 ? (
+                <ScrollArea className="h-[500px] pr-4">
+                  <div className="space-y-4">
+                    {pins.map((pin) => (
+                      <Card key={pin.id} className="hover-scale">
+                        <CardContent className="p-4">
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-4 flex-1">
+                              <div className="flex flex-col items-center gap-1 min-w-[60px]">
+                                <Zap className={`h-5 w-5 ${pin.value ? 'text-yellow-500' : 'text-muted-foreground'}`} />
+                                <span className="text-xs font-mono font-bold">GPIO {pin.pin_number || pin.id}</span>
                               </div>
-                              {pin.description && (
-                                <p className="text-sm text-muted-foreground mt-1">{pin.description}</p>
+
+                              <div className="flex-1">
+                                <div className="flex items-center gap-2">
+                                  <h4 className="font-semibold">{pin.name}</h4>
+                                  {pin.category && (
+                                    <Badge variant="outline" className={categoryColors[pin.category] || categoryColors.custom}>
+                                      {pin.category}
+                                    </Badge>
+                                  )}
+                                  <Badge variant="outline">
+                                    {pin.mode || pin.direction || "unknown"}
+                                  </Badge>
+                                </div>
+                                {pin.description && (
+                                  <p className="text-sm text-muted-foreground mt-1">{pin.description}</p>
+                                )}
+                              </div>
+                            </div>
+
+                            <div className="flex items-center gap-3">
+                              {(pin.mode === "output" || pin.direction === "output") ? (
+                                <Switch
+                                  checked={pin.value}
+                                  onCheckedChange={() => togglePin(pin.id)}
+                                  disabled={isLoading}
+                                />
+                              ) : (
+                                <Badge variant={pin.value ? "default" : "secondary"}>
+                                  {pin.value ? "HIGH" : "LOW"}
+                                </Badge>
                               )}
+                              <Button variant="ghost" size="icon">
+                                <Edit className="h-4 w-4" />
+                              </Button>
                             </div>
                           </div>
-
-                          <div className="flex items-center gap-3">
-                            {pin.mode === "output" ? (
-                              <Switch
-                                checked={pin.value}
-                                onCheckedChange={() => togglePin(pin.id)}
-                                disabled={isLoading}
-                              />
-                            ) : (
-                              <Badge variant={pin.value ? "default" : "secondary"}>
-                                {pin.value ? "HIGH" : "LOW"}
-                              </Badge>
-                            )}
-                            <Button variant="ghost" size="icon">
-                              <Edit className="h-4 w-4" />
-                            </Button>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                </ScrollArea>
+              ) : (
+                <div className="flex items-center justify-center py-12 text-muted-foreground">
+                  <div className="text-center">
+                    <Zap className="h-12 w-12 mx-auto mb-2 opacity-50" />
+                    <p>No GPIO pins configured</p>
+                    <p className="text-sm">Add GPIO pin configurations to control hardware</p>
+                  </div>
                 </div>
-              </ScrollArea>
+              )}
             </CardContent>
           </Card>
         </TabsContent>
@@ -279,19 +442,25 @@ export default function Hardware() {
               <CardContent className="space-y-2">
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Hostname:</span>
-                  <span className="font-mono font-medium">{systemInfo.hostname}</span>
+                  <span className="font-mono font-medium">{node.hostname || "N/A"}</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Platform:</span>
-                  <span className="font-mono">{systemInfo.platform}</span>
+                  <span className="font-mono">{node.platform || "linux"}</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Architecture:</span>
-                  <span className="font-mono">{systemInfo.architecture}</span>
+                  <span className="font-mono">{node.architecture || "arm64"}</span>
                 </div>
+                {node.cpu_model && (
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">CPU Model:</span>
+                    <span className="font-mono">{node.cpu_model}</span>
+                  </div>
+                )}
                 <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">CPU Model:</span>
-                  <span className="font-mono">{systemInfo.cpuModel}</span>
+                  <span className="text-muted-foreground">IP Address:</span>
+                  <span className="font-mono">{node.ip_address || "N/A"}</span>
                 </div>
               </CardContent>
             </Card>
@@ -304,18 +473,24 @@ export default function Hardware() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-2">
-                <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Total Memory:</span>
-                  <span className="font-mono font-medium">{systemInfo.totalMemory} MB</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Free Memory:</span>
-                  <span className="font-mono">{systemInfo.freeMemory} MB</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Used Memory:</span>
-                  <span className="font-mono">{systemInfo.totalMemory - systemInfo.freeMemory} MB</span>
-                </div>
+                {node.memory_total && (
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Total Memory:</span>
+                    <span className="font-mono font-medium">{node.memory_total} MB</span>
+                  </div>
+                )}
+                {node.memory_free !== undefined && (
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Free Memory:</span>
+                    <span className="font-mono">{node.memory_free} MB</span>
+                  </div>
+                )}
+                {node.memory_used !== undefined && (
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Used Memory:</span>
+                    <span className="font-mono">{node.memory_used} MB</span>
+                  </div>
+                )}
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Usage:</span>
                   <span className="font-mono">{memoryUsage.toFixed(1)}%</span>
@@ -353,39 +528,53 @@ export default function Hardware() {
               <CardDescription>Active network connections</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
-                {systemInfo.networkInterfaces.map((iface, index) => (
-                  <Card key={index}>
-                    <CardContent className="p-4">
-                      <div className="flex items-start justify-between">
-                        <div className="space-y-2 flex-1">
-                          <div className="flex items-center gap-2">
-                            <h4 className="font-semibold font-mono">{iface.name}</h4>
-                            <Badge variant={iface.internal ? "secondary" : "default"}>
-                              {iface.internal ? "Internal" : "External"}
-                            </Badge>
-                            <Badge variant="outline">{iface.family}</Badge>
-                          </div>
-                          <div className="grid gap-1 text-sm">
-                            <div className="flex justify-between">
-                              <span className="text-muted-foreground">IP Address:</span>
-                              <span className="font-mono">{iface.address}</span>
+              {networkInterfaces.length > 0 ? (
+                <div className="space-y-4">
+                  {networkInterfaces.map((iface, index) => (
+                    <Card key={index}>
+                      <CardContent className="p-4">
+                        <div className="flex items-start justify-between">
+                          <div className="space-y-2 flex-1">
+                            <div className="flex items-center gap-2">
+                              <h4 className="font-semibold font-mono">{iface.name}</h4>
+                              <Badge variant={iface.internal ? "secondary" : "default"}>
+                                {iface.internal ? "Internal" : "External"}
+                              </Badge>
+                              {iface.family && <Badge variant="outline">{iface.family}</Badge>}
                             </div>
-                            <div className="flex justify-between">
-                              <span className="text-muted-foreground">Netmask:</span>
-                              <span className="font-mono">{iface.netmask}</span>
-                            </div>
-                            <div className="flex justify-between">
-                              <span className="text-muted-foreground">MAC Address:</span>
-                              <span className="font-mono">{iface.mac}</span>
+                            <div className="grid gap-1 text-sm">
+                              <div className="flex justify-between">
+                                <span className="text-muted-foreground">IP Address:</span>
+                                <span className="font-mono">{iface.address || iface.ip_address || "N/A"}</span>
+                              </div>
+                              {iface.netmask && (
+                                <div className="flex justify-between">
+                                  <span className="text-muted-foreground">Netmask:</span>
+                                  <span className="font-mono">{iface.netmask}</span>
+                                </div>
+                              )}
+                              {(iface.mac || iface.mac_address) && (
+                                <div className="flex justify-between">
+                                  <span className="text-muted-foreground">MAC Address:</span>
+                                  <span className="font-mono">{iface.mac || iface.mac_address}</span>
+                                </div>
+                              )}
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              ) : (
+                <div className="flex items-center justify-center py-8 text-muted-foreground">
+                  <div className="text-center">
+                    <Wifi className="h-12 w-12 mx-auto mb-2 opacity-50" />
+                    <p>No network interface data</p>
+                    <p className="text-sm">Network information unavailable</p>
+                  </div>
+                </div>
+              )}
             </CardContent>
           </Card>
         </TabsContent>

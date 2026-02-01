@@ -61,6 +61,7 @@ interface NodeData {
 const PiDashboard = () => {
   const { nodeId } = useParams();
   const navigate = useNavigate();
+  const [selectedNode, setSelectedNode] = useState(nodeId);
 
   // Fetch health status
   const { data: healthData, isLoading: isLoadingHealth } = useHealth();
@@ -279,7 +280,6 @@ const PiDashboard = () => {
   }
 
   // Node Detail View
-  const [selectedNode, setSelectedNode] = useState(nodeId);
   const currentNode = nodeData || nodes.find(n => String(n.id) === nodeId);
 
   const formatBytes = (bytes?: number) => {

@@ -1,0 +1,38 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "baseBranches": ["main"],
+  "automerge": true,
+  "automergeType": "pr",
+  "automergeStrategy": "squash",
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchCurrentVersion": "!/^0/",
+      "automerge": true
+    },
+    {
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true
+    },
+    {
+      "groupName": "React ecosystem",
+      "matchPackagePatterns": ["^react", "^@types/react"]
+    },
+    {
+      "groupName": "Radix UI",
+      "matchPackagePatterns": ["^@radix-ui/"]
+    },
+    {
+      "groupName": "Build tools",
+      "matchPackagePatterns": ["^vite", "^@vitejs/", "^typescript", "^eslint"]
+    }
+  ],
+  "schedule": ["before 9am on monday"],
+  "timezone": "UTC",
+  "labels": ["dependencies"],
+  "reviewers": ["dsyorkd"]
+}
