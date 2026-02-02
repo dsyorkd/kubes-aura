@@ -326,4 +326,163 @@ test.describe('Dashboard', () => {
       expect(Object.values(typeDistribution).reduce((a, b) => a + b, 0)).toBe(mockClusters.length);
     });
   });
+
+  // ── Task #110: Dashboard Quick Action Buttons ─────────────────────────────
+
+  test.describe('Quick Action Buttons', () => {
+    test('Quick Actions section is visible', async ({ page }) => {
+      await navigateTo(page, '/pi-controller');
+      await waitForLoadingComplete(page);
+
+      await expect(page.getByText('Quick Actions')).toBeVisible({ timeout: 15000 });
+    });
+
+    test('View All Clusters button navigates to clusters page', async ({ page }) => {
+      await navigateTo(page, '/pi-controller');
+      await waitForLoadingComplete(page);
+
+      await page.getByRole('button', { name: /view all clusters/i }).click();
+      await expect(page).toHaveURL(/.*\/clusters/);
+      await expect(page.getByRole('heading', { name: 'Clusters', level: 1 })).toBeVisible();
+    });
+
+    test('Hardware Control button navigates to hardware page', async ({ page }) => {
+      await navigateTo(page, '/pi-controller');
+      await waitForLoadingComplete(page);
+
+      await page.getByRole('button', { name: /hardware control/i }).click();
+      await expect(page).toHaveURL(/.*\/hardware/);
+    });
+
+    test('all quick action buttons are enabled and clickable', async ({ page }) => {
+      await navigateTo(page, '/pi-controller');
+      await waitForLoadingComplete(page);
+
+      const clusterButton = page.getByRole('button', { name: /view all clusters/i });
+      const hardwareButton = page.getByRole('button', { name: /hardware control/i });
+
+      await expect(clusterButton).toBeVisible();
+      await expect(clusterButton).toBeEnabled();
+      await expect(hardwareButton).toBeVisible();
+      await expect(hardwareButton).toBeEnabled();
+    });
+
+    test('quick action buttons have descriptive text', async ({ page }) => {
+      await navigateTo(page, '/pi-controller');
+      await waitForLoadingComplete(page);
+
+      // Buttons should have clear labels that describe their action
+      await expect(page.getByRole('button', { name: /view all clusters/i })).toBeVisible();
+      await expect(page.getByRole('button', { name: /hardware control/i })).toBeVisible();
+    });
+
+    test('Refresh button reloads dashboard data', async ({ page }) => {
+      await navigateTo(page, '/pi-controller');
+      await waitForLoadingComplete(page);
+
+      // Verify data is loaded
+      await expect(page.getByText('pi-master-01')).toBeVisible({ timeout: 15000 });
+
+      // Click refresh
+      const refreshButton = page.getByRole('button', { name: /refresh/i });
+      await expect(refreshButton).toBeVisible();
+      await refreshButton.click();
+
+      // Data should still be visible after refresh
+      await expect(page.getByText('pi-master-01')).toBeVisible({ timeout: 15000 });
+    });
+  });
+
+  // ── Task #111: Real-Time Metric Updates ───────────────────────────────────
+
+  test.describe('Real-Time Metric Updates', () => {
+    test('dashboard shows live data from API mocks', async ({ page }) => {
+      await navigateTo(page, '/pi-controller');
+      await waitForLoadingComplete(page);
+
+      // Metrics should reflect the mock data
+      await expect(page.getByText('3 online, 2 offline')).toBeVisible({ timeout: 15000 });
+      await expect(page.getByText('46%')).toBeVisible();
+      await expect(page.getByText('Normal range')).toBeVisible();
+    });
+
+    test('metrics update when refresh is clicked', async ({ page }) => {
+      // Set up initial mocks
+      let callCount = 0;
+      await page.route(
+        (url) => /\/api\/v1\/nodes(\?.*)?$/.test(url.toString()) && !/gpio|discover/.test(url.toString()),
+        async (route) => {
+          callCount++;
+          await route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: JSON.stringify({
+              data: mockNodes,
+              total: mockNodes.length,
+            }),
+          });
+        },
+      );
+      await mockApiRoute(page, 'health', { status: 'healthy', version: '1.0.0', uptime: 86400 });
+      await mockApiRoute(page, 'ready', { status: 'ready' });
+      await mockApiRoute(page, 'clusters', mockClusters, { paginated: true });
+
+      await navigateTo(page, '/pi-controller');
+      await waitForLoadingComplete(page);
+
+      const initialCallCount = callCount;
+
+      // Click refresh
+      const refreshButton = page.getByRole('button', { name: /refresh/i });
+      if (await refreshButton.isVisible().catch(() => false)) {
+        await refreshButton.click();
+        await page.waitForTimeout(1000);
+
+        // Should have made additional API calls
+        expect(callCount).toBeGreaterThan(initialCallCount);
+      }
+    });
+
+    test('system health status reflects mock data', async ({ page }) => {
+      await navigateTo(page, '/pi-controller');
+      await waitForLoadingComplete(page);
+
+      await expect(page.getByText('System Health')).toBeVisible({ timeout: 15000 });
+      await expect(page.getByText('healthy')).toBeVisible();
+      await expect(page.getByText('v1.0.0')).toBeVisible();
+    });
+
+    test('node metrics on dashboard are computed from API data', async ({ page }) => {
+      await navigateTo(page, '/pi-controller');
+      await waitForLoadingComplete(page);
+
+      // The dashboard computes metrics from mockNodes
+      // Total: 5, Online: 3, Offline/Degraded: 2
+      const totalNodes = mockNodes.length;
+      const onlineNodes = mockNodes.filter((n) => n.status === 'online').length;
+
+      expect(totalNodes).toBe(5);
+      expect(onlineNodes).toBe(3);
+
+      // Verify computed values are displayed
+      await expect(page.getByText(`${totalNodes}`).first()).toBeVisible({ timeout: 15000 });
+      await expect(page.getByText(`${onlineNodes} online`).first()).toBeVisible();
+    });
+
+    test('dashboard handles degraded health status', async ({ page }) => {
+      // Override health mock with degraded status
+      await mockApiRoute(page, 'health', { status: 'degraded', version: '1.0.0', uptime: 3600 });
+      await mockApiRoute(page, 'ready', { status: 'ready' });
+      await mockApiRoute(page, 'clusters', mockClusters, { paginated: true });
+      await mockApiRoute(page, 'nodes', mockNodes, { paginated: true });
+      await mockApiRoute(page, 'nodes/*', mockNodes[0]);
+
+      await navigateTo(page, '/pi-controller');
+      await waitForLoadingComplete(page);
+
+      // Page should show the degraded status
+      await expect(page.getByText('System Health')).toBeVisible({ timeout: 15000 });
+      await expect(page.getByText('degraded')).toBeVisible();
+    });
+  });
 });
