@@ -797,6 +797,50 @@ test.describe('Nodes', () => {
       expect(offlineNode!.cpu_usage).toBe(0);
       expect(offlineNode!.temperature).toBe(0);
     });
+
+    // ── Task #131: Real-time Node Metrics Updates ──────────────────────────────
+    test('simulates metric changes and verifies UI updates', async ({ page }) => {
+      await setupDefaultApiMocks(page);
+      await navigateTo(page, '/pi-controller/nodes');
+      await waitForLoadingComplete(page);
+
+      // Capture initial CPU value for pi-master-01
+      const initialCpuText = await page
+        .getByText(/42\.5/i)
+        .first()
+        .textContent()
+        .catch(() => '');
+
+      // Mock updated metrics with higher CPU usage
+      await mockApiRoute(page, 'nodes', [
+        {
+          ...mockNodes[0],
+          cpu_usage: 85.3,
+          memory_usage: 78.9,
+          temperature: 65.2,
+          updated_at: new Date().toISOString()
+        },
+        ...mockNodes.slice(1)
+      ], { paginated: true });
+
+      // Trigger a refresh or wait for auto-update interval
+      await page.reload();
+      await waitForLoadingComplete(page);
+
+      // Verify the UI shows updated metrics
+      const updatedCpuText = await page
+        .getByText(/85\.3/i)
+        .first()
+        .isVisible()
+        .catch(() => false);
+
+      expect(updatedCpuText).toBeTruthy();
+      
+      // Verify that the metric value actually changed from initial
+      const currentPageText = await page.textContent('body');
+      expect(currentPageText).not.toMatch(/42\.5/); // Old value should be gone
+      expect(currentPageText).toMatch(/85\.3/); // New value should be present
+    });
   });
 
   // ── Task #129: Manual Node Entry and Adoption ─────────────────────────────
@@ -967,23 +1011,45 @@ test.describe('Nodes', () => {
       expect(hasActionButtons || hasMoreMenu || hasViewDetails || hasLinks).toBeTruthy();
     });
 
-    test('clicking a node navigates to node details', async ({ page }) => {
+    // ── Task #107: Test Node Detail View Selector and Initial Load ────────────
+    test('clicking a node opens detail view with correct info', async ({ page }) => {
       await navigateTo(page, '/pi-controller/nodes');
       await waitForLoadingComplete(page);
 
-      // Click on the first node name/card
+      // Click on the first node name/card to open detail view
       const nodeLink = page.getByText('pi-master-01').first();
       await nodeLink.click();
 
-      // Should navigate to node details or show more info
+      // Should navigate to node details page or open detail panel
       const isOnDetailPage = /\/nodes\/\d+/.test(page.url());
-      const hasDetailContent = await page
-        .getByText(/pi-master-01/i)
+      const hasDetailPanel = await page
+        .locator('[class*="detail"], [class*="sidebar"], [role="dialog"]')
         .first()
         .isVisible()
         .catch(() => false);
 
-      expect(isOnDetailPage || hasDetailContent).toBeTruthy();
+      expect(isOnDetailPage || hasDetailPanel).toBeTruthy();
+
+      // Verify detail view contains correct node information
+      await expect(page.getByText('pi-master-01')).toBeVisible();
+      
+      // Should show node status, IP, or other identifying information
+      const hasNodeDetails = await page
+        .getByText(/192\.168\.1\.100|online|master|active/i)
+        .first()
+        .isVisible()
+        .catch(() => false);
+        
+      expect(hasNodeDetails).toBeTruthy();
+      
+      // Should have some form of metrics or detailed information
+      const hasDetailedInfo = await page
+        .getByText(/cpu|memory|uptime|version|status|health/i)
+        .first()
+        .isVisible()
+        .catch(() => false);
+        
+      expect(hasDetailedInfo).toBeTruthy();
     });
 
     test('Retry button appears on error and is functional', async ({ page }) => {

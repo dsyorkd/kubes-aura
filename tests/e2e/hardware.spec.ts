@@ -766,4 +766,72 @@ test.describe('Hardware', () => {
       expect(visibleCount).toBeGreaterThan(0);
     });
   });
+
+  // ── Task #140: Network Tab Information Test ─────────────────────────────────
+
+  test.describe('network tab information', () => {
+    test('navigates to network tab and verifies info displays', async ({ page }) => {
+      await navigateTo(page, '/pi-controller/hardware');
+      await waitForLoadingComplete(page);
+
+      // Look for network tab or section
+      const networkTab = page.getByRole('tab', { name: /network/i });
+      const hasNetworkTab = await networkTab.isVisible().catch(() => false);
+
+      if (hasNetworkTab) {
+        // Click network tab
+        await networkTab.click();
+        await expect(page.getByText(/network/i).first()).toBeVisible();
+      } else {
+        // Look for network section or information directly on page
+        const hasNetworkSection = await page
+          .getByText(/network|ip address|interface|eth0|wlan0/i)
+          .first()
+          .isVisible()
+          .catch(() => false);
+        
+        expect(hasNetworkSection).toBeTruthy();
+      }
+
+      // Verify network information is displayed
+      const hasNetworkInfo = await page
+        .getByText(/192\.168\.1\.\d+|eth0|wlan0|ethernet|wireless|interface|mac.*address/i)
+        .first()
+        .isVisible()
+        .catch(() => false);
+
+      expect(hasNetworkInfo).toBeTruthy();
+
+      // Verify network status or connectivity information
+      const hasNetworkStatus = await page
+        .getByText(/connected|disconnected|active|inactive|up|down/i)
+        .first()
+        .isVisible()
+        .catch(() => false);
+
+      // Should show either network details or status
+      expect(hasNetworkInfo || hasNetworkStatus).toBeTruthy();
+    });
+
+    test('network tab shows interface details when available', async ({ page }) => {
+      await navigateTo(page, '/pi-controller/hardware');
+      await waitForLoadingComplete(page);
+
+      // Check for common network interface information
+      const hasInterfaceDetails = await page
+        .getByText(/eth0|wlan0|lo|br0|docker0/i)
+        .first()
+        .isVisible()
+        .catch(() => false);
+
+      const hasIpAddress = await page
+        .getByText(/192\.168|10\.|172\.|127\.0\.0\.1/i)
+        .first()
+        .isVisible()
+        .catch(() => false);
+
+      // At least one type of network information should be visible
+      expect(hasInterfaceDetails || hasIpAddress).toBeTruthy();
+    });
+  });
 });

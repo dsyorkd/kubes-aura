@@ -332,4 +332,187 @@ test.describe('Documentation and Help Pages', () => {
       expect(loadTime).toBeLessThan(10000);
     });
   });
+
+  // ── Task #156: Code Example Formatting Test ───────────────────────────────
+
+  test.describe('Code Example Formatting', () => {
+    test('verifies code blocks render with syntax highlighting', async ({ page }) => {
+      await navigateTo(page, '/pi-controller/docs');
+
+      // Look for code blocks with syntax highlighting classes
+      const hasHighlightedCode = await page
+        .locator('pre[class*="language-"], code[class*="language-"], [class*="hljs"], [class*="highlight"]')
+        .first()
+        .isVisible()
+        .catch(() => false);
+
+      const hasCodeBlocks = await page
+        .locator('pre, code, [class*="code-block"]')
+        .first()
+        .isVisible()
+        .catch(() => false);
+
+      // Check for syntax highlighting indicators
+      const hasColoredSyntax = await page
+        .locator('pre [class*="token"], pre [class*="keyword"], pre [class*="string"], code [style*="color"]')
+        .first()
+        .isVisible()
+        .catch(() => false);
+
+      // Verify code examples exist
+      expect(hasCodeBlocks).toBeTruthy();
+
+      // If code blocks exist, they should ideally have syntax highlighting
+      if (hasCodeBlocks) {
+        // Look for specific syntax highlighted content patterns
+        const codeContent = await page
+          .locator('pre, code')
+          .first()
+          .textContent()
+          .catch(() => '');
+
+        const hasCodePatterns = /curl|http|json|yaml|javascript|python|\{|\[|function|const|let|var|def|import/.test(codeContent || '');
+        
+        // Either should have highlighting classes or recognizable code patterns
+        expect(hasHighlightedCode || hasColoredSyntax || hasCodePatterns).toBeTruthy();
+      }
+    });
+
+    test('code examples are properly formatted and readable', async ({ page }) => {
+      await navigateTo(page, '/pi-controller/docs');
+
+      // Look for formatted code blocks
+      const codeBlocks = page.locator('pre, [class*="code"], code');
+      const count = await codeBlocks.count();
+
+      if (count > 0) {
+        const firstBlock = codeBlocks.first();
+        
+        // Verify code block is visible and properly sized
+        await expect(firstBlock).toBeVisible();
+        
+        const codeText = await firstBlock.textContent();
+        
+        // Code should not be empty and should have reasonable length
+        expect(codeText?.trim().length).toBeGreaterThan(10);
+        
+        // Should contain recognizable code patterns
+        expect(codeText).toMatch(/\{|\[|curl|http|api|json|yaml|function|const|let|import|def|class/i);
+      }
+    });
+
+    test('API endpoint examples are present and formatted', async ({ page }) => {
+      await navigateTo(page, '/pi-controller/docs');
+
+      // Look for API-specific code examples
+      const hasApiExamples = await page
+        .getByText(/GET|POST|PUT|DELETE|\/api\/v1|curl|http/i)
+        .first()
+        .isVisible()
+        .catch(() => false);
+
+      const hasJsonExamples = await page
+        .getByText(/\{.*".*".*\}|application\/json|Content-Type/i)
+        .first()
+        .isVisible()
+        .catch(() => false);
+
+      // API documentation should have some form of usage examples
+      expect(hasApiExamples || hasJsonExamples).toBeTruthy();
+    });
+  });
+
+  // ── Task #158: Use Case Cards Test ────────────────────────────────────────
+
+  test.describe('Use Case Cards', () => {
+    test('verifies use case cards display on documentation page', async ({ page }) => {
+      await navigateTo(page, '/pi-controller/docs');
+
+      // Look for use case cards or sections
+      const hasUseCaseCards = await page
+        .locator('[class*="card"], [class*="use-case"], [class*="example"], .grid > div, .flex > div')
+        .first()
+        .isVisible()
+        .catch(() => false);
+
+      const hasUseCaseContent = await page
+        .getByText(/use case|example|scenario|tutorial|how to|getting started/i)
+        .first()
+        .isVisible()
+        .catch(() => false);
+
+      // Look for specific use case patterns
+      const hasUseCaseTitles = await page
+        .getByText(/cluster management|gpio control|monitoring|automation|deployment|raspberry pi/i)
+        .first()
+        .isVisible()
+        .catch(() => false);
+
+      // Should have some form of use case presentation
+      expect(hasUseCaseCards || hasUseCaseContent || hasUseCaseTitles).toBeTruthy();
+    });
+
+    test('use case cards are interactive and navigable', async ({ page }) => {
+      await navigateTo(page, '/pi-controller/docs');
+
+      // Look for clickable use case elements
+      const useCaseLinks = page.locator('a[href*="doc"], a[href*="guide"], a[href*="tutorial"], [class*="card"] a, [class*="use-case"] a');
+      const linkCount = await useCaseLinks.count();
+
+      if (linkCount > 0) {
+        const firstLink = useCaseLinks.first();
+        await expect(firstLink).toBeVisible();
+        
+        // Verify link is clickable and has proper href
+        const href = await firstLink.getAttribute('href');
+        expect(href).toBeTruthy();
+        
+        // Click should work (test interactivity)
+        await firstLink.click({ force: true });
+        
+        // Should either navigate or show content
+        await page.waitForTimeout(1000);
+        
+        // Page should respond to interaction
+        const currentUrl = page.url();
+        expect(currentUrl).toBeTruthy();
+      } else {
+        // Look for other interactive elements in use case areas
+        const hasInteractiveElements = await page
+          .getByRole('button')
+          .or(page.locator('[class*="card"]:has(text)'))
+          .first()
+          .isVisible()
+          .catch(() => false);
+
+        expect(hasInteractiveElements).toBeTruthy();
+      }
+    });
+
+    test('use case cards contain descriptive content', async ({ page }) => {
+      await navigateTo(page, '/pi-controller/docs');
+
+      // Look for descriptive use case content
+      const hasDescriptions = await page
+        .getByText(/manage.*cluster|control.*gpio|monitor.*nodes|automate.*deployment|raspberry pi.*cluster/i)
+        .first()
+        .isVisible()
+        .catch(() => false);
+
+      const hasInstructionalContent = await page
+        .getByText(/learn.*how|step.*by.*step|follow.*guide|get.*started|tutorial/i)
+        .first()
+        .isVisible()
+        .catch(() => false);
+
+      const hasFeatureDescriptions = await page
+        .getByText(/features|capabilities|benefits|overview/i)
+        .first()
+        .isVisible()
+        .catch(() => false);
+
+      // Should have descriptive content about use cases
+      expect(hasDescriptions || hasInstructionalContent || hasFeatureDescriptions).toBeTruthy();
+    });
+  });
 });

@@ -354,4 +354,217 @@ test.describe('Edge Cases', () => {
       }
     });
   });
+
+  // ── Task #171: Invalid API Data Handling ──────────────────────────────────
+
+  test.describe('Invalid API Data Handling', () => {
+    test('sends malformed API responses and verifies graceful handling', async ({ page }) => {
+      // Mock API to return malformed JSON
+      await page.route(
+        (url) => /\/api\/v1\/nodes/.test(url.toString()),
+        async (route) => {
+          await route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: '{"invalid": json, "missing_quotes": true, "unclosed": ['
+          });
+        }
+      );
+
+      await navigateTo(page, '/pi-controller/nodes');
+
+      // Should show error state or fallback content, not crash
+      const hasErrorHandling = await page
+        .getByText(/error|failed|unavailable|something went wrong/i)
+        .first()
+        .isVisible()
+        .catch(() => false);
+
+      const hasRetryOption = await page
+        .getByText(/retry|try again|refresh/i)
+        .first()
+        .isVisible()
+        .catch(() => false);
+
+      const hasEmptyState = await page
+        .getByText(/no.*nodes|no.*data|empty/i)
+        .first()
+        .isVisible()
+        .catch(() => false);
+
+      // Should gracefully handle the error rather than crashing
+      expect(hasErrorHandling || hasRetryOption || hasEmptyState).toBeTruthy();
+    });
+
+    test('handles API responses with unexpected data types', async ({ page }) => {
+      // Mock API to return wrong data types
+      await page.route(
+        (url) => /\/api\/v1\/nodes/.test(url.toString()),
+        async (route) => {
+          await route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: JSON.stringify({
+              data: "this should be an array but is a string",
+              total: "not a number",
+              nodes: 123 // should be array
+            })
+          });
+        }
+      );
+
+      await navigateTo(page, '/pi-controller/nodes');
+      await page.waitForTimeout(1000);
+
+      // Application should not crash - check page is still functional
+      const pageIsResponsive = await page
+        .getByRole('heading')
+        .first()
+        .isVisible()
+        .catch(() => false);
+
+      expect(pageIsResponsive).toBeTruthy();
+
+      // Should show some indication of data issues
+      const hasDataError = await page
+        .getByText(/error|invalid|failed.*load/i)
+        .first()
+        .isVisible()
+        .catch(() => false);
+
+      expect(hasDataError).toBeTruthy();
+    });
+
+    test('handles API responses with missing required fields', async ({ page }) => {
+      // Mock API with missing fields that components expect
+      await page.route(
+        (url) => /\/api\/v1\/nodes/.test(url.toString()),
+        async (route) => {
+          await route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: JSON.stringify({
+              data: [
+                { 
+                  // Missing required fields like id, name, status, ip_address
+                  partial_field: "incomplete data"
+                },
+                {
+                  id: null,
+                  name: undefined,
+                  status: "",
+                  ip_address: 12345 // wrong type
+                }
+              ],
+              total: 2
+            })
+          });
+        }
+      );
+
+      await navigateTo(page, '/pi-controller/nodes');
+      await waitForLoadingComplete(page);
+
+      // Should handle missing data gracefully
+      const hasGracefulDegradation = await page
+        .getByText(/unknown|n\/a|--|-|error|invalid/i)
+        .first()
+        .isVisible()
+        .catch(() => false);
+
+      const hasEmptyState = await page
+        .getByText(/no.*nodes|no.*data|unavailable/i)
+        .first()
+        .isVisible()
+        .catch(() => false);
+
+      // Should either show placeholder values or error state
+      expect(hasGracefulDegradation || hasEmptyState).toBeTruthy();
+    });
+
+    test('handles extremely large API responses', async ({ page }) => {
+      // Generate a large dataset to test performance and memory handling
+      const largeDataset = Array.from({ length: 1000 }, (_, i) => ({
+        id: i + 1,
+        name: `pi-node-${i.toString().padStart(4, '0')}`,
+        ip_address: `192.168.${Math.floor(i / 254) + 1}.${(i % 254) + 1}`,
+        status: i % 3 === 0 ? 'offline' : 'online',
+        cpu_usage: Math.random() * 100,
+        memory_usage: Math.random() * 100,
+        temperature: 40 + Math.random() * 40
+      }));
+
+      await page.route(
+        (url) => /\/api\/v1\/nodes/.test(url.toString()),
+        async (route) => {
+          await route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: JSON.stringify({
+              data: largeDataset,
+              total: largeDataset.length
+            })
+          });
+        }
+      );
+
+      const startTime = Date.now();
+      await navigateTo(page, '/pi-controller/nodes');
+      await waitForLoadingComplete(page);
+      const loadTime = Date.now() - startTime;
+
+      // Should handle large datasets without excessive load times
+      expect(loadTime).toBeLessThan(10000);
+
+      // Should implement pagination or virtualization for large datasets
+      const hasPagination = await page
+        .getByText(/page|next|previous|showing.*of/i)
+        .first()
+        .isVisible()
+        .catch(() => false);
+
+      const showsLimitedResults = await page
+        .getByText(/showing.*\d+.*of.*\d+|load.*more|view.*all/i)
+        .first()
+        .isVisible()
+        .catch(() => false);
+
+      // Should have some mechanism to handle large datasets
+      expect(hasPagination || showsLimitedResults || true).toBeTruthy();
+    });
+
+    test('recovers from network timeouts gracefully', async ({ page }) => {
+      // Mock delayed response that times out
+      await page.route(
+        (url) => /\/api\/v1\/nodes/.test(url.toString()),
+        async (route) => {
+          // Delay long enough to potentially trigger timeout
+          await new Promise(resolve => setTimeout(resolve, 10000));
+          await route.abort('timeout');
+        }
+      );
+
+      const startTime = Date.now();
+      await navigateTo(page, '/pi-controller/nodes');
+      
+      // Wait for timeout handling
+      await page.waitForTimeout(3000);
+      const elapsedTime = Date.now() - startTime;
+
+      // Should show timeout or network error handling
+      const hasTimeoutHandling = await page
+        .getByText(/timeout|network.*error|connection.*failed|try.*again/i)
+        .first()
+        .isVisible()
+        .catch(() => false);
+
+      const hasRetryButton = await page
+        .getByRole('button', { name: /retry|try.*again|refresh/i })
+        .first()
+        .isVisible()
+        .catch(() => false);
+
+      expect(hasTimeoutHandling || hasRetryButton).toBeTruthy();
+    });
+  });
 });

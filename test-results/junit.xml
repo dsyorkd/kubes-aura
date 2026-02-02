@@ -1,5 +1,5 @@
-<testsuites id="" name="" tests="1785" failures="0" skipped="1785" errors="0" time="0.146355">
-<testsuite name="e2e/accessibility.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="chromium" tests="23" failures="0" skipped="23" time="0" errors="0">
+<testsuites id="" name="" tests="2465" failures="0" skipped="2465" errors="0" time="0.161416">
+<testsuite name="e2e/accessibility.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="chromium" tests="44" failures="0" skipped="44" time="0" errors="0">
 <testcase name="Accessibility › Axe-Core WCAG 2.0 AA Audit › dashboard page has no accessibility violations" classname="e2e/accessibility.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -92,8 +92,92 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Accessibility › ARIA Attributes for Interactive Elements (#174) › sidebar navigation links have accessible roles" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA Attributes for Interactive Elements (#174) › buttons have accessible names" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA Attributes for Interactive Elements (#174) › tab elements have correct ARIA attributes" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA Attributes for Interactive Elements (#174) › form inputs have associated labels via ARIA" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA Attributes for Interactive Elements (#174) › toggle switches have correct role and state" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA Attributes for Interactive Elements (#174) › cluster tab list has correct ARIA roles" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Keyboard Interaction for Dialogs and Forms (#178) › Escape key closes cluster creation dialog" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Keyboard Interaction for Dialogs and Forms (#178) › Tab key navigates through form fields in settings" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Keyboard Interaction for Dialogs and Forms (#178) › Enter key submits login form" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Keyboard Interaction for Dialogs and Forms (#178) › keyboard navigation works within tab panels" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Keyboard Interaction for Dialogs and Forms (#178) › dialog traps focus within itself" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA-Live Regions for Dynamic Status (#179) › page has aria-live regions for dynamic content" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA-Live Regions for Dynamic Status (#179) › error messages use aria-live or role=alert" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA-Live Regions for Dynamic Status (#179) › loading state changes are announced to assistive technology" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Screen Reader Page Title and Heading Hierarchy (#180) › dashboard has correct document title" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Screen Reader Page Title and Heading Hierarchy (#180) › nodes page has correct document title" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Screen Reader Page Title and Heading Hierarchy (#180) › clusters page has correct document title" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Screen Reader Page Title and Heading Hierarchy (#180) › settings page has correct document title" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Screen Reader Page Title and Heading Hierarchy (#180) › each page has exactly one h1 heading" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Screen Reader Page Title and Heading Hierarchy (#180) › heading levels do not skip (h1 &gt; h3 without h2)" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Screen Reader Page Title and Heading Hierarchy (#180) › page titles change when navigating between pages" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 </testsuite>
-<testsuite name="e2e/auth.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="chromium" tests="77" failures="0" skipped="77" time="0" errors="0">
+<testsuite name="e2e/auth.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="chromium" tests="77" failures="0" skipped="77" time="0" errors="0">
 <testcase name="Auth - Login Flow › renders login page with form elements" classname="e2e/auth.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -403,7 +487,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="e2e/clusters.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="chromium" tests="51" failures="0" skipped="51" time="0" errors="0">
+<testsuite name="e2e/clusters.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="chromium" tests="60" failures="0" skipped="60" time="0" errors="0">
 <testcase name="Clusters › with mocked data › renders page heading and subtitle" classname="e2e/clusters.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -608,8 +692,44 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Clusters › end-to-end successful cluster creation (#119) › complete cluster creation wizard and verify new cluster in list" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › end-to-end successful cluster creation (#119) › created cluster appears in the filtered views" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › end-to-end successful cluster creation (#119) › wizard preserves form data when navigating between steps" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › cluster edit and delete operations (#121) › cluster card has edit action available" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › cluster edit and delete operations (#121) › cluster edit opens edit form with pre-filled data" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › cluster edit and delete operations (#121) › cluster edit saves changes via PUT request" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › cluster edit and delete operations (#121) › cluster delete shows confirmation dialog" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › cluster edit and delete operations (#121) › cluster delete confirmation sends DELETE request" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › cluster edit and delete operations (#121) › cancel delete returns to cluster view without changes" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 </testsuite>
-<testsuite name="e2e/dashboard.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="chromium" tests="37" failures="0" skipped="37" time="0" errors="0">
+<testsuite name="e2e/dashboard.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="chromium" tests="37" failures="0" skipped="37" time="0" errors="0">
 <testcase name="Dashboard › renders page heading and subtitle" classname="e2e/dashboard.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -759,7 +879,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="e2e/documentation.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="chromium" tests="12" failures="0" skipped="12" time="0" errors="0">
+<testsuite name="e2e/documentation.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="chromium" tests="36" failures="0" skipped="36" time="0" errors="0">
 <testcase name="Documentation and Help Pages › help page › renders help page heading" classname="e2e/documentation.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -808,8 +928,104 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Documentation and Help Pages › All Documentation Sections (#154) › documentation page lists all major sections" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › All Documentation Sections (#154) › each documentation section has content" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › All Documentation Sections (#154) › documentation sections are navigable from sidebar or TOC" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › All Documentation Sections (#154) › documentation page has consistent heading structure" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Link Navigation (#155) › internal links on docs page navigate correctly" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Link Navigation (#155) › documentation navigation links point to valid destinations" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Link Navigation (#155) › help page links navigate to correct destinations" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Link Navigation (#155) › back navigation from docs returns to previous page" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Getting Started Page (#157) › getting started section is visible on help page" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Getting Started Page (#157) › getting started section has step-by-step instructions" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Getting Started Page (#157) › getting started content is readable and well-structured" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Getting Started Page (#157) › getting started section is accessible from docs navigation" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Hide from Navigation Checkbox (#159) › documentation page has navigation visibility controls" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Hide from Navigation Checkbox (#159) › toggling navigation visibility affects sidebar display" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › API Reference Page (#160) › API documentation section is visible" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › API Reference Page (#160) › API reference lists available endpoints" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › API Reference Page (#160) › API reference contains request/response examples" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › API Reference Page (#160) › API documentation page renders within acceptable time" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Code Example Formatting › verifies code blocks render with syntax highlighting" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Code Example Formatting › code examples are properly formatted and readable" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Code Example Formatting › API endpoint examples are present and formatted" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Use Case Cards › verifies use case cards display on documentation page" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Use Case Cards › use case cards are interactive and navigable" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Use Case Cards › use case cards contain descriptive content" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 </testsuite>
-<testsuite name="e2e/edge-cases.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="chromium" tests="10" failures="0" skipped="10" time="0" errors="0">
+<testsuite name="e2e/edge-cases.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="chromium" tests="28" failures="0" skipped="28" time="0" errors="0">
 <testcase name="Edge Cases › Loading States › displays loading indicators while data is fetching" classname="e2e/edge-cases.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -850,8 +1066,80 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Edge Cases › Loading States (#168) › dashboard shows loading indicators while fetching" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Loading States (#168) › clusters page shows loading state" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Loading States (#168) › loading state transitions to content after data loads" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Loading States (#168) › multiple simultaneous loading states resolve correctly" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Form Validation Messages (#169) › login form shows validation messages for empty fields" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Form Validation Messages (#169) › registration form shows validation for password mismatch" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Form Validation Messages (#169) › settings form validation prevents invalid data submission" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Form Validation Messages (#169) › validation messages disappear when errors are corrected" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Empty States (#170) › nodes page shows empty state message with no data" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Empty States (#170) › clusters page shows empty state message with no data" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Empty States (#170) › dashboard handles empty node data gracefully" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Empty States (#170) › empty state provides action button to add content" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Empty States (#170) › search producing no results shows appropriate message" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Invalid API Data Handling › sends malformed API responses and verifies graceful handling" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Invalid API Data Handling › handles API responses with unexpected data types" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Invalid API Data Handling › handles API responses with missing required fields" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Invalid API Data Handling › handles extremely large API responses" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Invalid API Data Handling › recovers from network timeouts gracefully" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 </testsuite>
-<testsuite name="e2e/error-handling.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="chromium" tests="9" failures="0" skipped="9" time="0" errors="0">
+<testsuite name="e2e/error-handling.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="chromium" tests="29" failures="0" skipped="29" time="0" errors="0">
 <testcase name="Error Handling › 404 Not Found › displays 404 page for unknown routes" classname="e2e/error-handling.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -888,8 +1176,88 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Error Handling › 404 Not Found Page (#163) › shows 404 for non-existent route under pi-controller" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › 404 Not Found Page (#163) › shows 404 for deeply nested non-existent route" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › 404 Not Found Page (#163) › 404 page has link back to home or dashboard" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › 404 Not Found Page (#163) › clicking back link on 404 navigates to dashboard" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › 404 Not Found Page (#163) › 404 page displays user-friendly error message" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Server Error Response Tests (#164) › 500 error on clusters page shows error state" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Server Error Response Tests (#164) › 500 error provides retry functionality" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Server Error Response Tests (#164) › 503 service unavailable on nodes page shows error" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Server Error Response Tests (#164) › 503 on clusters page shows appropriate message" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Server Error Response Tests (#164) › server error does not crash the application" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › API Timeout Handling (#165) › network timeout on nodes shows error state" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › API Timeout Handling (#165) › network timeout on clusters shows error state" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › API Timeout Handling (#165) › connection refused shows error with retry" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › API Timeout Handling (#165) › slow API response still renders correctly" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › API Timeout Handling (#165) › retry after timeout recovers data" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Authorization Error Tests (#166) › 401 on nodes redirects to login or shows error" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Authorization Error Tests (#166) › 401 on clusters redirects to login or shows error" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Authorization Error Tests (#166) › 403 on nodes shows forbidden message" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Authorization Error Tests (#166) › 403 on clusters shows forbidden message" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Authorization Error Tests (#166) › 401 error does not crash the application" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 </testsuite>
-<testsuite name="e2e/hardware.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="chromium" tests="35" failures="0" skipped="35" time="0" errors="0">
+<testsuite name="e2e/hardware.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="chromium" tests="37" failures="0" skipped="37" time="0" errors="0">
 <testcase name="Hardware › page layout › renders hardware page heading" classname="e2e/hardware.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -1030,9 +1398,49 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Hardware › network tab information › navigates to network tab and verifies info displays" classname="e2e/hardware.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Hardware › network tab information › network tab shows interface details when available" classname="e2e/hardware.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 </testsuite>
-<testsuite name="e2e/navigation.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="chromium" tests="14" failures="0" skipped="14" time="0" errors="0">
+<testsuite name="e2e/navigation.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="chromium" tests="22" failures="0" skipped="22" time="0" errors="0">
 <testcase name="Navigation › sidebar displays all navigation links" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › clicking Dashboard sidebar item loads dashboard page" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › clicking Clusters sidebar item loads clusters page" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › clicking Nodes sidebar item loads nodes page" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › clicking Settings sidebar item loads settings page" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › clicking Hardware sidebar item loads hardware page" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › full navigation round-trip through all pages" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › each page loads with correct unique content after sidebar navigation" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › sidebar remains visible and functional on every page" classname="e2e/navigation.spec.ts" time="0">
 <skipped>
 </skipped>
 </testcase>
@@ -1089,7 +1497,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="e2e/nodes.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="chromium" tests="54" failures="0" skipped="54" time="0" errors="0">
+<testsuite name="e2e/nodes.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="chromium" tests="55" failures="0" skipped="55" time="0" errors="0">
 <testcase name="Nodes › with mocked data › renders page heading and subtitle" classname="e2e/nodes.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -1270,6 +1678,10 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Nodes › node card metrics display › simulates metric changes and verifies UI updates" classname="e2e/nodes.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 <testcase name="Nodes › manual node entry and adoption › Add Node panel has manual IP entry field" classname="e2e/nodes.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -1298,7 +1710,7 @@
 <skipped>
 </skipped>
 </testcase>
-<testcase name="Nodes › node action buttons › clicking a node navigates to node details" classname="e2e/nodes.spec.ts" time="0">
+<testcase name="Nodes › node action buttons › clicking a node opens detail view with correct info" classname="e2e/nodes.spec.ts" time="0">
 <skipped>
 </skipped>
 </testcase>
@@ -1307,7 +1719,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="e2e/performance.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="chromium" tests="9" failures="0" skipped="9" time="0" errors="0">
+<testsuite name="e2e/performance.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="chromium" tests="16" failures="0" skipped="16" time="0" errors="0">
 <testcase name="Performance › Page Load Times › dashboard loads within acceptable time" classname="e2e/performance.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -1344,8 +1756,36 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Performance › Animation Smoothness › verifies animations do not drop below 30fps" classname="e2e/performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Performance › Animation Smoothness › smooth scrolling performance on long lists" classname="e2e/performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Performance › Memory Leak Detection › navigates repeatedly and checks memory does not grow unbounded" classname="e2e/performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Performance › Memory Leak Detection › detects event listener memory leaks" classname="e2e/performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Performance › Efficient Re-render › verifies components do not re-render unnecessarily" classname="e2e/performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Performance › Efficient Re-render › memoization prevents redundant component updates" classname="e2e/performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Performance › Efficient Re-render › list virtualization handles large datasets efficiently" classname="e2e/performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 </testsuite>
-<testsuite name="e2e/settings.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="chromium" tests="26" failures="0" skipped="26" time="0" errors="0">
+<testsuite name="e2e/settings.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="chromium" tests="49" failures="0" skipped="49" time="0" errors="0">
 <testcase name="Settings › renders page heading and subtitle" classname="e2e/settings.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -1450,8 +1890,114 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Settings › Form Input Validation (#145) › hostname field rejects empty value on save" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Form Input Validation (#145) › session timeout field accepts only numeric values" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Form Input Validation (#145) › negative values are rejected for numeric fields" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Form Input Validation (#145) › update interval field validates minimum value" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Form Input Validation (#145) › data retention field accepts reasonable values" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Form Input Validation (#145) › hostname field accepts valid hostname characters" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Form Input Validation (#145) › lockout duration field validates correctly" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Form Input Validation (#145) › all form fields maintain values during tab switch" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › YAML Configuration Export (#146) › Export YAML button is visible and clickable" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › YAML Configuration Export (#146) › clicking Export YAML triggers download or displays YAML" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › YAML Configuration Export (#146) › exported YAML contains current form values" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › YAML Configuration Import (#147) › Import YAML button is visible and clickable" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › YAML Configuration Import (#147) › clicking Import YAML opens file picker or dialog" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › YAML Configuration Import (#147) › importing valid YAML updates form fields" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Sync Between Form and YAML Editors (#149) › form changes reflect in YAML editor" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Sync Between Form and YAML Editors (#149) › YAML editor changes reflect in form fields" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Sync Between Form and YAML Editors (#149) › toggling boolean in form updates YAML representation" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Sync Between Form and YAML Editors (#149) › rapid tab switching preserves data integrity" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Invalid YAML Import Validation › imports malformed YAML and verifies error handling" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Invalid YAML Import Validation › YAML validation prevents form corruption" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Reset to Defaults Functionality › modifies settings, clicks reset, and verifies defaults restored" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Reset to Defaults Functionality › reset button is accessible and properly labeled" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Reset to Defaults Functionality › reset confirmation prevents accidental resets" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 </testsuite>
-<testsuite name="e2e/accessibility.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="firefox" tests="23" failures="0" skipped="23" time="0" errors="0">
+<testsuite name="e2e/smoke.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="chromium" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testcase name="Smoke Test - Infrastructure Validation › validates Playwright + mocks + fixtures all work together" classname="e2e/smoke.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Smoke Test - Infrastructure Validation › validates basic error handling works" classname="e2e/smoke.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Smoke Test - Infrastructure Validation › validates responsive design basics work" classname="e2e/smoke.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="e2e/accessibility.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="firefox" tests="44" failures="0" skipped="44" time="0" errors="0">
 <testcase name="Accessibility › Axe-Core WCAG 2.0 AA Audit › dashboard page has no accessibility violations" classname="e2e/accessibility.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -1544,8 +2090,92 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Accessibility › ARIA Attributes for Interactive Elements (#174) › sidebar navigation links have accessible roles" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA Attributes for Interactive Elements (#174) › buttons have accessible names" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA Attributes for Interactive Elements (#174) › tab elements have correct ARIA attributes" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA Attributes for Interactive Elements (#174) › form inputs have associated labels via ARIA" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA Attributes for Interactive Elements (#174) › toggle switches have correct role and state" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA Attributes for Interactive Elements (#174) › cluster tab list has correct ARIA roles" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Keyboard Interaction for Dialogs and Forms (#178) › Escape key closes cluster creation dialog" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Keyboard Interaction for Dialogs and Forms (#178) › Tab key navigates through form fields in settings" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Keyboard Interaction for Dialogs and Forms (#178) › Enter key submits login form" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Keyboard Interaction for Dialogs and Forms (#178) › keyboard navigation works within tab panels" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Keyboard Interaction for Dialogs and Forms (#178) › dialog traps focus within itself" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA-Live Regions for Dynamic Status (#179) › page has aria-live regions for dynamic content" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA-Live Regions for Dynamic Status (#179) › error messages use aria-live or role=alert" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA-Live Regions for Dynamic Status (#179) › loading state changes are announced to assistive technology" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Screen Reader Page Title and Heading Hierarchy (#180) › dashboard has correct document title" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Screen Reader Page Title and Heading Hierarchy (#180) › nodes page has correct document title" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Screen Reader Page Title and Heading Hierarchy (#180) › clusters page has correct document title" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Screen Reader Page Title and Heading Hierarchy (#180) › settings page has correct document title" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Screen Reader Page Title and Heading Hierarchy (#180) › each page has exactly one h1 heading" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Screen Reader Page Title and Heading Hierarchy (#180) › heading levels do not skip (h1 &gt; h3 without h2)" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Screen Reader Page Title and Heading Hierarchy (#180) › page titles change when navigating between pages" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 </testsuite>
-<testsuite name="e2e/auth.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="firefox" tests="77" failures="0" skipped="77" time="0" errors="0">
+<testsuite name="e2e/auth.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="firefox" tests="77" failures="0" skipped="77" time="0" errors="0">
 <testcase name="Auth - Login Flow › renders login page with form elements" classname="e2e/auth.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -1855,7 +2485,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="e2e/clusters.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="firefox" tests="51" failures="0" skipped="51" time="0" errors="0">
+<testsuite name="e2e/clusters.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="firefox" tests="60" failures="0" skipped="60" time="0" errors="0">
 <testcase name="Clusters › with mocked data › renders page heading and subtitle" classname="e2e/clusters.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -2060,8 +2690,44 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Clusters › end-to-end successful cluster creation (#119) › complete cluster creation wizard and verify new cluster in list" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › end-to-end successful cluster creation (#119) › created cluster appears in the filtered views" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › end-to-end successful cluster creation (#119) › wizard preserves form data when navigating between steps" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › cluster edit and delete operations (#121) › cluster card has edit action available" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › cluster edit and delete operations (#121) › cluster edit opens edit form with pre-filled data" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › cluster edit and delete operations (#121) › cluster edit saves changes via PUT request" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › cluster edit and delete operations (#121) › cluster delete shows confirmation dialog" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › cluster edit and delete operations (#121) › cluster delete confirmation sends DELETE request" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › cluster edit and delete operations (#121) › cancel delete returns to cluster view without changes" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 </testsuite>
-<testsuite name="e2e/dashboard.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="firefox" tests="37" failures="0" skipped="37" time="0" errors="0">
+<testsuite name="e2e/dashboard.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="firefox" tests="37" failures="0" skipped="37" time="0" errors="0">
 <testcase name="Dashboard › renders page heading and subtitle" classname="e2e/dashboard.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -2211,7 +2877,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="e2e/documentation.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="firefox" tests="12" failures="0" skipped="12" time="0" errors="0">
+<testsuite name="e2e/documentation.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="firefox" tests="36" failures="0" skipped="36" time="0" errors="0">
 <testcase name="Documentation and Help Pages › help page › renders help page heading" classname="e2e/documentation.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -2260,8 +2926,104 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Documentation and Help Pages › All Documentation Sections (#154) › documentation page lists all major sections" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › All Documentation Sections (#154) › each documentation section has content" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › All Documentation Sections (#154) › documentation sections are navigable from sidebar or TOC" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › All Documentation Sections (#154) › documentation page has consistent heading structure" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Link Navigation (#155) › internal links on docs page navigate correctly" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Link Navigation (#155) › documentation navigation links point to valid destinations" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Link Navigation (#155) › help page links navigate to correct destinations" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Link Navigation (#155) › back navigation from docs returns to previous page" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Getting Started Page (#157) › getting started section is visible on help page" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Getting Started Page (#157) › getting started section has step-by-step instructions" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Getting Started Page (#157) › getting started content is readable and well-structured" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Getting Started Page (#157) › getting started section is accessible from docs navigation" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Hide from Navigation Checkbox (#159) › documentation page has navigation visibility controls" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Hide from Navigation Checkbox (#159) › toggling navigation visibility affects sidebar display" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › API Reference Page (#160) › API documentation section is visible" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › API Reference Page (#160) › API reference lists available endpoints" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › API Reference Page (#160) › API reference contains request/response examples" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › API Reference Page (#160) › API documentation page renders within acceptable time" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Code Example Formatting › verifies code blocks render with syntax highlighting" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Code Example Formatting › code examples are properly formatted and readable" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Code Example Formatting › API endpoint examples are present and formatted" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Use Case Cards › verifies use case cards display on documentation page" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Use Case Cards › use case cards are interactive and navigable" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Use Case Cards › use case cards contain descriptive content" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 </testsuite>
-<testsuite name="e2e/edge-cases.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="firefox" tests="10" failures="0" skipped="10" time="0" errors="0">
+<testsuite name="e2e/edge-cases.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="firefox" tests="28" failures="0" skipped="28" time="0" errors="0">
 <testcase name="Edge Cases › Loading States › displays loading indicators while data is fetching" classname="e2e/edge-cases.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -2302,8 +3064,80 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Edge Cases › Loading States (#168) › dashboard shows loading indicators while fetching" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Loading States (#168) › clusters page shows loading state" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Loading States (#168) › loading state transitions to content after data loads" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Loading States (#168) › multiple simultaneous loading states resolve correctly" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Form Validation Messages (#169) › login form shows validation messages for empty fields" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Form Validation Messages (#169) › registration form shows validation for password mismatch" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Form Validation Messages (#169) › settings form validation prevents invalid data submission" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Form Validation Messages (#169) › validation messages disappear when errors are corrected" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Empty States (#170) › nodes page shows empty state message with no data" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Empty States (#170) › clusters page shows empty state message with no data" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Empty States (#170) › dashboard handles empty node data gracefully" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Empty States (#170) › empty state provides action button to add content" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Empty States (#170) › search producing no results shows appropriate message" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Invalid API Data Handling › sends malformed API responses and verifies graceful handling" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Invalid API Data Handling › handles API responses with unexpected data types" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Invalid API Data Handling › handles API responses with missing required fields" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Invalid API Data Handling › handles extremely large API responses" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Invalid API Data Handling › recovers from network timeouts gracefully" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 </testsuite>
-<testsuite name="e2e/error-handling.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="firefox" tests="9" failures="0" skipped="9" time="0" errors="0">
+<testsuite name="e2e/error-handling.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="firefox" tests="29" failures="0" skipped="29" time="0" errors="0">
 <testcase name="Error Handling › 404 Not Found › displays 404 page for unknown routes" classname="e2e/error-handling.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -2340,8 +3174,88 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Error Handling › 404 Not Found Page (#163) › shows 404 for non-existent route under pi-controller" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › 404 Not Found Page (#163) › shows 404 for deeply nested non-existent route" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › 404 Not Found Page (#163) › 404 page has link back to home or dashboard" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › 404 Not Found Page (#163) › clicking back link on 404 navigates to dashboard" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › 404 Not Found Page (#163) › 404 page displays user-friendly error message" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Server Error Response Tests (#164) › 500 error on clusters page shows error state" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Server Error Response Tests (#164) › 500 error provides retry functionality" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Server Error Response Tests (#164) › 503 service unavailable on nodes page shows error" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Server Error Response Tests (#164) › 503 on clusters page shows appropriate message" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Server Error Response Tests (#164) › server error does not crash the application" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › API Timeout Handling (#165) › network timeout on nodes shows error state" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › API Timeout Handling (#165) › network timeout on clusters shows error state" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › API Timeout Handling (#165) › connection refused shows error with retry" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › API Timeout Handling (#165) › slow API response still renders correctly" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › API Timeout Handling (#165) › retry after timeout recovers data" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Authorization Error Tests (#166) › 401 on nodes redirects to login or shows error" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Authorization Error Tests (#166) › 401 on clusters redirects to login or shows error" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Authorization Error Tests (#166) › 403 on nodes shows forbidden message" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Authorization Error Tests (#166) › 403 on clusters shows forbidden message" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Authorization Error Tests (#166) › 401 error does not crash the application" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 </testsuite>
-<testsuite name="e2e/hardware.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="firefox" tests="35" failures="0" skipped="35" time="0" errors="0">
+<testsuite name="e2e/hardware.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="firefox" tests="37" failures="0" skipped="37" time="0" errors="0">
 <testcase name="Hardware › page layout › renders hardware page heading" classname="e2e/hardware.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -2482,9 +3396,49 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Hardware › network tab information › navigates to network tab and verifies info displays" classname="e2e/hardware.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Hardware › network tab information › network tab shows interface details when available" classname="e2e/hardware.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 </testsuite>
-<testsuite name="e2e/navigation.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="firefox" tests="14" failures="0" skipped="14" time="0" errors="0">
+<testsuite name="e2e/navigation.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="firefox" tests="22" failures="0" skipped="22" time="0" errors="0">
 <testcase name="Navigation › sidebar displays all navigation links" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › clicking Dashboard sidebar item loads dashboard page" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › clicking Clusters sidebar item loads clusters page" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › clicking Nodes sidebar item loads nodes page" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › clicking Settings sidebar item loads settings page" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › clicking Hardware sidebar item loads hardware page" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › full navigation round-trip through all pages" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › each page loads with correct unique content after sidebar navigation" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › sidebar remains visible and functional on every page" classname="e2e/navigation.spec.ts" time="0">
 <skipped>
 </skipped>
 </testcase>
@@ -2541,7 +3495,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="e2e/nodes.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="firefox" tests="54" failures="0" skipped="54" time="0" errors="0">
+<testsuite name="e2e/nodes.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="firefox" tests="55" failures="0" skipped="55" time="0" errors="0">
 <testcase name="Nodes › with mocked data › renders page heading and subtitle" classname="e2e/nodes.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -2722,6 +3676,10 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Nodes › node card metrics display › simulates metric changes and verifies UI updates" classname="e2e/nodes.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 <testcase name="Nodes › manual node entry and adoption › Add Node panel has manual IP entry field" classname="e2e/nodes.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -2750,7 +3708,7 @@
 <skipped>
 </skipped>
 </testcase>
-<testcase name="Nodes › node action buttons › clicking a node navigates to node details" classname="e2e/nodes.spec.ts" time="0">
+<testcase name="Nodes › node action buttons › clicking a node opens detail view with correct info" classname="e2e/nodes.spec.ts" time="0">
 <skipped>
 </skipped>
 </testcase>
@@ -2759,7 +3717,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="e2e/performance.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="firefox" tests="9" failures="0" skipped="9" time="0" errors="0">
+<testsuite name="e2e/performance.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="firefox" tests="16" failures="0" skipped="16" time="0" errors="0">
 <testcase name="Performance › Page Load Times › dashboard loads within acceptable time" classname="e2e/performance.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -2796,8 +3754,36 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Performance › Animation Smoothness › verifies animations do not drop below 30fps" classname="e2e/performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Performance › Animation Smoothness › smooth scrolling performance on long lists" classname="e2e/performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Performance › Memory Leak Detection › navigates repeatedly and checks memory does not grow unbounded" classname="e2e/performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Performance › Memory Leak Detection › detects event listener memory leaks" classname="e2e/performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Performance › Efficient Re-render › verifies components do not re-render unnecessarily" classname="e2e/performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Performance › Efficient Re-render › memoization prevents redundant component updates" classname="e2e/performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Performance › Efficient Re-render › list virtualization handles large datasets efficiently" classname="e2e/performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 </testsuite>
-<testsuite name="e2e/settings.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="firefox" tests="26" failures="0" skipped="26" time="0" errors="0">
+<testsuite name="e2e/settings.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="firefox" tests="49" failures="0" skipped="49" time="0" errors="0">
 <testcase name="Settings › renders page heading and subtitle" classname="e2e/settings.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -2902,8 +3888,114 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Settings › Form Input Validation (#145) › hostname field rejects empty value on save" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Form Input Validation (#145) › session timeout field accepts only numeric values" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Form Input Validation (#145) › negative values are rejected for numeric fields" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Form Input Validation (#145) › update interval field validates minimum value" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Form Input Validation (#145) › data retention field accepts reasonable values" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Form Input Validation (#145) › hostname field accepts valid hostname characters" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Form Input Validation (#145) › lockout duration field validates correctly" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Form Input Validation (#145) › all form fields maintain values during tab switch" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › YAML Configuration Export (#146) › Export YAML button is visible and clickable" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › YAML Configuration Export (#146) › clicking Export YAML triggers download or displays YAML" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › YAML Configuration Export (#146) › exported YAML contains current form values" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › YAML Configuration Import (#147) › Import YAML button is visible and clickable" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › YAML Configuration Import (#147) › clicking Import YAML opens file picker or dialog" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › YAML Configuration Import (#147) › importing valid YAML updates form fields" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Sync Between Form and YAML Editors (#149) › form changes reflect in YAML editor" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Sync Between Form and YAML Editors (#149) › YAML editor changes reflect in form fields" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Sync Between Form and YAML Editors (#149) › toggling boolean in form updates YAML representation" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Sync Between Form and YAML Editors (#149) › rapid tab switching preserves data integrity" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Invalid YAML Import Validation › imports malformed YAML and verifies error handling" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Invalid YAML Import Validation › YAML validation prevents form corruption" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Reset to Defaults Functionality › modifies settings, clicks reset, and verifies defaults restored" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Reset to Defaults Functionality › reset button is accessible and properly labeled" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Reset to Defaults Functionality › reset confirmation prevents accidental resets" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 </testsuite>
-<testsuite name="e2e/accessibility.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="webkit" tests="23" failures="0" skipped="23" time="0" errors="0">
+<testsuite name="e2e/smoke.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="firefox" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testcase name="Smoke Test - Infrastructure Validation › validates Playwright + mocks + fixtures all work together" classname="e2e/smoke.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Smoke Test - Infrastructure Validation › validates basic error handling works" classname="e2e/smoke.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Smoke Test - Infrastructure Validation › validates responsive design basics work" classname="e2e/smoke.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="e2e/accessibility.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="webkit" tests="44" failures="0" skipped="44" time="0" errors="0">
 <testcase name="Accessibility › Axe-Core WCAG 2.0 AA Audit › dashboard page has no accessibility violations" classname="e2e/accessibility.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -2996,8 +4088,92 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Accessibility › ARIA Attributes for Interactive Elements (#174) › sidebar navigation links have accessible roles" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA Attributes for Interactive Elements (#174) › buttons have accessible names" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA Attributes for Interactive Elements (#174) › tab elements have correct ARIA attributes" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA Attributes for Interactive Elements (#174) › form inputs have associated labels via ARIA" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA Attributes for Interactive Elements (#174) › toggle switches have correct role and state" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA Attributes for Interactive Elements (#174) › cluster tab list has correct ARIA roles" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Keyboard Interaction for Dialogs and Forms (#178) › Escape key closes cluster creation dialog" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Keyboard Interaction for Dialogs and Forms (#178) › Tab key navigates through form fields in settings" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Keyboard Interaction for Dialogs and Forms (#178) › Enter key submits login form" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Keyboard Interaction for Dialogs and Forms (#178) › keyboard navigation works within tab panels" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Keyboard Interaction for Dialogs and Forms (#178) › dialog traps focus within itself" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA-Live Regions for Dynamic Status (#179) › page has aria-live regions for dynamic content" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA-Live Regions for Dynamic Status (#179) › error messages use aria-live or role=alert" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA-Live Regions for Dynamic Status (#179) › loading state changes are announced to assistive technology" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Screen Reader Page Title and Heading Hierarchy (#180) › dashboard has correct document title" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Screen Reader Page Title and Heading Hierarchy (#180) › nodes page has correct document title" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Screen Reader Page Title and Heading Hierarchy (#180) › clusters page has correct document title" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Screen Reader Page Title and Heading Hierarchy (#180) › settings page has correct document title" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Screen Reader Page Title and Heading Hierarchy (#180) › each page has exactly one h1 heading" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Screen Reader Page Title and Heading Hierarchy (#180) › heading levels do not skip (h1 &gt; h3 without h2)" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Screen Reader Page Title and Heading Hierarchy (#180) › page titles change when navigating between pages" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 </testsuite>
-<testsuite name="e2e/auth.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="webkit" tests="77" failures="0" skipped="77" time="0" errors="0">
+<testsuite name="e2e/auth.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="webkit" tests="77" failures="0" skipped="77" time="0" errors="0">
 <testcase name="Auth - Login Flow › renders login page with form elements" classname="e2e/auth.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -3307,7 +4483,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="e2e/clusters.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="webkit" tests="51" failures="0" skipped="51" time="0" errors="0">
+<testsuite name="e2e/clusters.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="webkit" tests="60" failures="0" skipped="60" time="0" errors="0">
 <testcase name="Clusters › with mocked data › renders page heading and subtitle" classname="e2e/clusters.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -3512,8 +4688,44 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Clusters › end-to-end successful cluster creation (#119) › complete cluster creation wizard and verify new cluster in list" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › end-to-end successful cluster creation (#119) › created cluster appears in the filtered views" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › end-to-end successful cluster creation (#119) › wizard preserves form data when navigating between steps" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › cluster edit and delete operations (#121) › cluster card has edit action available" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › cluster edit and delete operations (#121) › cluster edit opens edit form with pre-filled data" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › cluster edit and delete operations (#121) › cluster edit saves changes via PUT request" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › cluster edit and delete operations (#121) › cluster delete shows confirmation dialog" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › cluster edit and delete operations (#121) › cluster delete confirmation sends DELETE request" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › cluster edit and delete operations (#121) › cancel delete returns to cluster view without changes" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 </testsuite>
-<testsuite name="e2e/dashboard.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="webkit" tests="37" failures="0" skipped="37" time="0" errors="0">
+<testsuite name="e2e/dashboard.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="webkit" tests="37" failures="0" skipped="37" time="0" errors="0">
 <testcase name="Dashboard › renders page heading and subtitle" classname="e2e/dashboard.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -3663,7 +4875,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="e2e/documentation.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="webkit" tests="12" failures="0" skipped="12" time="0" errors="0">
+<testsuite name="e2e/documentation.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="webkit" tests="36" failures="0" skipped="36" time="0" errors="0">
 <testcase name="Documentation and Help Pages › help page › renders help page heading" classname="e2e/documentation.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -3712,8 +4924,104 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Documentation and Help Pages › All Documentation Sections (#154) › documentation page lists all major sections" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › All Documentation Sections (#154) › each documentation section has content" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › All Documentation Sections (#154) › documentation sections are navigable from sidebar or TOC" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › All Documentation Sections (#154) › documentation page has consistent heading structure" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Link Navigation (#155) › internal links on docs page navigate correctly" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Link Navigation (#155) › documentation navigation links point to valid destinations" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Link Navigation (#155) › help page links navigate to correct destinations" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Link Navigation (#155) › back navigation from docs returns to previous page" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Getting Started Page (#157) › getting started section is visible on help page" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Getting Started Page (#157) › getting started section has step-by-step instructions" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Getting Started Page (#157) › getting started content is readable and well-structured" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Getting Started Page (#157) › getting started section is accessible from docs navigation" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Hide from Navigation Checkbox (#159) › documentation page has navigation visibility controls" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Hide from Navigation Checkbox (#159) › toggling navigation visibility affects sidebar display" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › API Reference Page (#160) › API documentation section is visible" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › API Reference Page (#160) › API reference lists available endpoints" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › API Reference Page (#160) › API reference contains request/response examples" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › API Reference Page (#160) › API documentation page renders within acceptable time" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Code Example Formatting › verifies code blocks render with syntax highlighting" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Code Example Formatting › code examples are properly formatted and readable" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Code Example Formatting › API endpoint examples are present and formatted" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Use Case Cards › verifies use case cards display on documentation page" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Use Case Cards › use case cards are interactive and navigable" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Use Case Cards › use case cards contain descriptive content" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 </testsuite>
-<testsuite name="e2e/edge-cases.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="webkit" tests="10" failures="0" skipped="10" time="0" errors="0">
+<testsuite name="e2e/edge-cases.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="webkit" tests="28" failures="0" skipped="28" time="0" errors="0">
 <testcase name="Edge Cases › Loading States › displays loading indicators while data is fetching" classname="e2e/edge-cases.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -3754,8 +5062,80 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Edge Cases › Loading States (#168) › dashboard shows loading indicators while fetching" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Loading States (#168) › clusters page shows loading state" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Loading States (#168) › loading state transitions to content after data loads" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Loading States (#168) › multiple simultaneous loading states resolve correctly" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Form Validation Messages (#169) › login form shows validation messages for empty fields" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Form Validation Messages (#169) › registration form shows validation for password mismatch" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Form Validation Messages (#169) › settings form validation prevents invalid data submission" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Form Validation Messages (#169) › validation messages disappear when errors are corrected" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Empty States (#170) › nodes page shows empty state message with no data" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Empty States (#170) › clusters page shows empty state message with no data" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Empty States (#170) › dashboard handles empty node data gracefully" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Empty States (#170) › empty state provides action button to add content" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Empty States (#170) › search producing no results shows appropriate message" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Invalid API Data Handling › sends malformed API responses and verifies graceful handling" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Invalid API Data Handling › handles API responses with unexpected data types" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Invalid API Data Handling › handles API responses with missing required fields" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Invalid API Data Handling › handles extremely large API responses" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Invalid API Data Handling › recovers from network timeouts gracefully" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 </testsuite>
-<testsuite name="e2e/error-handling.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="webkit" tests="9" failures="0" skipped="9" time="0" errors="0">
+<testsuite name="e2e/error-handling.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="webkit" tests="29" failures="0" skipped="29" time="0" errors="0">
 <testcase name="Error Handling › 404 Not Found › displays 404 page for unknown routes" classname="e2e/error-handling.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -3792,8 +5172,88 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Error Handling › 404 Not Found Page (#163) › shows 404 for non-existent route under pi-controller" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › 404 Not Found Page (#163) › shows 404 for deeply nested non-existent route" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › 404 Not Found Page (#163) › 404 page has link back to home or dashboard" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › 404 Not Found Page (#163) › clicking back link on 404 navigates to dashboard" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › 404 Not Found Page (#163) › 404 page displays user-friendly error message" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Server Error Response Tests (#164) › 500 error on clusters page shows error state" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Server Error Response Tests (#164) › 500 error provides retry functionality" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Server Error Response Tests (#164) › 503 service unavailable on nodes page shows error" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Server Error Response Tests (#164) › 503 on clusters page shows appropriate message" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Server Error Response Tests (#164) › server error does not crash the application" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › API Timeout Handling (#165) › network timeout on nodes shows error state" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › API Timeout Handling (#165) › network timeout on clusters shows error state" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › API Timeout Handling (#165) › connection refused shows error with retry" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › API Timeout Handling (#165) › slow API response still renders correctly" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › API Timeout Handling (#165) › retry after timeout recovers data" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Authorization Error Tests (#166) › 401 on nodes redirects to login or shows error" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Authorization Error Tests (#166) › 401 on clusters redirects to login or shows error" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Authorization Error Tests (#166) › 403 on nodes shows forbidden message" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Authorization Error Tests (#166) › 403 on clusters shows forbidden message" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Authorization Error Tests (#166) › 401 error does not crash the application" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 </testsuite>
-<testsuite name="e2e/hardware.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="webkit" tests="35" failures="0" skipped="35" time="0" errors="0">
+<testsuite name="e2e/hardware.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="webkit" tests="37" failures="0" skipped="37" time="0" errors="0">
 <testcase name="Hardware › page layout › renders hardware page heading" classname="e2e/hardware.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -3934,9 +5394,49 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Hardware › network tab information › navigates to network tab and verifies info displays" classname="e2e/hardware.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Hardware › network tab information › network tab shows interface details when available" classname="e2e/hardware.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 </testsuite>
-<testsuite name="e2e/navigation.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="webkit" tests="14" failures="0" skipped="14" time="0" errors="0">
+<testsuite name="e2e/navigation.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="webkit" tests="22" failures="0" skipped="22" time="0" errors="0">
 <testcase name="Navigation › sidebar displays all navigation links" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › clicking Dashboard sidebar item loads dashboard page" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › clicking Clusters sidebar item loads clusters page" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › clicking Nodes sidebar item loads nodes page" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › clicking Settings sidebar item loads settings page" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › clicking Hardware sidebar item loads hardware page" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › full navigation round-trip through all pages" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › each page loads with correct unique content after sidebar navigation" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › sidebar remains visible and functional on every page" classname="e2e/navigation.spec.ts" time="0">
 <skipped>
 </skipped>
 </testcase>
@@ -3993,7 +5493,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="e2e/nodes.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="webkit" tests="54" failures="0" skipped="54" time="0" errors="0">
+<testsuite name="e2e/nodes.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="webkit" tests="55" failures="0" skipped="55" time="0" errors="0">
 <testcase name="Nodes › with mocked data › renders page heading and subtitle" classname="e2e/nodes.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -4174,6 +5674,10 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Nodes › node card metrics display › simulates metric changes and verifies UI updates" classname="e2e/nodes.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 <testcase name="Nodes › manual node entry and adoption › Add Node panel has manual IP entry field" classname="e2e/nodes.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -4202,7 +5706,7 @@
 <skipped>
 </skipped>
 </testcase>
-<testcase name="Nodes › node action buttons › clicking a node navigates to node details" classname="e2e/nodes.spec.ts" time="0">
+<testcase name="Nodes › node action buttons › clicking a node opens detail view with correct info" classname="e2e/nodes.spec.ts" time="0">
 <skipped>
 </skipped>
 </testcase>
@@ -4211,7 +5715,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="e2e/performance.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="webkit" tests="9" failures="0" skipped="9" time="0" errors="0">
+<testsuite name="e2e/performance.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="webkit" tests="16" failures="0" skipped="16" time="0" errors="0">
 <testcase name="Performance › Page Load Times › dashboard loads within acceptable time" classname="e2e/performance.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -4248,8 +5752,36 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Performance › Animation Smoothness › verifies animations do not drop below 30fps" classname="e2e/performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Performance › Animation Smoothness › smooth scrolling performance on long lists" classname="e2e/performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Performance › Memory Leak Detection › navigates repeatedly and checks memory does not grow unbounded" classname="e2e/performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Performance › Memory Leak Detection › detects event listener memory leaks" classname="e2e/performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Performance › Efficient Re-render › verifies components do not re-render unnecessarily" classname="e2e/performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Performance › Efficient Re-render › memoization prevents redundant component updates" classname="e2e/performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Performance › Efficient Re-render › list virtualization handles large datasets efficiently" classname="e2e/performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 </testsuite>
-<testsuite name="e2e/settings.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="webkit" tests="26" failures="0" skipped="26" time="0" errors="0">
+<testsuite name="e2e/settings.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="webkit" tests="49" failures="0" skipped="49" time="0" errors="0">
 <testcase name="Settings › renders page heading and subtitle" classname="e2e/settings.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -4354,8 +5886,114 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Settings › Form Input Validation (#145) › hostname field rejects empty value on save" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Form Input Validation (#145) › session timeout field accepts only numeric values" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Form Input Validation (#145) › negative values are rejected for numeric fields" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Form Input Validation (#145) › update interval field validates minimum value" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Form Input Validation (#145) › data retention field accepts reasonable values" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Form Input Validation (#145) › hostname field accepts valid hostname characters" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Form Input Validation (#145) › lockout duration field validates correctly" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Form Input Validation (#145) › all form fields maintain values during tab switch" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › YAML Configuration Export (#146) › Export YAML button is visible and clickable" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › YAML Configuration Export (#146) › clicking Export YAML triggers download or displays YAML" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › YAML Configuration Export (#146) › exported YAML contains current form values" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › YAML Configuration Import (#147) › Import YAML button is visible and clickable" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › YAML Configuration Import (#147) › clicking Import YAML opens file picker or dialog" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › YAML Configuration Import (#147) › importing valid YAML updates form fields" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Sync Between Form and YAML Editors (#149) › form changes reflect in YAML editor" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Sync Between Form and YAML Editors (#149) › YAML editor changes reflect in form fields" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Sync Between Form and YAML Editors (#149) › toggling boolean in form updates YAML representation" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Sync Between Form and YAML Editors (#149) › rapid tab switching preserves data integrity" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Invalid YAML Import Validation › imports malformed YAML and verifies error handling" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Invalid YAML Import Validation › YAML validation prevents form corruption" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Reset to Defaults Functionality › modifies settings, clicks reset, and verifies defaults restored" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Reset to Defaults Functionality › reset button is accessible and properly labeled" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Reset to Defaults Functionality › reset confirmation prevents accidental resets" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 </testsuite>
-<testsuite name="e2e/accessibility.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="mobile-chrome" tests="23" failures="0" skipped="23" time="0" errors="0">
+<testsuite name="e2e/smoke.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="webkit" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testcase name="Smoke Test - Infrastructure Validation › validates Playwright + mocks + fixtures all work together" classname="e2e/smoke.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Smoke Test - Infrastructure Validation › validates basic error handling works" classname="e2e/smoke.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Smoke Test - Infrastructure Validation › validates responsive design basics work" classname="e2e/smoke.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="e2e/accessibility.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="mobile-chrome" tests="44" failures="0" skipped="44" time="0" errors="0">
 <testcase name="Accessibility › Axe-Core WCAG 2.0 AA Audit › dashboard page has no accessibility violations" classname="e2e/accessibility.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -4448,8 +6086,92 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Accessibility › ARIA Attributes for Interactive Elements (#174) › sidebar navigation links have accessible roles" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA Attributes for Interactive Elements (#174) › buttons have accessible names" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA Attributes for Interactive Elements (#174) › tab elements have correct ARIA attributes" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA Attributes for Interactive Elements (#174) › form inputs have associated labels via ARIA" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA Attributes for Interactive Elements (#174) › toggle switches have correct role and state" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA Attributes for Interactive Elements (#174) › cluster tab list has correct ARIA roles" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Keyboard Interaction for Dialogs and Forms (#178) › Escape key closes cluster creation dialog" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Keyboard Interaction for Dialogs and Forms (#178) › Tab key navigates through form fields in settings" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Keyboard Interaction for Dialogs and Forms (#178) › Enter key submits login form" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Keyboard Interaction for Dialogs and Forms (#178) › keyboard navigation works within tab panels" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Keyboard Interaction for Dialogs and Forms (#178) › dialog traps focus within itself" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA-Live Regions for Dynamic Status (#179) › page has aria-live regions for dynamic content" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA-Live Regions for Dynamic Status (#179) › error messages use aria-live or role=alert" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA-Live Regions for Dynamic Status (#179) › loading state changes are announced to assistive technology" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Screen Reader Page Title and Heading Hierarchy (#180) › dashboard has correct document title" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Screen Reader Page Title and Heading Hierarchy (#180) › nodes page has correct document title" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Screen Reader Page Title and Heading Hierarchy (#180) › clusters page has correct document title" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Screen Reader Page Title and Heading Hierarchy (#180) › settings page has correct document title" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Screen Reader Page Title and Heading Hierarchy (#180) › each page has exactly one h1 heading" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Screen Reader Page Title and Heading Hierarchy (#180) › heading levels do not skip (h1 &gt; h3 without h2)" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Screen Reader Page Title and Heading Hierarchy (#180) › page titles change when navigating between pages" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 </testsuite>
-<testsuite name="e2e/auth.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="mobile-chrome" tests="77" failures="0" skipped="77" time="0" errors="0">
+<testsuite name="e2e/auth.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="mobile-chrome" tests="77" failures="0" skipped="77" time="0" errors="0">
 <testcase name="Auth - Login Flow › renders login page with form elements" classname="e2e/auth.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -4759,7 +6481,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="e2e/clusters.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="mobile-chrome" tests="51" failures="0" skipped="51" time="0" errors="0">
+<testsuite name="e2e/clusters.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="mobile-chrome" tests="60" failures="0" skipped="60" time="0" errors="0">
 <testcase name="Clusters › with mocked data › renders page heading and subtitle" classname="e2e/clusters.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -4964,8 +6686,44 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Clusters › end-to-end successful cluster creation (#119) › complete cluster creation wizard and verify new cluster in list" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › end-to-end successful cluster creation (#119) › created cluster appears in the filtered views" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › end-to-end successful cluster creation (#119) › wizard preserves form data when navigating between steps" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › cluster edit and delete operations (#121) › cluster card has edit action available" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › cluster edit and delete operations (#121) › cluster edit opens edit form with pre-filled data" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › cluster edit and delete operations (#121) › cluster edit saves changes via PUT request" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › cluster edit and delete operations (#121) › cluster delete shows confirmation dialog" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › cluster edit and delete operations (#121) › cluster delete confirmation sends DELETE request" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › cluster edit and delete operations (#121) › cancel delete returns to cluster view without changes" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 </testsuite>
-<testsuite name="e2e/dashboard.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="mobile-chrome" tests="37" failures="0" skipped="37" time="0" errors="0">
+<testsuite name="e2e/dashboard.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="mobile-chrome" tests="37" failures="0" skipped="37" time="0" errors="0">
 <testcase name="Dashboard › renders page heading and subtitle" classname="e2e/dashboard.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -5115,7 +6873,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="e2e/documentation.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="mobile-chrome" tests="12" failures="0" skipped="12" time="0" errors="0">
+<testsuite name="e2e/documentation.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="mobile-chrome" tests="36" failures="0" skipped="36" time="0" errors="0">
 <testcase name="Documentation and Help Pages › help page › renders help page heading" classname="e2e/documentation.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -5164,8 +6922,104 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Documentation and Help Pages › All Documentation Sections (#154) › documentation page lists all major sections" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › All Documentation Sections (#154) › each documentation section has content" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › All Documentation Sections (#154) › documentation sections are navigable from sidebar or TOC" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › All Documentation Sections (#154) › documentation page has consistent heading structure" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Link Navigation (#155) › internal links on docs page navigate correctly" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Link Navigation (#155) › documentation navigation links point to valid destinations" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Link Navigation (#155) › help page links navigate to correct destinations" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Link Navigation (#155) › back navigation from docs returns to previous page" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Getting Started Page (#157) › getting started section is visible on help page" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Getting Started Page (#157) › getting started section has step-by-step instructions" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Getting Started Page (#157) › getting started content is readable and well-structured" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Getting Started Page (#157) › getting started section is accessible from docs navigation" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Hide from Navigation Checkbox (#159) › documentation page has navigation visibility controls" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Hide from Navigation Checkbox (#159) › toggling navigation visibility affects sidebar display" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › API Reference Page (#160) › API documentation section is visible" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › API Reference Page (#160) › API reference lists available endpoints" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › API Reference Page (#160) › API reference contains request/response examples" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › API Reference Page (#160) › API documentation page renders within acceptable time" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Code Example Formatting › verifies code blocks render with syntax highlighting" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Code Example Formatting › code examples are properly formatted and readable" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Code Example Formatting › API endpoint examples are present and formatted" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Use Case Cards › verifies use case cards display on documentation page" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Use Case Cards › use case cards are interactive and navigable" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Use Case Cards › use case cards contain descriptive content" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 </testsuite>
-<testsuite name="e2e/edge-cases.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="mobile-chrome" tests="10" failures="0" skipped="10" time="0" errors="0">
+<testsuite name="e2e/edge-cases.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="mobile-chrome" tests="28" failures="0" skipped="28" time="0" errors="0">
 <testcase name="Edge Cases › Loading States › displays loading indicators while data is fetching" classname="e2e/edge-cases.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -5206,8 +7060,80 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Edge Cases › Loading States (#168) › dashboard shows loading indicators while fetching" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Loading States (#168) › clusters page shows loading state" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Loading States (#168) › loading state transitions to content after data loads" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Loading States (#168) › multiple simultaneous loading states resolve correctly" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Form Validation Messages (#169) › login form shows validation messages for empty fields" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Form Validation Messages (#169) › registration form shows validation for password mismatch" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Form Validation Messages (#169) › settings form validation prevents invalid data submission" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Form Validation Messages (#169) › validation messages disappear when errors are corrected" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Empty States (#170) › nodes page shows empty state message with no data" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Empty States (#170) › clusters page shows empty state message with no data" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Empty States (#170) › dashboard handles empty node data gracefully" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Empty States (#170) › empty state provides action button to add content" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Empty States (#170) › search producing no results shows appropriate message" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Invalid API Data Handling › sends malformed API responses and verifies graceful handling" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Invalid API Data Handling › handles API responses with unexpected data types" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Invalid API Data Handling › handles API responses with missing required fields" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Invalid API Data Handling › handles extremely large API responses" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Invalid API Data Handling › recovers from network timeouts gracefully" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 </testsuite>
-<testsuite name="e2e/error-handling.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="mobile-chrome" tests="9" failures="0" skipped="9" time="0" errors="0">
+<testsuite name="e2e/error-handling.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="mobile-chrome" tests="29" failures="0" skipped="29" time="0" errors="0">
 <testcase name="Error Handling › 404 Not Found › displays 404 page for unknown routes" classname="e2e/error-handling.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -5244,8 +7170,88 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Error Handling › 404 Not Found Page (#163) › shows 404 for non-existent route under pi-controller" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › 404 Not Found Page (#163) › shows 404 for deeply nested non-existent route" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › 404 Not Found Page (#163) › 404 page has link back to home or dashboard" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › 404 Not Found Page (#163) › clicking back link on 404 navigates to dashboard" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › 404 Not Found Page (#163) › 404 page displays user-friendly error message" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Server Error Response Tests (#164) › 500 error on clusters page shows error state" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Server Error Response Tests (#164) › 500 error provides retry functionality" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Server Error Response Tests (#164) › 503 service unavailable on nodes page shows error" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Server Error Response Tests (#164) › 503 on clusters page shows appropriate message" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Server Error Response Tests (#164) › server error does not crash the application" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › API Timeout Handling (#165) › network timeout on nodes shows error state" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › API Timeout Handling (#165) › network timeout on clusters shows error state" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › API Timeout Handling (#165) › connection refused shows error with retry" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › API Timeout Handling (#165) › slow API response still renders correctly" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › API Timeout Handling (#165) › retry after timeout recovers data" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Authorization Error Tests (#166) › 401 on nodes redirects to login or shows error" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Authorization Error Tests (#166) › 401 on clusters redirects to login or shows error" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Authorization Error Tests (#166) › 403 on nodes shows forbidden message" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Authorization Error Tests (#166) › 403 on clusters shows forbidden message" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Authorization Error Tests (#166) › 401 error does not crash the application" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 </testsuite>
-<testsuite name="e2e/hardware.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="mobile-chrome" tests="35" failures="0" skipped="35" time="0" errors="0">
+<testsuite name="e2e/hardware.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="mobile-chrome" tests="37" failures="0" skipped="37" time="0" errors="0">
 <testcase name="Hardware › page layout › renders hardware page heading" classname="e2e/hardware.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -5386,9 +7392,49 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Hardware › network tab information › navigates to network tab and verifies info displays" classname="e2e/hardware.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Hardware › network tab information › network tab shows interface details when available" classname="e2e/hardware.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 </testsuite>
-<testsuite name="e2e/navigation.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="mobile-chrome" tests="14" failures="0" skipped="14" time="0" errors="0">
+<testsuite name="e2e/navigation.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="mobile-chrome" tests="22" failures="0" skipped="22" time="0" errors="0">
 <testcase name="Navigation › sidebar displays all navigation links" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › clicking Dashboard sidebar item loads dashboard page" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › clicking Clusters sidebar item loads clusters page" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › clicking Nodes sidebar item loads nodes page" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › clicking Settings sidebar item loads settings page" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › clicking Hardware sidebar item loads hardware page" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › full navigation round-trip through all pages" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › each page loads with correct unique content after sidebar navigation" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › sidebar remains visible and functional on every page" classname="e2e/navigation.spec.ts" time="0">
 <skipped>
 </skipped>
 </testcase>
@@ -5445,7 +7491,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="e2e/nodes.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="mobile-chrome" tests="54" failures="0" skipped="54" time="0" errors="0">
+<testsuite name="e2e/nodes.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="mobile-chrome" tests="55" failures="0" skipped="55" time="0" errors="0">
 <testcase name="Nodes › with mocked data › renders page heading and subtitle" classname="e2e/nodes.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -5626,6 +7672,10 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Nodes › node card metrics display › simulates metric changes and verifies UI updates" classname="e2e/nodes.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 <testcase name="Nodes › manual node entry and adoption › Add Node panel has manual IP entry field" classname="e2e/nodes.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -5654,7 +7704,7 @@
 <skipped>
 </skipped>
 </testcase>
-<testcase name="Nodes › node action buttons › clicking a node navigates to node details" classname="e2e/nodes.spec.ts" time="0">
+<testcase name="Nodes › node action buttons › clicking a node opens detail view with correct info" classname="e2e/nodes.spec.ts" time="0">
 <skipped>
 </skipped>
 </testcase>
@@ -5663,7 +7713,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="e2e/performance.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="mobile-chrome" tests="9" failures="0" skipped="9" time="0" errors="0">
+<testsuite name="e2e/performance.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="mobile-chrome" tests="16" failures="0" skipped="16" time="0" errors="0">
 <testcase name="Performance › Page Load Times › dashboard loads within acceptable time" classname="e2e/performance.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -5700,8 +7750,36 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Performance › Animation Smoothness › verifies animations do not drop below 30fps" classname="e2e/performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Performance › Animation Smoothness › smooth scrolling performance on long lists" classname="e2e/performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Performance › Memory Leak Detection › navigates repeatedly and checks memory does not grow unbounded" classname="e2e/performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Performance › Memory Leak Detection › detects event listener memory leaks" classname="e2e/performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Performance › Efficient Re-render › verifies components do not re-render unnecessarily" classname="e2e/performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Performance › Efficient Re-render › memoization prevents redundant component updates" classname="e2e/performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Performance › Efficient Re-render › list virtualization handles large datasets efficiently" classname="e2e/performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 </testsuite>
-<testsuite name="e2e/settings.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="mobile-chrome" tests="26" failures="0" skipped="26" time="0" errors="0">
+<testsuite name="e2e/settings.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="mobile-chrome" tests="49" failures="0" skipped="49" time="0" errors="0">
 <testcase name="Settings › renders page heading and subtitle" classname="e2e/settings.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -5806,8 +7884,114 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Settings › Form Input Validation (#145) › hostname field rejects empty value on save" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Form Input Validation (#145) › session timeout field accepts only numeric values" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Form Input Validation (#145) › negative values are rejected for numeric fields" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Form Input Validation (#145) › update interval field validates minimum value" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Form Input Validation (#145) › data retention field accepts reasonable values" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Form Input Validation (#145) › hostname field accepts valid hostname characters" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Form Input Validation (#145) › lockout duration field validates correctly" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Form Input Validation (#145) › all form fields maintain values during tab switch" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › YAML Configuration Export (#146) › Export YAML button is visible and clickable" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › YAML Configuration Export (#146) › clicking Export YAML triggers download or displays YAML" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › YAML Configuration Export (#146) › exported YAML contains current form values" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › YAML Configuration Import (#147) › Import YAML button is visible and clickable" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › YAML Configuration Import (#147) › clicking Import YAML opens file picker or dialog" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › YAML Configuration Import (#147) › importing valid YAML updates form fields" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Sync Between Form and YAML Editors (#149) › form changes reflect in YAML editor" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Sync Between Form and YAML Editors (#149) › YAML editor changes reflect in form fields" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Sync Between Form and YAML Editors (#149) › toggling boolean in form updates YAML representation" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Sync Between Form and YAML Editors (#149) › rapid tab switching preserves data integrity" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Invalid YAML Import Validation › imports malformed YAML and verifies error handling" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Invalid YAML Import Validation › YAML validation prevents form corruption" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Reset to Defaults Functionality › modifies settings, clicks reset, and verifies defaults restored" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Reset to Defaults Functionality › reset button is accessible and properly labeled" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Reset to Defaults Functionality › reset confirmation prevents accidental resets" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 </testsuite>
-<testsuite name="e2e/accessibility.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="mobile-safari" tests="23" failures="0" skipped="23" time="0" errors="0">
+<testsuite name="e2e/smoke.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="mobile-chrome" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testcase name="Smoke Test - Infrastructure Validation › validates Playwright + mocks + fixtures all work together" classname="e2e/smoke.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Smoke Test - Infrastructure Validation › validates basic error handling works" classname="e2e/smoke.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Smoke Test - Infrastructure Validation › validates responsive design basics work" classname="e2e/smoke.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="e2e/accessibility.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="mobile-safari" tests="44" failures="0" skipped="44" time="0" errors="0">
 <testcase name="Accessibility › Axe-Core WCAG 2.0 AA Audit › dashboard page has no accessibility violations" classname="e2e/accessibility.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -5900,8 +8084,92 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Accessibility › ARIA Attributes for Interactive Elements (#174) › sidebar navigation links have accessible roles" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA Attributes for Interactive Elements (#174) › buttons have accessible names" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA Attributes for Interactive Elements (#174) › tab elements have correct ARIA attributes" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA Attributes for Interactive Elements (#174) › form inputs have associated labels via ARIA" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA Attributes for Interactive Elements (#174) › toggle switches have correct role and state" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA Attributes for Interactive Elements (#174) › cluster tab list has correct ARIA roles" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Keyboard Interaction for Dialogs and Forms (#178) › Escape key closes cluster creation dialog" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Keyboard Interaction for Dialogs and Forms (#178) › Tab key navigates through form fields in settings" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Keyboard Interaction for Dialogs and Forms (#178) › Enter key submits login form" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Keyboard Interaction for Dialogs and Forms (#178) › keyboard navigation works within tab panels" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Keyboard Interaction for Dialogs and Forms (#178) › dialog traps focus within itself" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA-Live Regions for Dynamic Status (#179) › page has aria-live regions for dynamic content" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA-Live Regions for Dynamic Status (#179) › error messages use aria-live or role=alert" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › ARIA-Live Regions for Dynamic Status (#179) › loading state changes are announced to assistive technology" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Screen Reader Page Title and Heading Hierarchy (#180) › dashboard has correct document title" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Screen Reader Page Title and Heading Hierarchy (#180) › nodes page has correct document title" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Screen Reader Page Title and Heading Hierarchy (#180) › clusters page has correct document title" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Screen Reader Page Title and Heading Hierarchy (#180) › settings page has correct document title" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Screen Reader Page Title and Heading Hierarchy (#180) › each page has exactly one h1 heading" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Screen Reader Page Title and Heading Hierarchy (#180) › heading levels do not skip (h1 &gt; h3 without h2)" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Accessibility › Screen Reader Page Title and Heading Hierarchy (#180) › page titles change when navigating between pages" classname="e2e/accessibility.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 </testsuite>
-<testsuite name="e2e/auth.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="mobile-safari" tests="77" failures="0" skipped="77" time="0" errors="0">
+<testsuite name="e2e/auth.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="mobile-safari" tests="77" failures="0" skipped="77" time="0" errors="0">
 <testcase name="Auth - Login Flow › renders login page with form elements" classname="e2e/auth.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -6211,7 +8479,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="e2e/clusters.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="mobile-safari" tests="51" failures="0" skipped="51" time="0" errors="0">
+<testsuite name="e2e/clusters.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="mobile-safari" tests="60" failures="0" skipped="60" time="0" errors="0">
 <testcase name="Clusters › with mocked data › renders page heading and subtitle" classname="e2e/clusters.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -6416,8 +8684,44 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Clusters › end-to-end successful cluster creation (#119) › complete cluster creation wizard and verify new cluster in list" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › end-to-end successful cluster creation (#119) › created cluster appears in the filtered views" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › end-to-end successful cluster creation (#119) › wizard preserves form data when navigating between steps" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › cluster edit and delete operations (#121) › cluster card has edit action available" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › cluster edit and delete operations (#121) › cluster edit opens edit form with pre-filled data" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › cluster edit and delete operations (#121) › cluster edit saves changes via PUT request" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › cluster edit and delete operations (#121) › cluster delete shows confirmation dialog" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › cluster edit and delete operations (#121) › cluster delete confirmation sends DELETE request" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Clusters › cluster edit and delete operations (#121) › cancel delete returns to cluster view without changes" classname="e2e/clusters.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 </testsuite>
-<testsuite name="e2e/dashboard.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="mobile-safari" tests="37" failures="0" skipped="37" time="0" errors="0">
+<testsuite name="e2e/dashboard.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="mobile-safari" tests="37" failures="0" skipped="37" time="0" errors="0">
 <testcase name="Dashboard › renders page heading and subtitle" classname="e2e/dashboard.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -6567,7 +8871,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="e2e/documentation.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="mobile-safari" tests="12" failures="0" skipped="12" time="0" errors="0">
+<testsuite name="e2e/documentation.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="mobile-safari" tests="36" failures="0" skipped="36" time="0" errors="0">
 <testcase name="Documentation and Help Pages › help page › renders help page heading" classname="e2e/documentation.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -6616,8 +8920,104 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Documentation and Help Pages › All Documentation Sections (#154) › documentation page lists all major sections" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › All Documentation Sections (#154) › each documentation section has content" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › All Documentation Sections (#154) › documentation sections are navigable from sidebar or TOC" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › All Documentation Sections (#154) › documentation page has consistent heading structure" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Link Navigation (#155) › internal links on docs page navigate correctly" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Link Navigation (#155) › documentation navigation links point to valid destinations" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Link Navigation (#155) › help page links navigate to correct destinations" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Link Navigation (#155) › back navigation from docs returns to previous page" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Getting Started Page (#157) › getting started section is visible on help page" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Getting Started Page (#157) › getting started section has step-by-step instructions" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Getting Started Page (#157) › getting started content is readable and well-structured" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Getting Started Page (#157) › getting started section is accessible from docs navigation" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Hide from Navigation Checkbox (#159) › documentation page has navigation visibility controls" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Hide from Navigation Checkbox (#159) › toggling navigation visibility affects sidebar display" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › API Reference Page (#160) › API documentation section is visible" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › API Reference Page (#160) › API reference lists available endpoints" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › API Reference Page (#160) › API reference contains request/response examples" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › API Reference Page (#160) › API documentation page renders within acceptable time" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Code Example Formatting › verifies code blocks render with syntax highlighting" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Code Example Formatting › code examples are properly formatted and readable" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Code Example Formatting › API endpoint examples are present and formatted" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Use Case Cards › verifies use case cards display on documentation page" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Use Case Cards › use case cards are interactive and navigable" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation and Help Pages › Use Case Cards › use case cards contain descriptive content" classname="e2e/documentation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 </testsuite>
-<testsuite name="e2e/edge-cases.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="mobile-safari" tests="10" failures="0" skipped="10" time="0" errors="0">
+<testsuite name="e2e/edge-cases.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="mobile-safari" tests="28" failures="0" skipped="28" time="0" errors="0">
 <testcase name="Edge Cases › Loading States › displays loading indicators while data is fetching" classname="e2e/edge-cases.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -6658,8 +9058,80 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Edge Cases › Loading States (#168) › dashboard shows loading indicators while fetching" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Loading States (#168) › clusters page shows loading state" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Loading States (#168) › loading state transitions to content after data loads" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Loading States (#168) › multiple simultaneous loading states resolve correctly" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Form Validation Messages (#169) › login form shows validation messages for empty fields" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Form Validation Messages (#169) › registration form shows validation for password mismatch" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Form Validation Messages (#169) › settings form validation prevents invalid data submission" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Form Validation Messages (#169) › validation messages disappear when errors are corrected" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Empty States (#170) › nodes page shows empty state message with no data" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Empty States (#170) › clusters page shows empty state message with no data" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Empty States (#170) › dashboard handles empty node data gracefully" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Empty States (#170) › empty state provides action button to add content" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Empty States (#170) › search producing no results shows appropriate message" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Invalid API Data Handling › sends malformed API responses and verifies graceful handling" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Invalid API Data Handling › handles API responses with unexpected data types" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Invalid API Data Handling › handles API responses with missing required fields" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Invalid API Data Handling › handles extremely large API responses" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases › Invalid API Data Handling › recovers from network timeouts gracefully" classname="e2e/edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 </testsuite>
-<testsuite name="e2e/error-handling.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="mobile-safari" tests="9" failures="0" skipped="9" time="0" errors="0">
+<testsuite name="e2e/error-handling.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="mobile-safari" tests="29" failures="0" skipped="29" time="0" errors="0">
 <testcase name="Error Handling › 404 Not Found › displays 404 page for unknown routes" classname="e2e/error-handling.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -6696,8 +9168,88 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Error Handling › 404 Not Found Page (#163) › shows 404 for non-existent route under pi-controller" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › 404 Not Found Page (#163) › shows 404 for deeply nested non-existent route" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › 404 Not Found Page (#163) › 404 page has link back to home or dashboard" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › 404 Not Found Page (#163) › clicking back link on 404 navigates to dashboard" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › 404 Not Found Page (#163) › 404 page displays user-friendly error message" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Server Error Response Tests (#164) › 500 error on clusters page shows error state" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Server Error Response Tests (#164) › 500 error provides retry functionality" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Server Error Response Tests (#164) › 503 service unavailable on nodes page shows error" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Server Error Response Tests (#164) › 503 on clusters page shows appropriate message" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Server Error Response Tests (#164) › server error does not crash the application" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › API Timeout Handling (#165) › network timeout on nodes shows error state" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › API Timeout Handling (#165) › network timeout on clusters shows error state" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › API Timeout Handling (#165) › connection refused shows error with retry" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › API Timeout Handling (#165) › slow API response still renders correctly" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › API Timeout Handling (#165) › retry after timeout recovers data" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Authorization Error Tests (#166) › 401 on nodes redirects to login or shows error" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Authorization Error Tests (#166) › 401 on clusters redirects to login or shows error" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Authorization Error Tests (#166) › 403 on nodes shows forbidden message" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Authorization Error Tests (#166) › 403 on clusters shows forbidden message" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Error Handling › Authorization Error Tests (#166) › 401 error does not crash the application" classname="e2e/error-handling.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 </testsuite>
-<testsuite name="e2e/hardware.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="mobile-safari" tests="35" failures="0" skipped="35" time="0" errors="0">
+<testsuite name="e2e/hardware.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="mobile-safari" tests="37" failures="0" skipped="37" time="0" errors="0">
 <testcase name="Hardware › page layout › renders hardware page heading" classname="e2e/hardware.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -6838,9 +9390,49 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Hardware › network tab information › navigates to network tab and verifies info displays" classname="e2e/hardware.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Hardware › network tab information › network tab shows interface details when available" classname="e2e/hardware.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 </testsuite>
-<testsuite name="e2e/navigation.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="mobile-safari" tests="14" failures="0" skipped="14" time="0" errors="0">
+<testsuite name="e2e/navigation.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="mobile-safari" tests="22" failures="0" skipped="22" time="0" errors="0">
 <testcase name="Navigation › sidebar displays all navigation links" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › clicking Dashboard sidebar item loads dashboard page" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › clicking Clusters sidebar item loads clusters page" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › clicking Nodes sidebar item loads nodes page" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › clicking Settings sidebar item loads settings page" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › clicking Hardware sidebar item loads hardware page" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › full navigation round-trip through all pages" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › each page loads with correct unique content after sidebar navigation" classname="e2e/navigation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Navigation › Sidebar Menu Navigation Routing (#106) › sidebar remains visible and functional on every page" classname="e2e/navigation.spec.ts" time="0">
 <skipped>
 </skipped>
 </testcase>
@@ -6897,7 +9489,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="e2e/nodes.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="mobile-safari" tests="54" failures="0" skipped="54" time="0" errors="0">
+<testsuite name="e2e/nodes.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="mobile-safari" tests="55" failures="0" skipped="55" time="0" errors="0">
 <testcase name="Nodes › with mocked data › renders page heading and subtitle" classname="e2e/nodes.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -7078,6 +9670,10 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Nodes › node card metrics display › simulates metric changes and verifies UI updates" classname="e2e/nodes.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 <testcase name="Nodes › manual node entry and adoption › Add Node panel has manual IP entry field" classname="e2e/nodes.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -7106,7 +9702,7 @@
 <skipped>
 </skipped>
 </testcase>
-<testcase name="Nodes › node action buttons › clicking a node navigates to node details" classname="e2e/nodes.spec.ts" time="0">
+<testcase name="Nodes › node action buttons › clicking a node opens detail view with correct info" classname="e2e/nodes.spec.ts" time="0">
 <skipped>
 </skipped>
 </testcase>
@@ -7115,7 +9711,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="e2e/performance.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="mobile-safari" tests="9" failures="0" skipped="9" time="0" errors="0">
+<testsuite name="e2e/performance.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="mobile-safari" tests="16" failures="0" skipped="16" time="0" errors="0">
 <testcase name="Performance › Page Load Times › dashboard loads within acceptable time" classname="e2e/performance.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -7152,8 +9748,36 @@
 <skipped>
 </skipped>
 </testcase>
+<testcase name="Performance › Animation Smoothness › verifies animations do not drop below 30fps" classname="e2e/performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Performance › Animation Smoothness › smooth scrolling performance on long lists" classname="e2e/performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Performance › Memory Leak Detection › navigates repeatedly and checks memory does not grow unbounded" classname="e2e/performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Performance › Memory Leak Detection › detects event listener memory leaks" classname="e2e/performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Performance › Efficient Re-render › verifies components do not re-render unnecessarily" classname="e2e/performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Performance › Efficient Re-render › memoization prevents redundant component updates" classname="e2e/performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Performance › Efficient Re-render › list virtualization handles large datasets efficiently" classname="e2e/performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
 </testsuite>
-<testsuite name="e2e/settings.spec.ts" timestamp="2026-02-02T07:36:53.103Z" hostname="mobile-safari" tests="26" failures="0" skipped="26" time="0" errors="0">
+<testsuite name="e2e/settings.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="mobile-safari" tests="49" failures="0" skipped="49" time="0" errors="0">
 <testcase name="Settings › renders page heading and subtitle" classname="e2e/settings.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -7255,6 +9879,112 @@
 </skipped>
 </testcase>
 <testcase name="Settings › General Settings Form Update and Persistence › cluster management settings can be updated" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Form Input Validation (#145) › hostname field rejects empty value on save" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Form Input Validation (#145) › session timeout field accepts only numeric values" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Form Input Validation (#145) › negative values are rejected for numeric fields" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Form Input Validation (#145) › update interval field validates minimum value" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Form Input Validation (#145) › data retention field accepts reasonable values" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Form Input Validation (#145) › hostname field accepts valid hostname characters" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Form Input Validation (#145) › lockout duration field validates correctly" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Form Input Validation (#145) › all form fields maintain values during tab switch" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › YAML Configuration Export (#146) › Export YAML button is visible and clickable" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › YAML Configuration Export (#146) › clicking Export YAML triggers download or displays YAML" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › YAML Configuration Export (#146) › exported YAML contains current form values" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › YAML Configuration Import (#147) › Import YAML button is visible and clickable" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › YAML Configuration Import (#147) › clicking Import YAML opens file picker or dialog" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › YAML Configuration Import (#147) › importing valid YAML updates form fields" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Sync Between Form and YAML Editors (#149) › form changes reflect in YAML editor" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Sync Between Form and YAML Editors (#149) › YAML editor changes reflect in form fields" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Sync Between Form and YAML Editors (#149) › toggling boolean in form updates YAML representation" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Sync Between Form and YAML Editors (#149) › rapid tab switching preserves data integrity" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Invalid YAML Import Validation › imports malformed YAML and verifies error handling" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Invalid YAML Import Validation › YAML validation prevents form corruption" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Reset to Defaults Functionality › modifies settings, clicks reset, and verifies defaults restored" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Reset to Defaults Functionality › reset button is accessible and properly labeled" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Settings › Reset to Defaults Functionality › reset confirmation prevents accidental resets" classname="e2e/settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="e2e/smoke.spec.ts" timestamp="2026-02-02T09:01:53.190Z" hostname="mobile-safari" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testcase name="Smoke Test - Infrastructure Validation › validates Playwright + mocks + fixtures all work together" classname="e2e/smoke.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Smoke Test - Infrastructure Validation › validates basic error handling works" classname="e2e/smoke.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Smoke Test - Infrastructure Validation › validates responsive design basics work" classname="e2e/smoke.spec.ts" time="0">
 <skipped>
 </skipped>
 </testcase>
