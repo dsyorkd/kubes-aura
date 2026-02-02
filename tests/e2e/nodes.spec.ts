@@ -181,4 +181,153 @@ test.describe('Nodes', () => {
       await expect(page.getByText(/no nodes found/i)).toBeVisible({ timeout: 15000 });
     });
   });
+
+  // ── Task #127: Node Adoption and Discovery Panel ────────────────────────────
+
+  test.describe('node adoption and discovery', () => {
+    test('Add Node button is present and clickable', async ({ page }) => {
+      await setupDefaultApiMocks(page);
+      await navigateTo(page, '/pi-controller/nodes');
+      await waitForLoadingComplete(page);
+
+      const addNodeButton = page.getByRole('button', { name: /add node/i });
+      await expect(addNodeButton).toBeVisible();
+      await expect(addNodeButton).toBeEnabled();
+    });
+
+    test('clicking Add Node opens discovery or adoption panel', async ({ page }) => {
+      await setupDefaultApiMocks(page);
+
+      // Mock discovery endpoint to return discoverable nodes
+      await mockApiRoute(page, 'nodes/discover', [
+        {
+          id: 'discovered-1',
+          hostname: 'pi-new-node-01',
+          ip_address: '192.168.1.150',
+          status: 'discovered',
+          role: 'worker',
+        },
+        {
+          id: 'discovered-2',
+          hostname: 'pi-new-node-02',
+          ip_address: '192.168.1.151',
+          status: 'discovered',
+          role: 'worker',
+        },
+      ]);
+
+      await navigateTo(page, '/pi-controller/nodes');
+      await waitForLoadingComplete(page);
+
+      await page.getByRole('button', { name: /add node/i }).click();
+
+      // Verify a panel/dialog/modal opens
+      const hasPanel = await page
+        .locator('[role="dialog"], [role="alertdialog"], [class*="modal"], [class*="panel"], [class*="dialog"], [class*="drawer"]')
+        .first()
+        .isVisible()
+        .catch(() => false);
+
+      const hasDiscoveryContent = await page
+        .getByText(/add node|discover|adoption|new node|connect/i)
+        .first()
+        .isVisible()
+        .catch(() => false);
+
+      expect(hasPanel || hasDiscoveryContent).toBeTruthy();
+    });
+
+    test('discovery panel shows node connection options', async ({ page }) => {
+      await setupDefaultApiMocks(page);
+      await navigateTo(page, '/pi-controller/nodes');
+      await waitForLoadingComplete(page);
+
+      await page.getByRole('button', { name: /add node/i }).click();
+
+      // Should show IP address or hostname input for manual connection
+      const hasIPInput = await page
+        .getByLabel(/ip address|hostname|host|address/i)
+        .first()
+        .isVisible()
+        .catch(() => false);
+
+      const hasPlaceholderInput = await page
+        .getByPlaceholder(/ip|address|hostname|192\.168/i)
+        .first()
+        .isVisible()
+        .catch(() => false);
+
+      const hasConnectionText = await page
+        .getByText(/ip address|hostname|connect|manual/i)
+        .first()
+        .isVisible()
+        .catch(() => false);
+
+      expect(hasIPInput || hasPlaceholderInput || hasConnectionText).toBeTruthy();
+    });
+
+    test('discovery panel can be closed', async ({ page }) => {
+      await setupDefaultApiMocks(page);
+      await navigateTo(page, '/pi-controller/nodes');
+      await waitForLoadingComplete(page);
+
+      await page.getByRole('button', { name: /add node/i }).click();
+
+      // Wait for panel to appear
+      await page.waitForTimeout(500);
+
+      // Close the panel
+      const closeButton = page.getByRole('button', { name: /close|cancel|back|×/i }).first();
+      const hasClose = await closeButton.isVisible().catch(() => false);
+
+      if (hasClose) {
+        await closeButton.click();
+      } else {
+        await page.keyboard.press('Escape');
+      }
+
+      // Original node list should be visible
+      await expect(page.getByText('pi-master-01').first()).toBeVisible({ timeout: 10000 });
+    });
+
+    test('node adoption workflow validates required fields', async ({ page }) => {
+      await setupDefaultApiMocks(page);
+      await navigateTo(page, '/pi-controller/nodes');
+      await waitForLoadingComplete(page);
+
+      await page.getByRole('button', { name: /add node/i }).click();
+
+      // Try to submit/add without filling required fields
+      const addButton = page.getByRole('button', { name: /add|connect|adopt|submit|save/i }).first();
+      const hasAdd = await addButton.isVisible().catch(() => false);
+
+      if (hasAdd) {
+        await addButton.click({ force: true });
+
+        // Should show validation or be disabled
+        const hasValidation = await page
+          .getByText(/required|please enter|invalid|cannot be empty/i)
+          .first()
+          .isVisible()
+          .catch(() => false);
+
+        const isDisabled = await addButton.isDisabled().catch(() => false);
+
+        expect(hasValidation || isDisabled).toBeTruthy();
+      }
+    });
+
+    test('existing node count is displayed in stats before adding', async ({ page }) => {
+      await setupDefaultApiMocks(page);
+      await navigateTo(page, '/pi-controller/nodes');
+      await waitForLoadingComplete(page);
+
+      // Verify current node count in stats card
+      await expect(page.getByText('Total Nodes')).toBeVisible({ timeout: 15000 });
+      await expect(page.getByText(`${mockNodes.length}`).first()).toBeVisible();
+
+      // This is the baseline before any adoption would increase the count
+      expect(mockNodes.length).toBe(5);
+    });
+  });
 });

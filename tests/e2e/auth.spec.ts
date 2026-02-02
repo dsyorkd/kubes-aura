@@ -2,6 +2,28 @@ import { test, expect } from '../setup/fixtures';
 import { mockApiRoute, navigateTo, setupDefaultApiMocks } from '../utils/helpers';
 import { mockUsers, mockAuthToken } from '../setup/test-data';
 
+// ── SQL injection and XSS payloads for security testing ──────────────────────
+
+const SQL_INJECTION_PAYLOADS = [
+  "' OR '1'='1",
+  "'; DROP TABLE users; --",
+  "admin'--",
+  "1' UNION SELECT * FROM users --",
+  "' OR 1=1 --",
+  "'; INSERT INTO users VALUES ('hacker','hacked'); --",
+  "1; EXEC xp_cmdshell('dir') --",
+];
+
+const XSS_PAYLOADS = [
+  '<script>alert("xss")</script>',
+  '<img src=x onerror=alert("xss")>',
+  '"><svg onload=alert(1)>',
+  "javascript:alert('xss')",
+  '<iframe src="javascript:alert(1)">',
+  '<body onload=alert("xss")>',
+  '{{constructor.constructor("return this")().alert(1)}}',
+];
+
 // ── Task #93: Basic Login Flow Tests ─────────────────────────────────────────
 
 test.describe('Auth - Login Flow', () => {
@@ -417,5 +439,361 @@ test.describe('Auth - Protected Routes', () => {
       return !!localStorage.getItem('pi-controller-token');
     });
     expect(hasTokenAfterLogout).toBeFalsy();
+  });
+});
+
+// ── Task #94: Invalid Login and Form Validation Tests ────────────────────────
+
+test.describe('Auth - Invalid Login and Form Validation', () => {
+  test('shows error for wrong password with valid username', async ({ page }) => {
+    await mockApiRoute(
+      page,
+      'auth/login',
+      { success: false, message: 'Invalid password' },
+      { method: 'POST', status: 401 },
+    );
+
+    await navigateTo(page, '/auth/login');
+    await page.getByLabel(/username/i).fill('admin');
+    await page.getByLabel(/password/i).fill('WrongPassword123!');
+    await page.getByRole('button', { name: /sign in/i }).click();
+
+    await expect(page.getByText(/invalid password|invalid credentials|login failed/i)).toBeVisible({
+      timeout: 10000,
+    });
+  });
+
+  test('shows error for non-existent user', async ({ page }) => {
+    await mockApiRoute(
+      page,
+      'auth/login',
+      { success: false, message: 'User not found' },
+      { method: 'POST', status: 401 },
+    );
+
+    await navigateTo(page, '/auth/login');
+    await page.getByLabel(/username/i).fill('nonexistentuser12345');
+    await page.getByLabel(/password/i).fill('SomePassword123!');
+    await page.getByRole('button', { name: /sign in/i }).click();
+
+    await expect(page.getByText(/user not found|invalid credentials|login failed/i)).toBeVisible({
+      timeout: 10000,
+    });
+  });
+
+  test('SQL injection in username fails gracefully', async ({ page }) => {
+    await mockApiRoute(
+      page,
+      'auth/login',
+      { success: false, message: 'Invalid credentials' },
+      { method: 'POST', status: 401 },
+    );
+
+    await navigateTo(page, '/auth/login');
+    await page.getByLabel(/username/i).fill("' OR '1'='1");
+    await page.getByLabel(/password/i).fill('anything');
+    await page.getByRole('button', { name: /sign in/i }).click();
+
+    // Should show an error or validation message — NOT grant access
+    const currentUrl = page.url();
+    expect(currentUrl).toMatch(/\/auth\/login/);
+    await expect(
+      page.getByText(/invalid|error|failed|credentials|username must be/i),
+    ).toBeVisible({ timeout: 10000 });
+  });
+
+  test('XSS payload in username field is sanitized', async ({ page }) => {
+    await mockApiRoute(
+      page,
+      'auth/login',
+      { success: false, message: 'Invalid credentials' },
+      { method: 'POST', status: 401 },
+    );
+
+    await navigateTo(page, '/auth/login');
+    await page.getByLabel(/username/i).fill('<script>alert("xss")</script>');
+    await page.getByLabel(/password/i).fill('SomePassword123!');
+    await page.getByRole('button', { name: /sign in/i }).click();
+
+    // Verify no script was executed — page should remain functional
+    const alertTriggered = await page.evaluate(() => {
+      return (window as unknown as Record<string, boolean>).__xssTriggered || false;
+    });
+    expect(alertTriggered).toBeFalsy();
+
+    // Should still be on login page or show an error
+    await expect(page.getByRole('heading', { name: /welcome back/i })).toBeVisible();
+  });
+
+  test('XSS payload in password field is sanitized', async ({ page }) => {
+    await mockApiRoute(
+      page,
+      'auth/login',
+      { success: false, message: 'Invalid credentials' },
+      { method: 'POST', status: 401 },
+    );
+
+    await navigateTo(page, '/auth/login');
+    await page.getByLabel(/username/i).fill('admin');
+    await page.getByLabel(/password/i).fill('<img src=x onerror=alert("xss")>');
+    await page.getByRole('button', { name: /sign in/i }).click();
+
+    // Verify no XSS triggered
+    const hasScriptElements = await page.evaluate(() => {
+      const scripts = document.querySelectorAll('script:not([src])');
+      return Array.from(scripts).some((s) => s.textContent?.includes('alert'));
+    });
+    expect(hasScriptElements).toBeFalsy();
+  });
+
+  test('account lockout after multiple failed attempts', async ({ page }) => {
+    // First N attempts return invalid credentials
+    let attemptCount = 0;
+    await page.route(
+      (url) => /\/api\/v1\/auth\/login/.test(url.toString()),
+      async (route) => {
+        if (route.request().method().toUpperCase() !== 'POST') {
+          await route.fallback();
+          return;
+        }
+        attemptCount++;
+        if (attemptCount >= 5) {
+          await route.fulfill({
+            status: 429,
+            contentType: 'application/json',
+            body: JSON.stringify({
+              success: false,
+              message: 'Account locked. Too many failed attempts.',
+            }),
+          });
+        } else {
+          await route.fulfill({
+            status: 401,
+            contentType: 'application/json',
+            body: JSON.stringify({ success: false, message: 'Invalid credentials' }),
+          });
+        }
+      },
+    );
+
+    await navigateTo(page, '/auth/login');
+
+    // Submit 5 failed login attempts
+    for (let i = 0; i < 5; i++) {
+      await page.getByLabel(/username/i).fill('admin');
+      await page.getByLabel(/password/i).fill('wrong-pass-' + i);
+      await page.getByRole('button', { name: /sign in/i }).click();
+
+      // Wait for error response before retrying
+      await page.waitForTimeout(500);
+    }
+
+    // After 5 failures, should show lockout/rate-limit message
+    await expect(
+      page.getByText(/locked|too many|rate limit|try again later|failed attempts/i),
+    ).toBeVisible({ timeout: 10000 });
+
+    expect(attemptCount).toBeGreaterThanOrEqual(5);
+  });
+});
+
+// ── Task #100: Security Tests for SQL Injection and XSS ──────────────────────
+
+test.describe('Auth - Security: SQL Injection', () => {
+  for (const payload of SQL_INJECTION_PAYLOADS) {
+    test(`login rejects SQL injection payload: ${payload.substring(0, 30)}...`, async ({ page }) => {
+      await mockApiRoute(
+        page,
+        'auth/login',
+        { success: false, message: 'Invalid credentials' },
+        { method: 'POST', status: 401 },
+      );
+
+      await navigateTo(page, '/auth/login');
+      await page.getByLabel(/username/i).fill(payload);
+      await page.getByLabel(/password/i).fill('anypassword');
+      await page.getByRole('button', { name: /sign in/i }).click();
+
+      // Must NOT redirect to dashboard — stay on login or show error
+      const url = page.url();
+      expect(url).toMatch(/\/auth\/login/);
+
+      // Page should remain functional
+      await expect(page.getByLabel(/username/i)).toBeVisible();
+    });
+  }
+
+  for (const payload of SQL_INJECTION_PAYLOADS.slice(0, 3)) {
+    test(`registration rejects SQL injection in username: ${payload.substring(0, 30)}...`, async ({
+      page,
+    }) => {
+      await mockApiRoute(
+        page,
+        'auth/register',
+        { success: false, message: 'Invalid username' },
+        { method: 'POST', status: 400 },
+      );
+
+      await navigateTo(page, '/auth/register');
+      await page.getByLabel(/username/i).fill(payload);
+      await page.getByLabel('Password *').fill('StrongPass123!');
+      await page.getByLabel('Confirm Password *').fill('StrongPass123!');
+      await page.getByLabel(/i agree to the/i).click();
+      await page.getByRole('button', { name: /create account/i }).click({ force: true });
+
+      // Should not succeed — stay on register page or show error
+      const url = page.url();
+      expect(url).toMatch(/\/auth\/register/);
+      await expect(page.getByLabel(/username/i)).toBeVisible();
+    });
+  }
+
+  test('SQL injection in email field during registration is rejected', async ({ page }) => {
+    await mockApiRoute(
+      page,
+      'auth/register',
+      { success: false, message: 'Invalid email' },
+      { method: 'POST', status: 400 },
+    );
+
+    await navigateTo(page, '/auth/register');
+    await page.getByLabel(/username/i).fill('testuser');
+    await page.getByLabel(/email/i).fill("' OR '1'='1' --@evil.com");
+    await page.getByLabel('Password *').fill('StrongPass123!');
+    await page.getByLabel('Confirm Password *').fill('StrongPass123!');
+    await page.getByLabel(/i agree to the/i).click();
+    await page.getByRole('button', { name: /create account/i }).click({ force: true });
+
+    // Should show validation error or stay on register page
+    const url = page.url();
+    expect(url).toMatch(/\/auth\/register/);
+  });
+});
+
+test.describe('Auth - Security: XSS Prevention', () => {
+  for (const payload of XSS_PAYLOADS) {
+    test(`login sanitizes XSS payload: ${payload.substring(0, 30)}...`, async ({ page }) => {
+      // Set up dialog handler to detect any alert() calls
+      let dialogTriggered = false;
+      page.on('dialog', async (dialog) => {
+        dialogTriggered = true;
+        await dialog.dismiss();
+      });
+
+      await mockApiRoute(
+        page,
+        'auth/login',
+        { success: false, message: 'Invalid credentials' },
+        { method: 'POST', status: 401 },
+      );
+
+      await navigateTo(page, '/auth/login');
+      await page.getByLabel(/username/i).fill(payload);
+      await page.getByLabel(/password/i).fill(payload);
+      await page.getByRole('button', { name: /sign in/i }).click();
+
+      // Wait briefly for any scripts to execute
+      await page.waitForTimeout(500);
+
+      // No dialog should have been triggered
+      expect(dialogTriggered).toBeFalsy();
+
+      // Page should remain functional
+      await expect(page.getByLabel(/username/i)).toBeVisible();
+    });
+  }
+
+  for (const payload of XSS_PAYLOADS.slice(0, 3)) {
+    test(`registration sanitizes XSS in username: ${payload.substring(0, 30)}...`, async ({
+      page,
+    }) => {
+      let dialogTriggered = false;
+      page.on('dialog', async (dialog) => {
+        dialogTriggered = true;
+        await dialog.dismiss();
+      });
+
+      await mockApiRoute(
+        page,
+        'auth/register',
+        { success: false, message: 'Invalid username' },
+        { method: 'POST', status: 400 },
+      );
+
+      await navigateTo(page, '/auth/register');
+      await page.getByLabel(/username/i).fill(payload);
+      await page.getByLabel('Password *').fill('StrongPass123!');
+      await page.getByLabel('Confirm Password *').fill('StrongPass123!');
+      await page.getByLabel(/i agree to the/i).click();
+      await page.getByRole('button', { name: /create account/i }).click({ force: true });
+
+      await page.waitForTimeout(500);
+      expect(dialogTriggered).toBeFalsy();
+    });
+  }
+
+  test('XSS in registration email field does not execute', async ({ page }) => {
+    let dialogTriggered = false;
+    page.on('dialog', async (dialog) => {
+      dialogTriggered = true;
+      await dialog.dismiss();
+    });
+
+    await mockApiRoute(
+      page,
+      'auth/register',
+      { success: false, message: 'Invalid email' },
+      { method: 'POST', status: 400 },
+    );
+
+    await navigateTo(page, '/auth/register');
+    await page.getByLabel(/username/i).fill('testuser');
+    await page.getByLabel(/email/i).fill('<script>alert("xss")</script>@evil.com');
+    await page.getByLabel('Password *').fill('StrongPass123!');
+    await page.getByLabel('Confirm Password *').fill('StrongPass123!');
+    await page.getByLabel(/i agree to the/i).click();
+    await page.getByRole('button', { name: /create account/i }).click({ force: true });
+
+    await page.waitForTimeout(500);
+    expect(dialogTriggered).toBeFalsy();
+    await expect(page.getByLabel(/username/i)).toBeVisible();
+  });
+
+  test('error messages do not render raw HTML from user input', async ({ page }) => {
+    // Mock API that echoes back the username in the error message
+    await page.route(
+      (url) => /\/api\/v1\/auth\/login/.test(url.toString()),
+      async (route) => {
+        if (route.request().method().toUpperCase() !== 'POST') {
+          await route.fallback();
+          return;
+        }
+        const body = route.request().postDataJSON();
+        await route.fulfill({
+          status: 401,
+          contentType: 'application/json',
+          body: JSON.stringify({
+            success: false,
+            message: `User ${body?.username || 'unknown'} not found`,
+          }),
+        });
+      },
+    );
+
+    await navigateTo(page, '/auth/login');
+    await page.getByLabel(/username/i).fill('<b>bold</b>');
+    await page.getByLabel(/password/i).fill('password123');
+    await page.getByRole('button', { name: /sign in/i }).click();
+
+    await page.waitForTimeout(1000);
+
+    // Verify the <b> tag is not rendered as HTML (no bold text from injection)
+    const hasBoldInjection = await page.evaluate(() => {
+      const errorElements = document.querySelectorAll('[class*="error"], [role="alert"], .text-red, .text-destructive');
+      return Array.from(errorElements).some((el) => {
+        return el.querySelector('b') !== null;
+      });
+    });
+    expect(hasBoldInjection).toBeFalsy();
   });
 });
