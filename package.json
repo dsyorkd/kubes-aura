@@ -41,7 +41,11 @@
     "test:ui": "npx playwright test --ui",
     "test:headed": "npx playwright test --headed",
     "test:debug": "npx playwright test --debug",
-    "test:report": "npx playwright show-report"
+    "test:report": "npx playwright show-report",
+    "lighthouse": "lhci autorun",
+    "lighthouse:collect": "lhci collect",
+    "lighthouse:assert": "lhci assert",
+    "lighthouse:upload": "lhci upload"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -102,6 +106,7 @@
   "devDependencies": {
     "@axe-core/playwright": "^4.11.0",
     "@eslint/js": "^9.32.0",
+    "@lhci/cli": "^0.15.1",
     "@playwright/test": "^1.44.0",
     "@tailwindcss/typography": "^0.5.16",
     "@types/node": "^22.16.5",
