@@ -1,5 +1,5 @@
 import { test, expect } from '../setup/fixtures';
-import { setupDefaultApiMocks, navigateTo } from '../utils/helpers';
+import { setupDefaultApiMocks, navigateTo, waitForLoadingComplete } from '../utils/helpers';
 
 test.describe('Navigation', () => {
   test.beforeEach(async ({ page }) => {
@@ -15,6 +15,118 @@ test.describe('Navigation', () => {
     await expect(menu.getByRole('link', { name: 'Clusters' })).toBeVisible();
     await expect(menu.getByRole('link', { name: 'Nodes' })).toBeVisible();
     await expect(menu.getByRole('link', { name: 'Settings' })).toBeVisible();
+  });
+
+  // ── Task #106: Sidebar Menu Navigation Routing ──────────────────────────────
+
+  test.describe('Sidebar Menu Navigation Routing (#106)', () => {
+    test('clicking Dashboard sidebar item loads dashboard page', async ({ page }) => {
+      await navigateTo(page, '/pi-controller/settings');
+      const menu = page.locator('[data-sidebar="menu"]').first();
+      await menu.getByRole('link', { name: 'Dashboard' }).click();
+      await expect(page).toHaveURL(/.*\/pi-controller$/);
+      await expect(page.getByRole('heading', { name: 'Pi Controller Dashboard' })).toBeVisible();
+      await waitForLoadingComplete(page);
+      await expect(page.getByText('Overview of your Raspberry Pi infrastructure')).toBeVisible();
+    });
+
+    test('clicking Clusters sidebar item loads clusters page', async ({ page }) => {
+      await navigateTo(page, '/pi-controller');
+      const menu = page.locator('[data-sidebar="menu"]').first();
+      await menu.getByRole('link', { name: 'Clusters' }).click();
+      await expect(page).toHaveURL(/.*\/clusters/);
+      await expect(page.getByRole('heading', { name: 'Clusters', level: 1 })).toBeVisible();
+      await expect(page.getByText('Manage all your compute clusters')).toBeVisible();
+    });
+
+    test('clicking Nodes sidebar item loads nodes page', async ({ page }) => {
+      await navigateTo(page, '/pi-controller');
+      const menu = page.locator('[data-sidebar="menu"]').first();
+      await menu.getByRole('link', { name: 'Nodes' }).click();
+      await expect(page).toHaveURL(/.*\/nodes/);
+      await expect(page.getByRole('heading', { name: 'All Nodes' })).toBeVisible();
+      await expect(page.getByText('Manage all Raspberry Pi nodes across clusters')).toBeVisible();
+    });
+
+    test('clicking Settings sidebar item loads settings page', async ({ page }) => {
+      await navigateTo(page, '/pi-controller');
+      const menu = page.locator('[data-sidebar="menu"]').first();
+      await menu.getByRole('link', { name: 'Settings' }).click();
+      await expect(page).toHaveURL(/.*\/settings/);
+      await expect(page.getByRole('heading', { name: 'Settings', level: 2 })).toBeVisible();
+      await expect(page.getByText('Configure Pi Controller system parameters')).toBeVisible();
+    });
+
+    test('clicking Hardware sidebar item loads hardware page', async ({ page }) => {
+      await navigateTo(page, '/pi-controller');
+      const menu = page.locator('[data-sidebar="menu"]').first();
+      const hardwareLink = menu.getByRole('link', { name: /hardware/i });
+      if (await hardwareLink.isVisible().catch(() => false)) {
+        await hardwareLink.click();
+        await expect(page).toHaveURL(/.*\/hardware/);
+        await expect(page.getByRole('heading', { name: /hardware|gpio/i })).toBeVisible();
+      }
+    });
+
+    test('full navigation round-trip through all pages', async ({ page }) => {
+      const menu = page.locator('[data-sidebar="menu"]').first();
+
+      // Start on Dashboard
+      await navigateTo(page, '/pi-controller');
+      await expect(page.getByRole('heading', { name: 'Pi Controller Dashboard' })).toBeVisible();
+
+      // Navigate to Clusters
+      await menu.getByRole('link', { name: 'Clusters' }).click();
+      await expect(page).toHaveURL(/.*\/clusters/);
+      await expect(page.getByRole('heading', { name: 'Clusters', level: 1 })).toBeVisible();
+
+      // Navigate to Nodes
+      await menu.getByRole('link', { name: 'Nodes' }).click();
+      await expect(page).toHaveURL(/.*\/nodes/);
+      await expect(page.getByRole('heading', { name: 'All Nodes' })).toBeVisible();
+
+      // Navigate to Settings
+      await menu.getByRole('link', { name: 'Settings' }).click();
+      await expect(page).toHaveURL(/.*\/settings/);
+      await expect(page.getByRole('heading', { name: 'Settings', level: 2 })).toBeVisible();
+
+      // Navigate back to Dashboard
+      await menu.getByRole('link', { name: 'Dashboard' }).click();
+      await expect(page).toHaveURL(/.*\/pi-controller$/);
+      await expect(page.getByRole('heading', { name: 'Pi Controller Dashboard' })).toBeVisible();
+    });
+
+    test('each page loads with correct unique content after sidebar navigation', async ({ page }) => {
+      const menu = page.locator('[data-sidebar="menu"]').first();
+      const pageMap: { link: string; url: RegExp; content: RegExp }[] = [
+        { link: 'Dashboard', url: /\/pi-controller$/, content: /Overview of your Raspberry Pi infrastructure/ },
+        { link: 'Clusters', url: /\/clusters/, content: /Manage all your compute clusters/ },
+        { link: 'Nodes', url: /\/nodes/, content: /Manage all Raspberry Pi nodes across clusters/ },
+        { link: 'Settings', url: /\/settings/, content: /Configure Pi Controller system parameters/ },
+      ];
+
+      await navigateTo(page, '/pi-controller');
+
+      for (const { link, url, content } of pageMap) {
+        await menu.getByRole('link', { name: link }).click();
+        await expect(page).toHaveURL(url);
+        await expect(page.getByText(content)).toBeVisible({ timeout: 10000 });
+      }
+    });
+
+    test('sidebar remains visible and functional on every page', async ({ page }) => {
+      const pages = ['/pi-controller', '/pi-controller/clusters', '/pi-controller/nodes', '/pi-controller/settings'];
+
+      for (const pagePath of pages) {
+        await navigateTo(page, pagePath);
+        const menu = page.locator('[data-sidebar="menu"]').first();
+        await expect(menu).toBeVisible();
+        await expect(menu.getByRole('link', { name: 'Dashboard' })).toBeVisible();
+        await expect(menu.getByRole('link', { name: 'Clusters' })).toBeVisible();
+        await expect(menu.getByRole('link', { name: 'Nodes' })).toBeVisible();
+        await expect(menu.getByRole('link', { name: 'Settings' })).toBeVisible();
+      }
+    });
   });
 
   test('navigates to Clusters page from sidebar', async ({ page }) => {
